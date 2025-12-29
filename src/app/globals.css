@@ -1,0 +1,245 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #111827;
+}
+
+.dark {
+  --background: #030712;
+  --foreground: #f9fafb;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Optimize scroll performance */
+  -webkit-overflow-scrolling: touch;
+  scroll-padding-top: 4rem;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  /* Prevent layout shifts during scroll */
+  overflow-x: hidden;
+  /* Optimize font rendering */
+  text-rendering: optimizeLegibility;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #444;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #666;
+}
+
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+.animation-delay-4000 {
+  animation-delay: 4s;
+}
+
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.transform-gpu {
+  transform: translateZ(0);
+}
+
+/* Performance optimizations */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Optimize scroll performance */
+section {
+  contain: layout style paint;
+  transform: translateZ(0);
+}
+
+/* Prevent layout shifts */
+img, video {
+  content-visibility: auto;
+}
+
+/* Image optimization */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Next.js Image optimization */
+.next-image-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Smooth image loading */
+img[loading="lazy"] {
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+img[loading="lazy"].loaded {
+  opacity: 1;
+}
+
+/* Card hover fill animation - CSS only for performance */
+.card-fill-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.08) 0%, rgba(139, 92, 246, 0.08) 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.card-fill-overlay.active {
+  opacity: 1;
+}
+
+.card-fill-overlay.fill-left {
+  clip-path: inset(0 100% 0 0);
+  animation: fillLeft 0.5s ease-out forwards;
+}
+
+.card-fill-overlay.fill-right {
+  clip-path: inset(0 0 0 100%);
+  animation: fillRight 0.5s ease-out forwards;
+}
+
+.card-fill-overlay.fill-top {
+  clip-path: inset(100% 0 0 0);
+  animation: fillTop 0.5s ease-out forwards;
+}
+
+.card-fill-overlay.fill-bottom {
+  clip-path: inset(0 0 100% 0);
+  animation: fillBottom 0.5s ease-out forwards;
+}
+
+@keyframes fillLeft {
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes fillRight {
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes fillTop {
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes fillBottom {
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .card-fill-overlay {
+    animation: none !important;
+  }
+}
+
+/* Gradient text animation */
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer 3s linear infinite;
+  background-size: 200% auto;
+}
+
+/* Glass morphism effect */
+.glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.dark .glass {
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Remove focus outline from all form elements */
+input:focus,
+textarea:focus,
+select:focus,
+button:focus,
+a:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Remove focus outline for accessibility - use ring instead if needed */
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+button:focus-visible,
+a:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
