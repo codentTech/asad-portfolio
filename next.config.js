@@ -29,7 +29,7 @@ const nextConfig = {
   // Optimize package imports
   experimental: {
     optimizePackageImports: ['lucide-react', 'framer-motion'],
-    optimizeCss: true,
+    // optimizeCss: true, // Disabled - requires critters dependency
   },
   // Headers for caching and security
   async headers() {

@@ -80,7 +80,7 @@ export default function ServicesPage() {
               Ready to Start Your Project?
             </h3>
             <p className="text-base sm:text-xl text-indigo-100 mb-4 sm:mb-6">
-              Let's discuss how I can help bring your vision to life.
+              Let&apos;s discuss how I can help bring your vision to life.
             </p>
             <a
               href="/contact"

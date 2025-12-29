@@ -1,10 +1,10 @@
 'use client'
 
 import { HTMLAttributes, forwardRef, useRef, useState, useCallback } from 'react'
-import { motion } from 'framer-motion'
+import { motion, HTMLMotionProps } from 'framer-motion'
 import { cn } from '@/lib/utils'
 
-interface CardProps extends HTMLAttributes<HTMLDivElement> {
+interface CardProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onDrag' | 'onDragStart' | 'onDragEnd'> {
   hover?: boolean
   cursorFollow?: boolean
   disableAnimation?: boolean
@@ -12,17 +12,17 @@ interface CardProps extends HTMLAttributes<HTMLDivElement> {
 
 const Card = forwardRef<HTMLDivElement, CardProps>(
   ({ className, hover = true, cursorFollow = true, disableAnimation = false, children, ...props }, ref) => {
-    const internalRef = useRef<HTMLDivElement>(null)
+    const internalRef = useRef<HTMLDivElement | null>(null)
     const [isHovered, setIsHovered] = useState(false)
     const [fillDirection, setFillDirection] = useState<'left' | 'right' | 'top' | 'bottom'>('right')
 
     // Use ref callback to set both internal and external refs
     const setRefs = useCallback((node: HTMLDivElement | null) => {
-      internalRef.current = node
+      (internalRef as React.MutableRefObject<HTMLDivElement | null>).current = node
       if (typeof ref === 'function') {
         ref(node)
-      } else if (ref) {
-        ref.current = node
+      } else if (ref && 'current' in ref) {
+        (ref as React.MutableRefObject<HTMLDivElement | null>).current = node
       }
     }, [ref])
 
@@ -88,6 +88,9 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
       )
     }
 
+    // Extract drag-related props that conflict with Framer Motion
+    const { onDrag, onDragStart, onDragEnd, ...restProps } = props as any
+
     return (
       <motion.div
         ref={setRefs}
@@ -98,7 +101,7 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         className={cardClassName}
-        {...props}
+        {...(restProps as HTMLMotionProps<'div'>)}
       >
         {/* Directional fill overlay - CSS animation for performance */}
         {cursorFollow && (

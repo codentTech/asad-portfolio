@@ -1,11 +1,11 @@
 'use client'
 
 import { ButtonHTMLAttributes, forwardRef, cloneElement, isValidElement } from 'react'
-import { motion } from 'framer-motion'
+import { motion, HTMLMotionProps } from 'framer-motion'
 import Link from 'next/link'
 import { cn } from '@/lib/utils'
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'onDrag' | 'onDragStart' | 'onDragEnd'> {
   variant?: 'primary' | 'secondary' | 'outline' | 'ghost'
   size?: 'sm' | 'md' | 'lg'
   asChild?: boolean
@@ -45,13 +45,16 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       )
     }
 
+    // Extract drag-related props that conflict with Framer Motion
+    const { onDrag, onDragStart, onDragEnd, ...restProps } = props as any
+
     return (
       <motion.button
         ref={ref}
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
         className={buttonClassName}
-        {...props}
+        {...(restProps as HTMLMotionProps<'button'>)}
       >
         {children}
       </motion.button>

@@ -124,7 +124,7 @@ export default function ContactPage() {
                     animate={{ opacity: 1, y: 0 }}
                     className="p-4 rounded-lg bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-400"
                   >
-                    Message sent successfully! I'll get back to you soon.
+                    Message sent successfully! I&apos;ll get back to you soon.
                   </motion.div>
                 )}
 
@@ -157,7 +157,7 @@ export default function ContactPage() {
                 <h3 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6">Contact Information</h3>
                 <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400 mb-6 sm:mb-8">
                   Feel free to reach out if you have any questions, want to collaborate,
-                  or just want to say hello. I'm always open to discussing new projects
+                  or just want to say hello. I&apos;m always open to discussing new projects
                   and opportunities.
                 </p>
 

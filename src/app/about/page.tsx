@@ -35,16 +35,16 @@ export default function AboutPage() {
             </div>
             <div className="order-1 md:order-2">
               <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6">
-                Hi, I'm <span className="bg-gradient-to-r from-purple-600 to-purple-600 bg-clip-text text-transparent">Asad Abbas</span>
+                Hi, I&apos;m <span className="bg-gradient-to-r from-purple-600 to-purple-600 bg-clip-text text-transparent">Asad Abbas</span>
               </h1>
               <p className="text-base sm:text-lg text-gray-600 dark:text-gray-400 mb-4 sm:mb-6 leading-relaxed">
-                I'm a Full-Stack / Frontend Engineer with a passion for building exceptional digital experiences.
+                I&apos;m a Full-Stack / Frontend Engineer with a passion for building exceptional digital experiences.
                 I specialize in Next.js, TypeScript, and React, creating scalable, performant web applications
                 that make a real impact.
               </p>
               <p className="text-base sm:text-lg text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">
-                With over {stats.yearsExperience} years of experience, I've helped numerous companies build
-                modern web applications, from startups to enterprise-level solutions. I'm passionate about
+                With over {stats.yearsExperience} years of experience, I&apos;ve helped numerous companies build
+                modern web applications, from startups to enterprise-level solutions. I&apos;m passionate about
                 clean code, best practices, and continuous learning.
               </p>
             </div>
