@@ -76,7 +76,7 @@ export default function HeroSection() {
         transition={{ type: "spring", damping: 25, stiffness: 700 }}
       />
 
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#0a192f]">
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#0a192f] pt-16 lg:pt-20 pb-8">
         {/* Background Image with Enhanced Parallax */}
         <div className="absolute inset-0 z-0">
           <motion.div
@@ -91,7 +91,7 @@ export default function HeroSection() {
           />
           <div className="absolute inset-0 bg-gradient-to-b from-[#0a192f]/95 via-[#0a192f]/90 to-[#0a192f]/95" />
           <div className="absolute inset-0 bg-[#020c1b]/60" />
-        </div>
+            </div>
 
         {/* Animated Background Particles */}
         <div className="absolute inset-0 z-0 overflow-hidden">
@@ -153,12 +153,12 @@ export default function HeroSection() {
         {/* Content - Text on Image */}
         <motion.div
           style={{ y, opacity, scale }}
-          className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 text-center"
+          className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 text-center py-8 sm:py-12 lg:py-16"
         >
           <div className="max-w-5xl mx-auto">
             {/* Greeting */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
               className="mb-4"
@@ -169,14 +169,14 @@ export default function HeroSection() {
               >
                 Hi, my name is
               </motion.span>
-            </motion.div>
+              </motion.div>
 
             {/* Name with enhanced animations */}
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.1 }}
-              className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-4 text-[#ccd6f6] leading-tight"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold mb-4 text-[#ccd6f6] leading-tight px-2"
             >
               <motion.span
                 className="block"
@@ -192,7 +192,7 @@ export default function HeroSection() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 text-[#8892b0] leading-tight"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 sm:mb-6 text-[#8892b0] leading-tight px-2"
             >
               <motion.span
                 className="block"
@@ -203,12 +203,12 @@ export default function HeroSection() {
               </motion.span>
             </motion.h2>
 
-            {/* Description */}
-            <motion.p
+              {/* Description */}
+          <motion.p
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
-              className="text-lg sm:text-xl text-[#8892b0] max-w-2xl mx-auto mb-8 leading-relaxed"
+              className="text-base sm:text-lg md:text-xl text-[#8892b0] max-w-2xl mx-auto mb-6 sm:mb-8 leading-relaxed px-4"
             >
               I&apos;m a Full-Stack / Frontend Engineer specializing in building
               exceptional digital experiences. Currently focused on building
@@ -220,9 +220,9 @@ export default function HeroSection() {
                   textShadow: "0 0 20px rgba(100,255,218,0.5)",
                 }}
               >
-                Next.js
+                  Next.js
               </motion.span>
-              ,{" "}
+                ,{" "}
               <motion.span
                 className="text-[#64ffda] font-semibold"
                 whileHover={{
@@ -230,9 +230,9 @@ export default function HeroSection() {
                   textShadow: "0 0 20px rgba(100,255,218,0.5)",
                 }}
               >
-                TypeScript
+                  TypeScript
               </motion.span>
-              , and{" "}
+                , and{" "}
               <motion.span
                 className="text-[#64ffda] font-semibold"
                 whileHover={{
@@ -240,17 +240,17 @@ export default function HeroSection() {
                   textShadow: "0 0 20px rgba(100,255,218,0.5)",
                 }}
               >
-                React
+                  React
               </motion.span>
-              .
-            </motion.p>
+                .
+          </motion.p>
 
-            {/* CTA Buttons */}
-            <motion.div
+          {/* CTA Buttons */}
+          <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+              className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center px-4 mb-6 sm:mb-8"
             >
               <motion.div
                 whileHover={{ scale: 1.05, y: -5 }}
@@ -260,7 +260,7 @@ export default function HeroSection() {
               >
                 <motion.a
                   href="/portfolio"
-                  className="inline-flex items-center px-8 py-4 border-2 border-[#64ffda] text-[#64ffda] font-mono text-sm rounded transition-all hover:bg-[#64ffda]/10 hover:shadow-[0_0_30px_rgba(100,255,218,0.4)] relative overflow-hidden group"
+                  className="inline-flex items-center px-6 sm:px-8 py-3 sm:py-4 border-2 border-[#64ffda] text-[#64ffda] font-mono text-xs sm:text-sm rounded transition-all hover:bg-[#64ffda]/10 hover:shadow-[0_0_30px_rgba(100,255,218,0.4)] relative overflow-hidden group w-full sm:w-auto justify-center"
                   whileHover={{
                     boxShadow: "0 0 30px rgba(100,255,218,0.4)",
                   }}
@@ -289,7 +289,7 @@ export default function HeroSection() {
               >
                 <motion.a
                   href="/contact"
-                  className="inline-flex items-center px-8 py-4 border-2 border-[#233554] text-[#ccd6f6] font-mono text-sm rounded transition-all hover:border-[#64ffda] hover:text-[#64ffda] relative overflow-hidden group"
+                  className="inline-flex items-center px-6 sm:px-8 py-3 sm:py-4 border-2 border-[#233554] text-[#ccd6f6] font-mono text-xs sm:text-sm rounded transition-all hover:border-[#64ffda] hover:text-[#64ffda] relative overflow-hidden group w-full sm:w-auto justify-center"
                   whileHover={{
                     borderColor: "#64ffda",
                   }}
@@ -310,7 +310,7 @@ export default function HeroSection() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.5 }}
-              className="grid grid-cols-3 gap-8 mt-16 pt-8 border-t border-[#233554] max-w-2xl mx-auto"
+              className="grid grid-cols-3 gap-4 sm:gap-6 lg:gap-8 mt-8 sm:mt-12 lg:mt-16 pt-6 sm:pt-8 border-t border-[#233554] max-w-2xl mx-auto px-4"
             >
               {[
                 { number: "6+", label: "Years Experience" },
@@ -326,28 +326,28 @@ export default function HeroSection() {
                   whileHover={{ scale: 1.1, y: -5 }}
                 >
                   <motion.div
-                    className="text-3xl sm:text-4xl font-bold text-[#64ffda] mb-2"
+                    className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#64ffda] mb-1 sm:mb-2"
                     whileHover={{ scale: 1.2 }}
                   >
                     {stat.number}
                   </motion.div>
-                  <div className="text-sm text-[#8892b0] font-mono">
+                  <div className="text-xs sm:text-sm text-[#8892b0] font-mono leading-tight">
                     {stat.label}
-                  </div>
-                </motion.div>
+                        </div>
+                      </motion.div>
               ))}
             </motion.div>
           </div>
-        </motion.div>
+                    </motion.div>
 
         {/* Enhanced Scroll Indicator */}
-        <motion.div
+                    <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 1 }}
           className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10"
-        >
-          <motion.div
+                    >
+                      <motion.div
             animate={{ y: [0, 10, 0] }}
             transition={{ duration: 2, repeat: Infinity }}
             className="flex flex-col items-center text-[#64ffda] cursor-pointer group"
@@ -368,19 +368,19 @@ export default function HeroSection() {
             >
               Scroll Down
             </motion.span>
-            <motion.div
+                    <motion.div
               animate={{ y: [0, 8, 0] }}
-              transition={{
+                      transition={{
                 duration: 1.5,
-                repeat: Infinity,
-                ease: "easeInOut",
+                        repeat: Infinity,
+                        ease: "easeInOut",
               }}
             >
               <ChevronDown className="w-5 h-5" />
             </motion.div>
           </motion.div>
         </motion.div>
-      </section>
+    </section>
     </>
   );
 }
