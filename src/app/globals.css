@@ -3,13 +3,26 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #111827;
+  /* Dark Portfolio Theme - Dark Blue & Black */
+  --background: #0a192f;
+  --foreground: #ccd6f6;
+  --accent-blue: #64ffda;
+  --accent-blue-dark: #52e0c4;
+  --text-primary: #ccd6f6;
+  --text-secondary: #8892b0;
+  --dark-bg: #020c1b;
+  --card-bg: #112240;
+  --border-color: #233554;
 }
 
-.dark {
-  --background: #030712;
-  --foreground: #f9fafb;
+/* Force dark theme - no light mode */
+html {
+  color-scheme: dark;
+}
+
+body {
+  background: var(--background) !important;
+  color: var(--foreground) !important;
 }
 
 * {
@@ -40,30 +53,22 @@ body {
   }
 }
 
-/* Custom scrollbar */
+/* Custom scrollbar - Dark Theme */
 ::-webkit-scrollbar {
   width: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: transparent;
+  background: var(--dark-bg);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #888;
+  background: var(--border-color);
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
-}
-
-.dark ::-webkit-scrollbar-thumb {
-  background: #444;
-}
-
-.dark ::-webkit-scrollbar-thumb:hover {
-  background: #666;
+  background: var(--accent-blue);
 }
 
 .animation-delay-2000 {
@@ -211,16 +216,70 @@ img[loading="lazy"].loaded {
   background-size: 200% auto;
 }
 
-/* Glass morphism effect */
+/* Glass morphism effect - Dark Theme */
 .glass {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(17, 34, 64, 0.7);
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(100, 255, 218, 0.1);
 }
 
-.dark .glass {
-  background: rgba(0, 0, 0, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+/* Text on Image Overlay */
+.text-on-image {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.text-on-image::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(10, 25, 47, 0.85), rgba(10, 25, 47, 0.95));
+  z-index: 1;
+}
+
+.text-on-image > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* Scroll Animation Classes */
+.scroll-fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.scroll-fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Typing Animation */
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes blink-caret {
+  from, to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: var(--accent-blue);
+  }
+}
+
+.typing-effect {
+  overflow: hidden;
+  border-right: 3px solid var(--accent-blue);
+  white-space: nowrap;
+  animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
 }
 
 /* Remove focus outline from all form elements */

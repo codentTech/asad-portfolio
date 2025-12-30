@@ -3,10 +3,10 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { Plus, Edit, Trash2, LogOut, Eye } from 'lucide-react'
+import { Plus, Edit, Trash2, Eye } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
-import Button from '@/components/ui/Button'
-import Card from '@/components/ui/Card'
+import AdminLayout from '@/components/admin/AdminLayout'
+import { motion } from 'framer-motion'
 import ConfirmModal from '@/components/ui/ConfirmModal'
 import { BlogPost } from '@/types'
 import { formatDate } from '@/lib/utils'
@@ -81,123 +81,111 @@ export default function AdminBlogPage() {
     }
   }
 
-  const handleLogout = async () => {
-    await supabase.auth.signOut()
-    toast.success('Logged out successfully')
-    router.push('/admin/login')
-  }
-
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-gray-600 dark:text-gray-400">Loading...</div>
-      </div>
+      <AdminLayout title="Blog Management" description="Manage your blog posts">
+        <div className="flex items-center justify-center py-20">
+          <div className="text-[#8892b0]">Loading...</div>
+        </div>
+      </AdminLayout>
     )
   }
 
   return (
     <>
-      <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-purple-50 to-gray-50 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950 pt-24 pb-16">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Header */}
-          <div className="flex justify-between items-center mb-8">
-            <div>
-              <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
-                Blog Management
-              </h1>
-              <p className="text-gray-600 dark:text-gray-400">
-                Manage your blog posts
-              </p>
-            </div>
-            <div className="flex gap-3">
-              <Button variant="outline" onClick={handleLogout}>
-                <LogOut className="w-4 h-4 mr-2" />
-                Logout
-              </Button>
-              <Button asChild>
-                <Link href="/admin/blog/new">
-                  <Plus className="w-4 h-4 mr-2" />
-                  New Post
-                </Link>
-              </Button>
-            </div>
-          </div>
-
-          {/* Posts List */}
-          {posts.length === 0 ? (
-            <Card className="p-12 text-center" disableAnimation>
-              <p className="text-gray-600 dark:text-gray-400 mb-6">
-                No blog posts yet. Create your first post!
-              </p>
-              <Button asChild>
-                <Link href="/admin/blog/new">
-                  <Plus className="w-4 h-4 mr-2" />
-                  Create First Post
-                </Link>
-              </Button>
-            </Card>
-          ) : (
-            <div className="grid gap-4">
-              {posts.map((post) => (
-                <Card key={post.id} className="p-6" disableAnimation>
-                  <div className="flex justify-between items-start">
-                    <div className="flex-1">
-                      <div className="flex items-center gap-3 mb-2">
-                        <h3 className="text-xl font-bold text-gray-900 dark:text-white">
-                          {post.title}
-                        </h3>
-                        {post.featured && (
-                          <span className="px-2 py-1 text-xs font-semibold rounded-lg bg-gradient-to-r from-indigo-500 to-purple-500 text-white">
-                            Featured
-                          </span>
-                        )}
-                      </div>
-                      <p className="text-gray-600 dark:text-gray-400 mb-3 line-clamp-2">
-                        {post.excerpt}
-                      </p>
-                      <div className="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400">
-                        <span>{formatDate(post.publishedAt)}</span>
-                        <span>•</span>
-                        <span>{post.readingTime} min read</span>
-                        <span>•</span>
-                        <span>{post.tags.length} tags</span>
-                      </div>
+      <AdminLayout
+        title="Blog Management"
+        description="Manage your blog posts"
+        actionButton={
+          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            <Link
+              href="/admin/blog/new"
+              className="px-4 py-2 bg-[#64ffda] text-[#0a192f] font-mono text-sm rounded transition-all hover:bg-[#52e0c4] flex items-center gap-2"
+            >
+              <Plus className="w-4 h-4" />
+              New Post
+            </Link>
+          </motion.div>
+        }
+      >
+        {/* Posts List */}
+        {posts.length === 0 ? (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="bg-[#112240] border border-[#233554] rounded-lg p-12 text-center"
+          >
+            <p className="text-[#8892b0] mb-6">No blog posts yet. Create your first post!</p>
+            <Link
+              href="/admin/blog/new"
+              className="inline-flex items-center px-4 py-2 bg-[#64ffda] text-[#0a192f] font-mono text-sm rounded transition-all hover:bg-[#52e0c4]"
+            >
+              <Plus className="w-4 h-4 mr-2" />
+              Create First Post
+            </Link>
+          </motion.div>
+        ) : (
+          <div className="grid gap-4">
+            {posts.map((post, index) => (
+              <motion.div
+                key={post.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.05 }}
+                className="bg-[#112240] border border-[#233554] rounded-lg p-6 hover:border-[#64ffda] transition-all"
+              >
+                <div className="flex justify-between items-start">
+                  <div className="flex-1">
+                    <div className="flex items-center gap-3 mb-2">
+                      <h3 className="text-xl font-bold text-[#ccd6f6]">{post.title}</h3>
+                      {post.featured && (
+                        <span className="px-2 py-1 text-xs font-semibold rounded bg-[#64ffda] text-[#0a192f] font-mono">
+                          Featured
+                        </span>
+                      )}
                     </div>
-                    <div className="flex gap-2 ml-4">
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        asChild
-                      >
-                        <Link href={`/blog/${post.slug}`} target="_blank">
-                          <Eye className="w-4 h-4" />
-                        </Link>
-                      </Button>
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        asChild
-                      >
-                        <Link href={`/admin/blog/${post.id}/edit`}>
-                          <Edit className="w-4 h-4" />
-                        </Link>
-                      </Button>
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => handleDeleteClick(post)}
-                        className="text-red-600 hover:text-red-700 dark:text-red-400"
-                      >
-                        <Trash2 className="w-4 h-4" />
-                      </Button>
+                    <p className="text-[#8892b0] mb-3 line-clamp-2">{post.excerpt}</p>
+                    <div className="flex items-center gap-4 text-sm text-[#8892b0] font-mono">
+                      <span>{formatDate(post.publishedAt)}</span>
+                      <span className="text-[#233554]">•</span>
+                      <span>{post.readingTime} min read</span>
+                      <span className="text-[#233554]">•</span>
+                      <span>{post.tags.length} tags</span>
                     </div>
                   </div>
-                </Card>
-              ))}
-            </div>
-          )}
-        </div>
-      </div>
+                  <div className="flex gap-2 ml-4">
+                    <motion.a
+                      href={`/blog/${post.slug}`}
+                      target="_blank"
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.9 }}
+                      className="p-2 border border-[#233554] text-[#8892b0] rounded hover:border-[#64ffda] hover:text-[#64ffda] transition-all"
+                    >
+                      <Eye className="w-4 h-4" />
+                    </motion.a>
+                    <motion.a
+                      href={`/admin/blog/${post.id}/edit`}
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.9 }}
+                      className="p-2 border border-[#233554] text-[#8892b0] rounded hover:border-[#64ffda] hover:text-[#64ffda] transition-all"
+                    >
+                      <Edit className="w-4 h-4" />
+                    </motion.a>
+                    <motion.button
+                      onClick={() => handleDeleteClick(post)}
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.9 }}
+                      className="p-2 border border-[#233554] text-red-400 rounded hover:border-red-400 hover:bg-red-400/10 transition-all"
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </motion.button>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        )}
+      </AdminLayout>
 
       {/* Delete Confirmation Modal */}
       <ConfirmModal

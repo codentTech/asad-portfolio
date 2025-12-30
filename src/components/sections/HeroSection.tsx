@@ -2,405 +2,385 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
-import {
-  ArrowRight,
-  ArrowDown,
-  Sparkles,
-  Code,
-  Zap,
-  Github,
-  TrendingUp,
-  Terminal,
-  Database,
-  Cpu,
-} from "lucide-react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { ArrowRight, ChevronDown } from "lucide-react";
 import Button from "@/components/ui/Button";
 
 export default function HeroSection() {
-  const [windowWidth, setWindowWidth] = useState(1024);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [cursorVariant, setCursorVariant] = useState("default");
+  const [windowSize, setWindowSize] = useState({ width: 1920, height: 1080 });
+  const { scrollY } = useScroll();
+  const y = useTransform(scrollY, [0, 500], [0, 150]);
+  const opacity = useTransform(scrollY, [0, 300], [1, 0]);
+  const scale = useTransform(scrollY, [0, 300], [1, 0.95]);
 
   useEffect(() => {
-    const updateWidth = () => setWindowWidth(window.innerWidth);
-    updateWidth();
-    window.addEventListener("resize", updateWidth);
-    return () => window.removeEventListener("resize", updateWidth);
+    if (typeof window === "undefined") return;
+
+    setWindowSize({ width: window.innerWidth, height: window.innerHeight });
+
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePosition({
+        x: e.clientX,
+        y: e.clientY,
+      });
+
+      // Update cursor variant based on hover targets
+      const target = e.target as HTMLElement;
+      if (target?.closest("a, button")) {
+        setCursorVariant("hover");
+      } else {
+        setCursorVariant("default");
+      }
+    };
+
+    const handleResize = () => {
+      setWindowSize({ width: window.innerWidth, height: window.innerHeight });
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
-  // Calculate responsive radius based on window width
-  const getInnerRadius = () => {
-    if (windowWidth < 375) return 50;
-    if (windowWidth < 640) return 55;
-    if (windowWidth < 768) return 70;
-    if (windowWidth < 1024) return 85;
-    return 120;
-  };
-
-  const getOuterRadius = () => {
-    if (windowWidth < 375) return 65;
-    if (windowWidth < 640) return 75;
-    if (windowWidth < 768) return 95;
-    if (windowWidth < 1024) return 115;
-    return 160;
-  };
-
-  const getParticleRadius = () => {
-    if (windowWidth < 375) return 85;
-    if (windowWidth < 640) return 95;
-    if (windowWidth < 768) return 115;
-    if (windowWidth < 1024) return 135;
-    return 180;
-  };
+  // Calculate background parallax based on mouse position
+  const backgroundX = useTransform(scrollY, [0, 500], [0, 0], {
+    clamp: false,
+  });
+  const backgroundY = useTransform(scrollY, [0, 500], [0, 0], {
+    clamp: false,
+  });
 
   return (
-    <section className="relative min-h-[calc(100vh-4rem)] sm:min-h-screen flex items-center pt-20 sm:pt-16 bg-white dark:bg-gray-950 overflow-hidden">
-      {/* Main Content Container */}
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-12 items-center py-8 sm:py-12 lg:py-16 transform-gpu">
-            {/* Left Column - Content (Takes more space) */}
-            <div className="lg:col-span-7 space-y-3 sm:space-y-4 md:space-y-5">
-          {/* Badge */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.5, ease: "easeOut" }}
-              >
-                <div className="inline-flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full bg-gradient-to-r from-indigo-500/10 to-purple-500/10 border border-indigo-500/20 backdrop-blur-sm">
-                  <div className="w-1 h-1 rounded-full bg-indigo-500 animate-pulse" />
-                  <span className="text-[10px] sm:text-xs font-medium text-indigo-600 dark:text-indigo-300 tracking-wide">
-                    Full-Stack / Frontend Engineer
-                  </span>
-            </div>
-          </motion.div>
-
-              {/* Main Headline */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
-                className="space-y-2"
-              >
-                <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-[1.1] sm:leading-tight tracking-tight">
-                  <span className="block text-gray-900 dark:text-white mb-0.5 sm:mb-1">
-                    Building Modern
-            </span>
-                  <span className="block bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-500 dark:from-indigo-400 dark:via-purple-400 dark:to-indigo-300 bg-clip-text text-transparent">
-                    Web Experiences
-            </span>
-                </h1>
-              </motion.div>
-
-              {/* Description */}
-          <motion.p
-                initial={{ opacity: 0, y: 15 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-                className="text-xs sm:text-sm md:text-base lg:text-lg text-gray-600 dark:text-gray-400 leading-relaxed max-w-xl"
-              >
-                Specializing in{" "}
-                <span className="font-semibold text-indigo-600 dark:text-indigo-400">
-                  Next.js
-                </span>
-                ,{" "}
-                <span className="font-semibold text-purple-600 dark:text-purple-400">
-                  TypeScript
-                </span>
-                , and{" "}
-                <span className="font-semibold text-gray-900 dark:text-white">
-                  React
-                </span>
-                .
-                <br className="hidden sm:block" />
-                <span className="block mt-0.5 sm:mt-1">
-                  Creating scalable, performant, and beautiful web applications.
-                </span>
-          </motion.p>
-
-          {/* CTA Buttons */}
-          <motion.div
-                initial={{ opacity: 0, y: 15 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
-                className="flex flex-col md:flex-row gap-3 pt-2 sm:pt-3"
-              >
-                <Button
-                  asChild
-                  size="md"
-                  className="group shadow-lg shadow-indigo-500/20 text-sm sm:text-base w-full md:w-auto"
-                >
-                  <Link href="/portfolio" className="w-full md:w-auto">
-                    <span className="flex items-center justify-center">
-                View My Work
-                      <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                    </span>
-              </Link>
-            </Button>
-                <Button
-                  asChild
-                  variant="outline"
-                  size="md"
-                  className="bg-white dark:bg-transparent border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-900/50 hover:border-gray-400 dark:hover:border-gray-600 transition-all text-sm sm:text-base w-full md:w-auto"
-                >
-              <Link href="/contact" className="w-full md:w-auto">Get In Touch</Link>
-            </Button>
-          </motion.div>
-
-              {/* Stats Row */}
-          <motion.div
-                initial={{ opacity: 0, y: 15 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
-                className="flex items-center justify-between sm:justify-start gap-3 sm:gap-4 md:gap-6 lg:gap-8 pt-3 sm:pt-4 md:pt-5 border-t border-gray-200 dark:border-gray-800"
-              >
-                <div className="text-center sm:text-left">
-                  <div className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white mb-0.5">
-                    6+
-                  </div>
-                  <div className="text-[9px] sm:text-[10px] md:text-xs text-gray-500 dark:text-gray-400 whitespace-nowrap">
-                    Years Experience
-                  </div>
-                </div>
-                <div className="text-center sm:text-left">
-                  <div className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white mb-0.5">
-                    50+
-                  </div>
-                  <div className="text-[9px] sm:text-[10px] md:text-xs text-gray-500 dark:text-gray-400 whitespace-nowrap">
-                    Projects
-                  </div>
-                </div>
-                <div className="text-center sm:text-left">
-                  <div className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white mb-0.5">
-                    30+
-                  </div>
-                  <div className="text-[9px] sm:text-[10px] md:text-xs text-gray-500 dark:text-gray-400 whitespace-nowrap">
-                    Clients
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* Tech Stack */}
-              <motion.div
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.6, delay: 0.5 }}
-                className="flex flex-wrap items-center gap-1.5 sm:gap-2 md:gap-3 pt-2 sm:pt-3"
-              >
-                <span className="text-[10px] sm:text-xs text-gray-500 dark:text-gray-400">
-                  Tech Stack:
-                </span>
-                <div className="flex items-center gap-1.5 sm:gap-2">
-                  {[
-                    {
-                      icon: Code,
-                      label: "Next.js",
-                      color: "text-indigo-600 dark:text-indigo-400",
-                    },
-                    {
-                      icon: Zap,
-                      label: "TS",
-                      color: "text-purple-600 dark:text-purple-400",
-                    },
-                    {
-                      icon: Github,
-                      label: "React",
-                      color: "text-indigo-500 dark:text-indigo-300",
-                    },
-                  ].map(({ icon: Icon, label, color }) => (
-                    <div
-                      key={label}
-                      className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-lg bg-gray-100/50 dark:bg-gray-900/50 border border-gray-200/50 dark:border-gray-800/50 hover:border-indigo-300 dark:hover:border-indigo-500/30 transition-colors"
-                    >
-                      <Icon className={`w-3 h-3 sm:w-3.5 sm:h-3.5 ${color}`} />
-                      <span className="text-[10px] sm:text-xs font-medium text-gray-600 dark:text-gray-400">
-                        {label}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </motion.div>
-            </div>
-
-            {/* Right Column - Circular Animation */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
-              className="lg:col-span-5 relative mt-8 sm:mt-10 lg:mt-0 flex items-center justify-center mx-auto lg:mx-0"
-            >
-              <div className="relative w-[180px] h-[180px] xs:w-[220px] xs:h-[220px] sm:w-[280px] sm:h-[280px] md:w-[320px] md:h-[320px] lg:w-[400px] lg:h-[400px] max-w-full">
-                {/* Central Circle/Element */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <motion.div
-                    animate={{ rotate: 360 }}
-                    transition={{
-                      duration: 20,
-                      repeat: Infinity,
-                      ease: "linear",
-                    }}
-                    className="w-10 h-10 xs:w-12 xs:h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-24 lg:h-24 rounded-full bg-black dark:bg-gradient-to-br dark:from-indigo-500 dark:to-purple-500 flex items-center justify-center shadow-lg"
-                  >
-                    <Code className="w-5 h-5 xs:w-6 xs:h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 lg:w-12 lg:h-12 text-white" />
-                  </motion.div>
-                </div>
-
-                {/* Orbiting Elements - Circle 1 */}
-                {[
-                  { icon: Terminal, size: "w-7 h-7 xs:w-8 xs:h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 lg:w-12 lg:h-12" },
-                  { icon: Database, size: "w-7 h-7 xs:w-8 xs:h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 lg:w-12 lg:h-12" },
-                  { icon: Cpu, size: "w-7 h-7 xs:w-8 xs:h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 lg:w-12 lg:h-12" },
-                  { icon: Zap, size: "w-7 h-7 xs:w-8 xs:h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 lg:w-12 lg:h-12" },
-                ].map(({ icon: Icon, size }, index) => {
-                  const radius = getInnerRadius();
-                  const initialAngle = (index * 360) / 4;
-                  return (
-                    <motion.div
-                      key={index}
-                      className="absolute top-1/2 left-1/2"
-                      style={{
-                        x: "-50%",
-                        y: "-50%",
-                      }}
-                      animate={{
-                        rotate: 360,
-                      }}
-                      transition={{
-                        duration: 15,
-                        repeat: Infinity,
-                        ease: "linear",
-                      }}
-                    >
-                      <motion.div
-                        style={{
-                          x: `${
-                            radius * Math.cos((initialAngle * Math.PI) / 180)
-                          }px`,
-                          y: `${
-                            radius * Math.sin((initialAngle * Math.PI) / 180)
-                          }px`,
-                        }}
-                        className="absolute"
-                      >
-                        <div
-                          className={`${size} rounded-full bg-black dark:bg-gray-800 border-2 border-gray-300 dark:border-indigo-800 shadow-lg flex items-center justify-center`}
-                        >
-                          <Icon className="w-3.5 h-3.5 xs:w-4 xs:h-4 sm:w-4.5 sm:h-4.5 md:w-5 md:h-5 lg:w-6 lg:h-6 text-white dark:text-indigo-400" />
-                        </div>
-                      </motion.div>
-                    </motion.div>
-                  );
-                })}
-
-                {/* Orbiting Elements - Circle 2 (Outer) */}
-                {[
-                  { icon: Github, size: "w-6 h-6 xs:w-7 xs:h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 lg:w-10 lg:h-10" },
-                  { icon: TrendingUp, size: "w-6 h-6 xs:w-7 xs:h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 lg:w-10 lg:h-10" },
-                  { icon: Sparkles, size: "w-6 h-6 xs:w-7 xs:h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 lg:w-10 lg:h-10" },
-                  { icon: Code, size: "w-6 h-6 xs:w-7 xs:h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 lg:w-10 lg:h-10" },
-                  { icon: Zap, size: "w-6 h-6 xs:w-7 xs:h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 lg:w-10 lg:h-10" },
-                ].map(({ icon: Icon, size }, index) => {
-                  const radius = getOuterRadius();
-                  const initialAngle = (index * 360) / 5;
-                  return (
-                    <motion.div
-                      key={`outer-${index}`}
-                      className="absolute top-1/2 left-1/2"
-                      style={{
-                        x: "-50%",
-                        y: "-50%",
-                      }}
-                      animate={{
-                        rotate: -360,
-                      }}
-                      transition={{
-                        duration: 20,
-                        repeat: Infinity,
-                        ease: "linear",
-                      }}
-                    >
-                      <motion.div
-                        style={{
-                          x: `${
-                            radius * Math.cos((initialAngle * Math.PI) / 180)
-                          }px`,
-                          y: `${
-                            radius * Math.sin((initialAngle * Math.PI) / 180)
-                          }px`,
-                        }}
-                        className="absolute"
-                      >
-                        <div
-                          className={`${size} rounded-full bg-gradient-to-br from-purple-500/20 to-indigo-500/20 dark:from-purple-500/30 dark:to-indigo-500/30 border border-purple-300/50 dark:border-purple-700/50 shadow-md flex items-center justify-center backdrop-blur-sm`}
-                        >
-                          <Icon className="w-3 h-3 xs:w-3.5 xs:h-3.5 sm:w-3.5 sm:h-3.5 md:w-4 md:h-4 lg:w-5 lg:h-5 text-purple-600 dark:text-purple-400" />
-                        </div>
-                      </motion.div>
-                    </motion.div>
-                  );
-                })}
-
-                {/* Floating Particles */}
-                {[...Array(4)].map((_, i) => {
-                  const particleRadius = getParticleRadius();
-                  return (
-                    <motion.div
-                      key={`particle-${i}`}
-                      className="absolute top-1/2 left-1/2 w-1 h-1 xs:w-1.5 xs:h-1.5 sm:w-2 sm:h-2 rounded-full bg-indigo-400/50 dark:bg-indigo-500/50"
-                      style={{
-                        x: "-50%",
-                        y: "-50%",
-                      }}
-                      animate={{
-                        x: [
-                          `calc(-50% + ${
-                            particleRadius * Math.cos((i * 60 * Math.PI) / 180)
-                          }px)`,
-                        ],
-                        y: [
-                          `calc(-50% + ${
-                            particleRadius * Math.sin((i * 60 * Math.PI) / 180)
-                          }px)`,
-                        ],
-                        scale: [1, 1.5, 1],
-                        opacity: [0.3, 0.7, 0.3],
-                      }}
-                      transition={{
-                        duration: 3 + i * 0.3,
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                        delay: i * 0.2,
-                      }}
-                    />
-                  );
-                })}
-              </div>
-          </motion.div>
-        </div>
-      </div>
-
-      {/* Scroll Indicator */}
+    <>
+      {/* Custom Cursor */}
       <motion.div
-        initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8, delay: 1.1 }}
-          className="absolute bottom-4 sm:bottom-6 md:bottom-8 left-1/2 transform -translate-x-1/2 transform-gpu hidden sm:flex"
+        className="fixed top-0 left-0 w-6 h-6 rounded-full border-2 border-[#64ffda] pointer-events-none z-[9999] mix-blend-difference"
+        animate={{
+          x: mousePosition.x - 12,
+          y: mousePosition.y - 12,
+          scale: cursorVariant === "hover" ? 1.5 : 1,
+        }}
+        transition={{ type: "spring", damping: 25, stiffness: 700 }}
+      />
+      <motion.div
+        className="fixed top-0 left-0 w-2 h-2 rounded-full bg-[#64ffda] pointer-events-none z-[9999]"
+        animate={{
+          x: mousePosition.x - 4,
+          y: mousePosition.y - 4,
+        }}
+        transition={{ type: "spring", damping: 25, stiffness: 700 }}
+      />
+
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#0a192f]">
+        {/* Background Image with Enhanced Parallax */}
+        <div className="absolute inset-0 z-0">
+          <motion.div
+            className="absolute inset-0 bg-cover bg-center bg-fixed"
+            style={{
+              backgroundImage:
+                "url(https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop)",
+              transform: `translate(${mousePosition.x / 50}px, ${
+                mousePosition.y / 50
+              }px) scale(1.15)`,
+            }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0a192f]/95 via-[#0a192f]/90 to-[#0a192f]/95" />
+          <div className="absolute inset-0 bg-[#020c1b]/60" />
+        </div>
+
+        {/* Animated Background Particles */}
+        <div className="absolute inset-0 z-0 overflow-hidden">
+          {[...Array(80)].map((_, i) => {
+            const initialX = Math.random() * windowSize.width;
+            const initialY = Math.random() * windowSize.height;
+            return (
+              <motion.div
+                key={i}
+                className="absolute w-1 h-1 bg-[#64ffda]/30 rounded-full"
+                initial={{
+                  x: initialX,
+                  y: initialY,
+                  opacity: 0.2,
+                }}
+                animate={{
+                  y: [initialY, Math.random() * windowSize.height, initialY],
+                  opacity: [0.2, 0.8, 0.2],
+                  scale: [1, 1.5, 1],
+                }}
+                transition={{
+                  duration: Math.random() * 4 + 3,
+                  repeat: Infinity,
+                  delay: Math.random() * 2,
+                  ease: "easeInOut",
+                }}
+              />
+            );
+          })}
+        </div>
+
+        {/* Floating Orbs */}
+        <div className="absolute inset-0 z-0 overflow-hidden">
+          {[...Array(3)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute rounded-full blur-3xl opacity-20"
+              style={{
+                width: `${200 + i * 150}px`,
+                height: `${200 + i * 150}px`,
+                background: `radial-gradient(circle, #64ffda, transparent)`,
+                left: `${20 + i * 30}%`,
+                top: `${30 + i * 20}%`,
+              }}
+              animate={{
+                x: [0, 50, -50, 0],
+                y: [0, -50, 50, 0],
+                scale: [1, 1.2, 0.8, 1],
+              }}
+              transition={{
+                duration: 8 + i * 2,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            />
+          ))}
+        </div>
+
+        {/* Content - Text on Image */}
+        <motion.div
+          style={{ y, opacity, scale }}
+          className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 text-center"
         >
-          <div className="flex flex-col items-center gap-1 sm:gap-1.5 text-gray-500 dark:text-gray-400 group cursor-pointer">
-            <span className="text-[10px] sm:text-xs font-medium uppercase tracking-wider">
-              Scroll
-            </span>
-            <ArrowDown className="w-3 h-3 sm:w-3.5 sm:h-3.5 animate-bounce group-hover:text-indigo-500 dark:group-hover:text-indigo-400 transition-colors" />
+          <div className="max-w-5xl mx-auto">
+            {/* Greeting */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="mb-4"
+            >
+              <motion.span
+                className="text-[#64ffda] font-mono text-sm sm:text-base inline-block"
+                whileHover={{ scale: 1.1 }}
+              >
+                Hi, my name is
+              </motion.span>
+            </motion.div>
+
+            {/* Name with enhanced animations */}
+            <motion.h1
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.1 }}
+              className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-4 text-[#ccd6f6] leading-tight"
+            >
+              <motion.span
+                className="block"
+                whileHover={{ scale: 1.05, x: 10 }}
+                transition={{ type: "spring", stiffness: 400 }}
+              >
+                Asad Abbas.
+              </motion.span>
+            </motion.h1>
+
+            {/* Big Headline with gradient */}
+            <motion.h2
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 text-[#8892b0] leading-tight"
+            >
+              <motion.span
+                className="block"
+                whileHover={{ scale: 1.03 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                I build things for the web.
+              </motion.span>
+            </motion.h2>
+
+            {/* Description */}
+            <motion.p
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+              className="text-lg sm:text-xl text-[#8892b0] max-w-2xl mx-auto mb-8 leading-relaxed"
+            >
+              I&apos;m a Full-Stack / Frontend Engineer specializing in building
+              exceptional digital experiences. Currently focused on building
+              accessible, human-centered products using{" "}
+              <motion.span
+                className="text-[#64ffda] font-semibold"
+                whileHover={{
+                  scale: 1.1,
+                  textShadow: "0 0 20px rgba(100,255,218,0.5)",
+                }}
+              >
+                Next.js
+              </motion.span>
+              ,{" "}
+              <motion.span
+                className="text-[#64ffda] font-semibold"
+                whileHover={{
+                  scale: 1.1,
+                  textShadow: "0 0 20px rgba(100,255,218,0.5)",
+                }}
+              >
+                TypeScript
+              </motion.span>
+              , and{" "}
+              <motion.span
+                className="text-[#64ffda] font-semibold"
+                whileHover={{
+                  scale: 1.1,
+                  textShadow: "0 0 20px rgba(100,255,218,0.5)",
+                }}
+              >
+                React
+              </motion.span>
+              .
+            </motion.p>
+
+            {/* CTA Buttons */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+            >
+              <motion.div
+                whileHover={{ scale: 1.05, y: -5 }}
+                whileTap={{ scale: 0.95 }}
+                onHoverStart={() => setCursorVariant("hover")}
+                onHoverEnd={() => setCursorVariant("default")}
+              >
+                <motion.a
+                  href="/portfolio"
+                  className="inline-flex items-center px-8 py-4 border-2 border-[#64ffda] text-[#64ffda] font-mono text-sm rounded transition-all hover:bg-[#64ffda]/10 hover:shadow-[0_0_30px_rgba(100,255,218,0.4)] relative overflow-hidden group"
+                  whileHover={{
+                    boxShadow: "0 0 30px rgba(100,255,218,0.4)",
+                  }}
+                >
+                  <motion.span
+                    className="absolute inset-0 bg-[#64ffda] opacity-0 group-hover:opacity-10"
+                    initial={{ x: "-100%" }}
+                    whileHover={{ x: "100%" }}
+                    transition={{ duration: 0.5 }}
+                  />
+                  <span className="relative z-10">View My Work</span>
+                  <motion.span
+                    className="relative z-10 ml-2"
+                    animate={{ x: [0, 5, 0] }}
+                    transition={{ duration: 1.5, repeat: Infinity }}
+                  >
+                    <ArrowRight className="w-4 h-4" />
+                  </motion.span>
+                </motion.a>
+              </motion.div>
+              <motion.div
+                whileHover={{ scale: 1.05, y: -5 }}
+                whileTap={{ scale: 0.95 }}
+                onHoverStart={() => setCursorVariant("hover")}
+                onHoverEnd={() => setCursorVariant("default")}
+              >
+                <motion.a
+                  href="/contact"
+                  className="inline-flex items-center px-8 py-4 border-2 border-[#233554] text-[#ccd6f6] font-mono text-sm rounded transition-all hover:border-[#64ffda] hover:text-[#64ffda] relative overflow-hidden group"
+                  whileHover={{
+                    borderColor: "#64ffda",
+                  }}
+                >
+                  <motion.span
+                    className="absolute inset-0 bg-[#64ffda] opacity-0 group-hover:opacity-5"
+                    initial={{ scale: 0 }}
+                    whileHover={{ scale: 1 }}
+                    transition={{ duration: 0.3 }}
+                  />
+                  <span className="relative z-10">Get In Touch</span>
+                </motion.a>
+              </motion.div>
+            </motion.div>
+
+            {/* Stats with enhanced animations */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.5 }}
+              className="grid grid-cols-3 gap-8 mt-16 pt-8 border-t border-[#233554] max-w-2xl mx-auto"
+            >
+              {[
+                { number: "6+", label: "Years Experience" },
+                { number: "50+", label: "Projects" },
+                { number: "30+", label: "Clients" },
+              ].map((stat, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5, delay: 0.6 + index * 0.1 }}
+                  className="text-center"
+                  whileHover={{ scale: 1.1, y: -5 }}
+                >
+                  <motion.div
+                    className="text-3xl sm:text-4xl font-bold text-[#64ffda] mb-2"
+                    whileHover={{ scale: 1.2 }}
+                  >
+                    {stat.number}
+                  </motion.div>
+                  <div className="text-sm text-[#8892b0] font-mono">
+                    {stat.label}
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
           </div>
         </motion.div>
-      </div>
-    </section>
+
+        {/* Enhanced Scroll Indicator */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 1 }}
+          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10"
+        >
+          <motion.div
+            animate={{ y: [0, 10, 0] }}
+            transition={{ duration: 2, repeat: Infinity }}
+            className="flex flex-col items-center text-[#64ffda] cursor-pointer group"
+            onClick={() => {
+              if (typeof window !== "undefined") {
+                window.scrollTo({
+                  top: window.innerHeight,
+                  behavior: "smooth",
+                });
+              }
+            }}
+            whileHover={{ scale: 1.2 }}
+          >
+            <motion.span
+              className="text-xs font-mono mb-2"
+              animate={{ opacity: [0.5, 1, 0.5] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            >
+              Scroll Down
+            </motion.span>
+            <motion.div
+              animate={{ y: [0, 8, 0] }}
+              transition={{
+                duration: 1.5,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            >
+              <ChevronDown className="w-5 h-5" />
+            </motion.div>
+          </motion.div>
+        </motion.div>
+      </section>
+    </>
   );
 }

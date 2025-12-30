@@ -70,7 +70,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className="scroll-smooth dark" style={{ colorScheme: 'dark' }}>
       <head>
         {/* Preconnect to external domains for faster loading */}
         <link rel="preconnect" href="https://images.pexels.com" crossOrigin="anonymous" />
@@ -96,7 +96,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={`${inter.className} antialiased bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100`}>
+      <body className={`${inter.className} antialiased bg-[#0a192f] text-[#ccd6f6]`}>
         <Header />
         <main className="min-h-screen">{children}</main>
         <Footer />

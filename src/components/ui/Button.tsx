@@ -16,10 +16,10 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     const baseStyles = 'inline-flex items-center justify-center rounded-lg font-medium transition-all duration-200 focus:outline-none disabled:opacity-50 disabled:pointer-events-none'
     
     const variants = {
-      primary: 'bg-gradient-to-r from-indigo-600 via-purple-600 to-gray-900 dark:to-gray-800 text-white hover:from-indigo-700 hover:via-purple-700 hover:to-gray-800 dark:hover:to-gray-700 shadow-lg hover:shadow-xl',
-      secondary: 'bg-gray-100 text-gray-900 dark:bg-gray-800 dark:text-gray-100 hover:bg-gray-200 dark:hover:bg-gray-700',
-      outline: 'border-2 border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800',
-      ghost: 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800',
+      primary: 'bg-[#64ffda] text-[#0a192f] hover:bg-[#52e0c4] shadow-lg hover:shadow-[0_0_20px_rgba(100,255,218,0.3)] font-mono',
+      secondary: 'bg-[#112240] text-[#ccd6f6] hover:bg-[#233554] border border-[#233554]',
+      outline: 'border-2 border-[#64ffda] text-[#64ffda] hover:bg-[#64ffda]/10 font-mono',
+      ghost: 'text-[#8892b0] hover:text-[#64ffda] hover:bg-[#112240]',
     }
     
     const sizes = {

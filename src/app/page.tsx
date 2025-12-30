@@ -1,7 +1,7 @@
-import type { Metadata } from "next";
-import { Suspense } from "react";
-import dynamic from "next/dynamic";
 import HeroSection from "@/components/sections/HeroSection";
+import type { Metadata } from "next";
+import dynamic from "next/dynamic";
+import { Suspense } from "react";
 
 // Lazy load below-the-fold sections for better performance
 const AboutSection = dynamic(
@@ -64,9 +64,6 @@ export default function HomePage() {
       </Suspense>
       <Suspense fallback={<div className="min-h-[400px]" />}>
         <BlogSection />
-      </Suspense>
-      <Suspense fallback={<div className="min-h-[200px]" />}>
-        <CTASection />
       </Suspense>
     </>
   );

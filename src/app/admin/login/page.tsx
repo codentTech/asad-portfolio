@@ -1,80 +1,111 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import { useRouter } from 'next/navigation'
-import { createClient } from '@/lib/supabase/client'
-import Button from '@/components/ui/Button'
-import Card from '@/components/ui/Card'
-import toast from 'react-hot-toast'
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { createClient } from "@/lib/supabase/client";
+import { motion } from "framer-motion";
+import toast from "react-hot-toast";
 
 export default function AdminLoginPage() {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [loading, setLoading] = useState(false)
-  const router = useRouter()
-  const supabase = createClient()
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
+  const supabase = createClient();
 
   const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setLoading(true)
+    e.preventDefault();
+    setLoading(true);
 
-    const { data, error: signInError } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    })
+    const { data, error: signInError } = await supabase.auth.signInWithPassword(
+      {
+        email,
+        password,
+      }
+    );
 
     if (signInError) {
-      toast.error(signInError.message || 'Failed to login. Please check your credentials.')
-      setLoading(false)
-      return
+      toast.error(
+        signInError.message || "Failed to login. Please check your credentials."
+      );
+      setLoading(false);
+      return;
     }
 
     if (data.user) {
-      toast.success('Login successful! Redirecting...')
-      router.push('/admin/blog')
-      router.refresh()
+      toast.success("Login successful! Redirecting...");
+      router.push("/admin/blog");
+      router.refresh();
     }
-  }
+  };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-50 via-purple-50 to-gray-50 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950 px-4">
-      <Card className="w-full max-w-md p-8" disableAnimation>
-        <h1 className="text-3xl font-bold text-center mb-6 bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
-          Admin Login
-        </h1>
-        <form onSubmit={handleLogin} className="space-y-4">
-          <div>
-            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
-              Email
-            </label>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              className="w-full px-4 py-2 rounded-lg border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
-              placeholder="your@email.com"
-            />
+    <div className="min-h-screen flex items-center justify-center bg-[#0a192f] px-4">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="w-full max-w-md"
+      >
+        <div className="bg-[#112240] border border-[#233554] rounded-lg p-8">
+          <div className="text-center mb-8">
+            <h1 className="text-3xl font-bold text-[#ccd6f6] mb-2">
+              Admin Login
+            </h1>
+            <p className="text-[#8892b0] font-mono text-sm">
+              Access the admin dashboard
+            </p>
           </div>
-          <div>
-            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
-              Password
-            </label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              className="w-full px-4 py-2 rounded-lg border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
-              placeholder="••••••••"
-            />
-          </div>
-          <Button type="submit" className="w-full" disabled={loading}>
-            {loading ? 'Logging in...' : 'Login'}
-          </Button>
-        </form>
-      </Card>
-    </div>
-  )
-}
 
+          <form onSubmit={handleLogin} className="space-y-6">
+            <div>
+              <label
+                htmlFor="email"
+                className="block text-sm font-mono text-[#ccd6f6] mb-2"
+              >
+                Email
+              </label>
+              <input
+                id="email"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                className="w-full px-4 py-3 bg-[#0a192f] border border-[#233554] rounded-lg text-[#ccd6f6] placeholder-[#8892b0] focus:outline-none focus:border-[#64ffda] transition-colors font-mono text-sm"
+                placeholder="your@email.com"
+              />
+            </div>
+
+            <div>
+              <label
+                htmlFor="password"
+                className="block text-sm font-mono text-[#ccd6f6] mb-2"
+              >
+                Password
+              </label>
+              <input
+                id="password"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                className="w-full px-4 py-3 bg-[#0a192f] border border-[#233554] rounded-lg text-[#ccd6f6] placeholder-[#8892b0] focus:outline-none focus:border-[#64ffda] transition-colors font-mono text-sm"
+                placeholder="••••••••"
+              />
+            </div>
+
+            <motion.button
+              type="submit"
+              disabled={loading}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="w-full px-4 py-3 bg-[#64ffda] text-[#0a192f] font-mono text-sm rounded-lg transition-all hover:bg-[#52e0c4] disabled:opacity-50 disabled:cursor-not-allowed font-semibold"
+            >
+              {loading ? "Logging in..." : "Login"}
+            </motion.button>
+          </form>
+        </div>
+      </motion.div>
+    </div>
+  );
+}
