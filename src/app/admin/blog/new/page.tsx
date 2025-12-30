@@ -9,7 +9,11 @@ import Button from '@/components/ui/Button'
 import Card from '@/components/ui/Card'
 import { generateSlug } from '@/lib/utils'
 import toast from 'react-hot-toast'
-import RichTextEditor from '@/components/admin/RichTextEditor'
+import dynamic from 'next/dynamic'
+
+const RichTextEditor = dynamic(() => import('@/components/admin/RichTextEditor'), {
+  ssr: false,
+})
 
 export default function NewBlogPostPage() {
   const [loading, setLoading] = useState(false)

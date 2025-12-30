@@ -2,11 +2,15 @@
 
 import { useState, useEffect } from 'react'
 import { useRouter, useParams } from 'next/navigation'
+import dynamic from 'next/dynamic'
 import { ArrowLeft, Save } from 'lucide-react'
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase/client'
-import RichTextEditor from '@/components/admin/RichTextEditor'
 import toast from 'react-hot-toast'
+
+const RichTextEditor = dynamic(() => import('@/components/admin/RichTextEditor'), {
+  ssr: false,
+})
 
 const availableIcons = ['TrendingUp', 'Zap', 'BarChart', 'Code', 'ShoppingCart', 'CheckCircle2', 'Clock', 'Users', 'Target']
 
