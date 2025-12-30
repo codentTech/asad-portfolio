@@ -266,7 +266,7 @@ export default function AboutPageClient() {
       </section>
 
       {/* Skills */}
-      <section className="py-20 sm:py-32 bg-[#020c1b]">
+      {/* <section className="py-20 sm:py-32 bg-[#020c1b]">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-6xl mx-auto">
             <motion.div
@@ -335,7 +335,7 @@ export default function AboutPageClient() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Philosophy Section */}
       <section className="py-20 sm:py-32 bg-[#0a192f]">
