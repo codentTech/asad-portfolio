@@ -83,7 +83,7 @@ export default function TestimonialsSection() {
   return (
     <section
       ref={ref}
-      className="relative py-20 sm:py-32 overflow-hidden bg-[#020c1b]"
+      className="relative py-16 sm:py-24 overflow-hidden bg-[#020c1b]"
     >
       {/* Animated Background */}
       <div className="absolute inset-0 z-0">
@@ -111,13 +111,13 @@ export default function TestimonialsSection() {
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="max-w-7xl mx-auto">
+      <div className="max-w-7xl mx-auto">
           {/* Section Header */}
-          <motion.div
+            <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ duration: 0.6 }}
-            className="text-center mb-16"
+            className="text-center mb-12"
             style={{ opacity }}
           >
             <motion.span
@@ -132,7 +132,7 @@ export default function TestimonialsSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="text-4xl sm:text-5xl md:text-6xl font-bold text-[#ccd6f6] mb-4"
+              className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#ccd6f6] mb-3"
             >
               Client Testimonials
             </motion.h2>
@@ -182,7 +182,7 @@ export default function TestimonialsSection() {
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -100 }}
                   transition={{ duration: 0.5, ease: "easeInOut" }}
-                  className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+                  className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
                 >
                   {getCurrentTestimonials().map((testimonial, index) => {
                     const globalIndex = currentIndex * slidesPerView + index;
@@ -203,7 +203,7 @@ export default function TestimonialsSection() {
                         whileHover={{ y: -10, scale: 1.02 }}
                         style={{ y }}
                       >
-                        <div className="relative bg-[#112240] border border-[#233554] rounded-lg p-8 h-full flex flex-col hover:border-[#64ffda] transition-all duration-300 overflow-hidden">
+                        <div className="relative bg-[#112240] border border-[#233554] rounded-lg p-6 h-full flex flex-col hover:border-[#64ffda] transition-all duration-300 overflow-hidden">
                           {/* Animated glow */}
                           <motion.div
                             className="absolute inset-0 bg-gradient-to-br from-[#64ffda]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
@@ -212,9 +212,9 @@ export default function TestimonialsSection() {
                             }}
                           />
 
-                          {/* Quote Icon */}
-                          <motion.div
-                            className="mb-4 relative z-10"
+                {/* Quote Icon */}
+                  <motion.div
+                    className="mb-3 relative z-10"
                             animate={{
                               rotate:
                                 hoveredIndex === globalIndex
@@ -223,16 +223,16 @@ export default function TestimonialsSection() {
                             }}
                             transition={{ duration: 0.5 }}
                           >
-                            <div className="w-12 h-12 rounded-full bg-[#64ffda]/10 border border-[#64ffda]/20 flex items-center justify-center">
-                              <Quote className="w-6 h-6 text-[#64ffda]" />
-                            </div>
-                          </motion.div>
+                    <div className="w-10 h-10 rounded-full bg-[#64ffda]/10 border border-[#64ffda]/20 flex items-center justify-center">
+                      <Quote className="w-5 h-5 text-[#64ffda]" />
+                    </div>
+                  </motion.div>
 
-                          {/* Stars Rating */}
-                          <div className="flex gap-1 mb-4 relative z-10">
-                            {[0, 1, 2, 3, 4].map((i) => (
+                  {/* Stars Rating */}
+                  <div className="flex gap-1 mb-3 relative z-10">
+                  {[0, 1, 2, 3, 4].map((i) => (
                               <motion.div
-                                key={i}
+                      key={i}
                                 animate={{
                                   scale:
                                     hoveredIndex === globalIndex
@@ -244,50 +244,50 @@ export default function TestimonialsSection() {
                                   delay: i * 0.05,
                                 }}
                               >
-                                <Star className="w-5 h-5 fill-[#64ffda] text-[#64ffda]" />
+                                <Star className="w-4 h-4 fill-[#64ffda] text-[#64ffda]" />
                               </motion.div>
-                            ))}
-                          </div>
+                  ))}
+                </div>
 
-                          {/* Testimonial Content */}
-                          <motion.p
-                            className="text-[#8892b0] mb-6 flex-grow leading-relaxed relative z-10"
-                            whileHover={{ color: "#ccd6f6" }}
-                          >
-                            &quot;{testimonial.content}&quot;
-                          </motion.p>
+                  {/* Testimonial Content */}
+                  <motion.p
+                    className="text-sm text-[#8892b0] mb-4 flex-grow leading-relaxed relative z-10"
+                    whileHover={{ color: "#ccd6f6" }}
+                  >
+                    &quot;{testimonial.content}&quot;
+                  </motion.p>
 
-                          {/* Author Info */}
-                          <div className="flex items-center gap-4 pt-4 border-t border-[#233554] relative z-10">
+                  {/* Author Info */}
+                  <div className="flex items-center gap-3 pt-3 border-t border-[#233554] relative z-10">
                             <motion.div
                               className="relative flex-shrink-0"
                               whileHover={{ scale: 1.1, rotate: 5 }}
                             >
-                              <img
-                                src={testimonial.avatar}
-                                alt={testimonial.name}
-                                className="w-14 h-14 rounded-full object-cover border-2 border-[#233554] group-hover:border-[#64ffda] transition-colors"
-                                loading="lazy"
-                                decoding="async"
-                              />
-                            </motion.div>
-                            <div className="flex-1 min-w-0">
-                              <motion.h4
-                                className="text-base font-semibold text-[#ccd6f6] mb-1"
-                                whileHover={{ x: 5, color: "#64ffda" }}
-                              >
-                                {testimonial.name}
-                              </motion.h4>
-                              <p className="text-sm text-[#8892b0] font-mono">
-                                {testimonial.role} at {testimonial.company}
-                              </p>
-                            </div>
-                          </div>
+                      <img
+                        src={testimonial.avatar}
+                        alt={testimonial.name}
+                        className="w-12 h-12 rounded-full object-cover border-2 border-[#233554] group-hover:border-[#64ffda] transition-colors"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </motion.div>
+                    <div className="flex-1 min-w-0">
+                      <motion.h4
+                        className="text-sm font-semibold text-[#ccd6f6] mb-0.5"
+                        whileHover={{ x: 5, color: "#64ffda" }}
+                      >
+                        {testimonial.name}
+                      </motion.h4>
+                      <p className="text-xs text-[#8892b0] font-mono">
+                      {testimonial.role} at {testimonial.company}
+                    </p>
+                  </div>
+                </div>
                         </div>
                       </motion.div>
                     );
                   })}
-                </motion.div>
+            </motion.div>
               </AnimatePresence>
             </div>
           </div>

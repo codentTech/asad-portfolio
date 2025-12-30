@@ -91,7 +91,7 @@ export default function HeroSection() {
           />
           <div className="absolute inset-0 bg-gradient-to-b from-[#0a192f]/95 via-[#0a192f]/90 to-[#0a192f]/95" />
           <div className="absolute inset-0 bg-[#020c1b]/60" />
-            </div>
+        </div>
 
         {/* Animated Background Particles */}
         <div className="absolute inset-0 z-0 overflow-hidden">
@@ -157,8 +157,8 @@ export default function HeroSection() {
         >
           <div className="max-w-5xl mx-auto">
             {/* Greeting */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
               className="mb-4"
@@ -169,7 +169,7 @@ export default function HeroSection() {
               >
                 Hi, my name is
               </motion.span>
-              </motion.div>
+            </motion.div>
 
             {/* Name with enhanced animations */}
             <motion.h1
@@ -192,61 +192,30 @@ export default function HeroSection() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 sm:mb-6 text-[#8892b0] leading-tight px-2"
+              className="text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold mb-3 sm:mb-4 text-[#8892b0] leading-tight px-2"
             >
               <motion.span
                 className="block"
                 whileHover={{ scale: 1.03 }}
                 transition={{ type: "spring", stiffness: 300 }}
               >
-                I build things for the web.
+                Full Stack Development Meets AI Innovation
               </motion.span>
             </motion.h2>
 
-              {/* Description */}
-          <motion.p
+            {/* Description */}
+            <motion.p
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
-              className="text-base sm:text-lg md:text-xl text-[#8892b0] max-w-2xl mx-auto mb-6 sm:mb-8 leading-relaxed px-4"
+              className="text-sm sm:text-base md:text-lg text-[#8892b0] max-w-2xl mx-auto mb-4 sm:mb-6 leading-relaxed px-4"
             >
-              I&apos;m a Full-Stack / Frontend Engineer specializing in building
-              exceptional digital experiences. Currently focused on building
-              accessible, human-centered products using{" "}
-              <motion.span
-                className="text-[#64ffda] font-semibold"
-                whileHover={{
-                  scale: 1.1,
-                  textShadow: "0 0 20px rgba(100,255,218,0.5)",
-                }}
-              >
-                  Next.js
-              </motion.span>
-                ,{" "}
-              <motion.span
-                className="text-[#64ffda] font-semibold"
-                whileHover={{
-                  scale: 1.1,
-                  textShadow: "0 0 20px rgba(100,255,218,0.5)",
-                }}
-              >
-                  TypeScript
-              </motion.span>
-                , and{" "}
-              <motion.span
-                className="text-[#64ffda] font-semibold"
-                whileHover={{
-                  scale: 1.1,
-                  textShadow: "0 0 20px rgba(100,255,218,0.5)",
-                }}
-              >
-                  React
-              </motion.span>
-                .
-          </motion.p>
+              Proven Track Record – Delivered 50+ projects including AI-driven
+              platforms.
+            </motion.p>
 
-          {/* CTA Buttons */}
-          <motion.div
+            {/* CTA Buttons */}
+            <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
@@ -313,9 +282,9 @@ export default function HeroSection() {
               className="grid grid-cols-3 gap-4 sm:gap-6 lg:gap-8 mt-8 sm:mt-12 lg:mt-16 pt-6 sm:pt-8 border-t border-[#233554] max-w-2xl mx-auto px-4"
             >
               {[
-                { number: "6+", label: "Years Experience" },
-                { number: "50+", label: "Projects" },
-                { number: "30+", label: "Clients" },
+                { number: "50+", label: "Happy Client" },
+                { number: "20+", label: "Support Team" },
+                { number: "100", label: "Sales Count" },
               ].map((stat, index) => (
                 <motion.div
                   key={index}
@@ -326,28 +295,28 @@ export default function HeroSection() {
                   whileHover={{ scale: 1.1, y: -5 }}
                 >
                   <motion.div
-                    className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#64ffda] mb-1 sm:mb-2"
+                    className="text-xl sm:text-2xl md:text-3xl font-bold text-[#64ffda] mb-1"
                     whileHover={{ scale: 1.2 }}
                   >
                     {stat.number}
                   </motion.div>
                   <div className="text-xs sm:text-sm text-[#8892b0] font-mono leading-tight">
                     {stat.label}
-                        </div>
-                      </motion.div>
+                  </div>
+                </motion.div>
               ))}
             </motion.div>
           </div>
-                    </motion.div>
+        </motion.div>
 
         {/* Enhanced Scroll Indicator */}
-                    <motion.div
+        <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 1 }}
           className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10"
-                    >
-                      <motion.div
+        >
+          <motion.div
             animate={{ y: [0, 10, 0] }}
             transition={{ duration: 2, repeat: Infinity }}
             className="flex flex-col items-center text-[#64ffda] cursor-pointer group"
@@ -368,19 +337,19 @@ export default function HeroSection() {
             >
               Scroll Down
             </motion.span>
-                    <motion.div
+            <motion.div
               animate={{ y: [0, 8, 0] }}
-                      transition={{
+              transition={{
                 duration: 1.5,
-                        repeat: Infinity,
-                        ease: "easeInOut",
+                repeat: Infinity,
+                ease: "easeInOut",
               }}
             >
               <ChevronDown className="w-5 h-5" />
             </motion.div>
           </motion.div>
         </motion.div>
-    </section>
+      </section>
     </>
   );
 }

@@ -18,7 +18,7 @@ export default function CTASection() {
   const y = useTransform(scrollYProgress, [0, 1], [30, -30]);
 
   return (
-    <section ref={ref} className="relative py-20 sm:py-32 overflow-hidden bg-[#0a192f]">
+    <section ref={ref} className="relative py-16 sm:py-24 overflow-hidden bg-[#0a192f]">
       {/* Animated Background with gradient */}
       <motion.div
         className="absolute inset-0 bg-gradient-to-b from-[#020c1b] to-[#0a192f]"
@@ -76,7 +76,7 @@ export default function CTASection() {
             }}
           />
         ))}
-      </div>
+        </div>
       
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
@@ -111,14 +111,14 @@ export default function CTASection() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-[#ccd6f6] leading-tight"
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-[#ccd6f6] leading-tight"
           >
             <motion.span
               className="block"
               whileHover={{ scale: 1.02 }}
               transition={{ type: "spring", stiffness: 300 }}
             >
-              Let&apos;s Build Something Amazing Together
+          Let&apos;s Build Something Amazing Together
             </motion.span>
           </motion.h2>
           
@@ -126,7 +126,7 @@ export default function CTASection() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="text-lg text-[#8892b0] mb-8 max-w-xl mx-auto leading-relaxed"
+            className="text-sm sm:text-base text-[#8892b0] mb-6 max-w-xl mx-auto leading-relaxed"
           >
             Ready to bring your ideas to life? Let&apos;s discuss your next project.
           </motion.p>
@@ -158,7 +158,7 @@ export default function CTASection() {
               >
                 <Link
                   href="/contact"
-                  className="inline-flex items-center px-8 py-4 bg-[#64ffda] text-[#0a192f] font-mono text-sm rounded transition-all hover:bg-[#52e0c4] relative overflow-hidden group"
+                  className="inline-flex items-center px-6 py-3 bg-[#64ffda] text-[#0a192f] font-mono text-xs sm:text-sm rounded transition-all hover:bg-[#52e0c4] relative overflow-hidden group"
                 >
                   <motion.span
                     className="absolute inset-0 bg-white opacity-0 group-hover:opacity-20"
@@ -176,7 +176,7 @@ export default function CTASection() {
             >
               <Link
                 href="/portfolio"
-                className="inline-flex items-center px-8 py-4 border-2 border-[#64ffda] text-[#64ffda] font-mono text-sm rounded transition-all hover:bg-[#64ffda]/10 relative overflow-hidden group"
+                className="inline-flex items-center px-6 py-3 border-2 border-[#64ffda] text-[#64ffda] font-mono text-xs sm:text-sm rounded transition-all hover:bg-[#64ffda]/10 relative overflow-hidden group"
               >
                 <motion.span
                   className="absolute inset-0 bg-[#64ffda] opacity-0 group-hover:opacity-10"
@@ -185,7 +185,7 @@ export default function CTASection() {
                   transition={{ duration: 0.3 }}
                 />
                 <span className="relative z-10">View Portfolio</span>
-              </Link>
+            </Link>
             </motion.div>
           </motion.div>
         </motion.div>

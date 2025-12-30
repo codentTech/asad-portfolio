@@ -19,7 +19,7 @@ export default function ProjectsClient({ projects }: { projects: any[] }) {
   return (
     <section
       ref={ref}
-      className="relative py-20 sm:py-32 overflow-hidden bg-[#020c1b]"
+      className="relative py-16 sm:py-24 overflow-hidden bg-[#020c1b]"
     >
       {/* Animated Background */}
       <div className="absolute inset-0 z-0">
@@ -52,7 +52,7 @@ export default function ProjectsClient({ projects }: { projects: any[] }) {
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ duration: 0.6 }}
-            className="text-center mb-16"
+            className="text-center mb-12"
             style={{ opacity }}
           >
             <motion.span
@@ -67,7 +67,7 @@ export default function ProjectsClient({ projects }: { projects: any[] }) {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="text-4xl sm:text-5xl md:text-6xl font-bold text-[#ccd6f6] mb-4"
+              className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#ccd6f6] mb-3"
             >
               Featured Projects
             </motion.h2>
@@ -87,7 +87,7 @@ export default function ProjectsClient({ projects }: { projects: any[] }) {
               </p>
             </div>
           ) : (
-            <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {projects.map((project, index) => (
                 <motion.div
                   key={project.id}
@@ -119,7 +119,7 @@ export default function ProjectsClient({ projects }: { projects: any[] }) {
                     />
 
                     {/* Image */}
-                    <div className="relative h-64 overflow-hidden z-10">
+                    <div className="relative h-48 overflow-hidden z-10">
                       <motion.img
                         src={project.image}
                         alt={project.title}
@@ -181,17 +181,17 @@ export default function ProjectsClient({ projects }: { projects: any[] }) {
                     </div>
 
                     {/* Content */}
-                    <div className="p-6 flex-1 flex flex-col z-10 relative">
+                    <div className="p-5 flex-1 flex flex-col z-10 relative">
                       <motion.h3
-                        className="text-xl font-bold text-[#ccd6f6] mb-3 group-hover:text-[#64ffda] transition-colors"
+                        className="text-lg font-bold text-[#ccd6f6] mb-2 group-hover:text-[#64ffda] transition-colors"
                         whileHover={{ x: 5 }}
                       >
                         {project.title}
                       </motion.h3>
-                      <p className="text-[#8892b0] mb-4 text-sm line-clamp-3 flex-1">
+                      <p className="text-[#8892b0] mb-3 text-xs sm:text-sm line-clamp-3 flex-1">
                         {project.description}
                       </p>
-                      <div className="flex flex-wrap gap-2 mb-4">
+                      <div className="flex flex-wrap gap-1.5 mb-3">
                         {project.techStack
                           .slice(0, 4)
                           .map((tech: string, techIndex: number) => (

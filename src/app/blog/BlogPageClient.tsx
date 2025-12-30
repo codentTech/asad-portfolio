@@ -22,7 +22,7 @@ export default function BlogPageClient({ posts }: { posts: any[] }) {
 
   return (
     <div className="min-h-screen bg-[#0a192f] pt-20">
-      <section className="py-20 sm:py-32">
+      <section className="py-16 sm:py-24">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-7xl mx-auto">
             {/* Header */}
@@ -30,7 +30,7 @@ export default function BlogPageClient({ posts }: { posts: any[] }) {
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
               transition={{ duration: 0.6 }}
-              className="text-center mb-16"
+              className="text-center mb-12"
             >
               <motion.span
                 initial={{ opacity: 0 }}
@@ -44,7 +44,7 @@ export default function BlogPageClient({ posts }: { posts: any[] }) {
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                 transition={{ duration: 0.6, delay: 0.3 }}
-                className="text-4xl sm:text-5xl md:text-6xl font-bold text-[#ccd6f6] mb-6"
+                className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#ccd6f6] mb-4"
               >
                 Blog
               </motion.h1>
@@ -52,7 +52,7 @@ export default function BlogPageClient({ posts }: { posts: any[] }) {
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
-                className="text-xl text-[#8892b0] max-w-3xl mx-auto leading-relaxed mb-4"
+                className="text-base sm:text-lg text-[#8892b0] max-w-3xl mx-auto leading-relaxed mb-3"
               >
                 Thoughts on web development, technology, and best practices. Sharing knowledge,
                 experiences, and insights from my journey as a developer.
@@ -61,7 +61,7 @@ export default function BlogPageClient({ posts }: { posts: any[] }) {
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                 transition={{ duration: 0.6, delay: 0.5 }}
-                className="text-lg text-[#8892b0] max-w-2xl mx-auto"
+                className="text-sm sm:text-base text-[#8892b0] max-w-2xl mx-auto"
               >
                 From technical tutorials to industry insights, explore articles that help you build
                 better web applications.
@@ -80,7 +80,7 @@ export default function BlogPageClient({ posts }: { posts: any[] }) {
               initial={{ opacity: 0, y: 30 }}
               animate={introInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20"
+              className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-16"
             >
               {[
                 {
@@ -107,14 +107,14 @@ export default function BlogPageClient({ posts }: { posts: any[] }) {
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={introInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
                   transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
-                  className="bg-[#112240] border border-[#233554] rounded-lg p-6 text-center hover:border-[#64ffda] transition-all duration-300"
+                  className="bg-[#112240] border border-[#233554] rounded-lg p-5 text-center hover:border-[#64ffda] transition-all duration-300"
                 >
                   <div className="flex justify-center mb-4">
                     <div className="w-12 h-12 rounded-lg bg-[#64ffda]/10 border border-[#64ffda]/20 flex items-center justify-center">
                       <stat.icon className="w-6 h-6 text-[#64ffda]" />
                     </div>
                   </div>
-                  <div className="text-3xl font-bold text-[#64ffda] mb-2">{stat.value}</div>
+                  <div className="text-2xl sm:text-3xl font-bold text-[#64ffda] mb-1.5">{stat.value}</div>
                   <div className="text-[#ccd6f6] font-semibold mb-1">{stat.label}</div>
                   <div className="text-sm text-[#8892b0] font-mono">{stat.description}</div>
                 </motion.div>
@@ -127,16 +127,16 @@ export default function BlogPageClient({ posts }: { posts: any[] }) {
                 <p className="text-[#8892b0] text-lg">No blog posts yet. Check back soon!</p>
               </div>
             ) : (
-              <div ref={ref} className="mb-20">
+              <div ref={ref} className="mb-16">
                 <motion.h2
                   initial={{ opacity: 0, y: 20 }}
                   animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                   transition={{ duration: 0.6, delay: 0.2 }}
-                  className="text-3xl font-bold text-[#ccd6f6] mb-12 text-center"
+                  className="text-2xl sm:text-3xl font-bold text-[#ccd6f6] mb-8 text-center"
                 >
                   Latest Articles
                 </motion.h2>
-                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
                   {recentPosts.map((post, index) => (
                     <motion.div
                       key={post.id}
@@ -148,7 +148,7 @@ export default function BlogPageClient({ posts }: { posts: any[] }) {
                       <Link href={`/blog/${post.slug}`}>
                         <div className="relative bg-[#112240] border border-[#233554] rounded-lg overflow-hidden hover:border-[#64ffda] transition-all duration-300 h-full flex flex-col">
                           {/* Image */}
-                          <div className="relative h-48 overflow-hidden">
+                          <div className="relative h-40 overflow-hidden">
                             <img
                               src={post.image}
                               alt={post.title}
@@ -164,21 +164,21 @@ export default function BlogPageClient({ posts }: { posts: any[] }) {
                           </div>
 
                           {/* Content */}
-                          <div className="p-6 flex-1 flex flex-col">
-                            <div className="flex items-center text-xs text-[#8892b0] mb-3 font-mono">
-                              <Calendar className="w-4 h-4 mr-2" />
+                          <div className="p-5 flex-1 flex flex-col">
+                            <div className="flex items-center text-xs text-[#8892b0] mb-2 font-mono">
+                              <Calendar className="w-3.5 h-3.5 mr-2" />
                               <span>{formatDate(post.publishedAt)}</span>
                               <span className="mx-2">•</span>
-                              <Clock className="w-4 h-4 mr-2" />
+                              <Clock className="w-3.5 h-3.5 mr-2" />
                               <span>{post.readingTime} min read</span>
                             </div>
-                            <h3 className="text-xl font-bold text-[#ccd6f6] mb-3 group-hover:text-[#64ffda] transition-colors">
+                            <h3 className="text-lg font-bold text-[#ccd6f6] mb-2 group-hover:text-[#64ffda] transition-colors">
                               {post.title}
                             </h3>
-                            <p className="text-[#8892b0] mb-4 text-sm line-clamp-3 flex-1">
+                            <p className="text-[#8892b0] mb-3 text-xs sm:text-sm line-clamp-3 flex-1">
                               {post.excerpt}
                             </p>
-                            <div className="flex flex-wrap gap-2 mb-4">
+                            <div className="flex flex-wrap gap-1.5 mb-3">
                               {post.tags.slice(0, 3).map((tag: string) => (
                                 <span
                                   key={tag}
@@ -208,9 +208,9 @@ export default function BlogPageClient({ posts }: { posts: any[] }) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
-                className="mb-20 bg-[#112240] border border-[#233554] rounded-lg p-8"
+                className="mb-16 bg-[#112240] border border-[#233554] rounded-lg p-6"
               >
-                <h3 className="text-2xl font-bold text-[#ccd6f6] mb-6 text-center">
+                <h3 className="text-xl sm:text-2xl font-bold text-[#ccd6f6] mb-4 text-center">
                   Popular Topics
                 </h3>
                 <div className="flex flex-wrap gap-3 justify-center">
@@ -232,18 +232,18 @@ export default function BlogPageClient({ posts }: { posts: any[] }) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="text-center bg-[#112240] border border-[#233554] rounded-lg p-12"
+              className="text-center bg-[#112240] border border-[#233554] rounded-lg p-8"
             >
-              <h2 className="text-3xl font-bold text-[#ccd6f6] mb-4">
+              <h2 className="text-2xl sm:text-3xl font-bold text-[#ccd6f6] mb-3">
                 Want to Stay Updated?
               </h2>
-              <p className="text-lg text-[#8892b0] mb-8 max-w-2xl mx-auto">
+              <p className="text-sm sm:text-base text-[#8892b0] mb-6 max-w-2xl mx-auto">
                 I regularly publish new articles about web development, best practices, and
                 emerging technologies. Check back often for the latest insights and tutorials.
               </p>
               <Link
                 href="/contact"
-                className="inline-flex items-center px-8 py-4 bg-[#64ffda] text-[#0a192f] font-mono text-sm rounded transition-all hover:bg-[#52e0c4] hover:shadow-[0_0_20px_rgba(100,255,218,0.3)]"
+                className="inline-flex items-center px-6 py-3 bg-[#64ffda] text-[#0a192f] font-mono text-xs sm:text-sm rounded transition-all hover:bg-[#52e0c4] hover:shadow-[0_0_20px_rgba(100,255,218,0.3)]"
               >
                 Get In Touch
                 <ArrowRight className="ml-2 w-4 h-4" />

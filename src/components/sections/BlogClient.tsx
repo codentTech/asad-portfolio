@@ -19,7 +19,7 @@ export default function BlogClient({ blogs }: { blogs: any[] }) {
   const y = useTransform(scrollYProgress, [0, 1], [40, -40]);
 
   return (
-    <section ref={ref} className="relative py-20 sm:py-32 overflow-hidden bg-[#0a192f]">
+    <section ref={ref} className="relative py-16 sm:py-24 overflow-hidden bg-[#0a192f]">
       {/* Animated Background */}
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-gradient-to-b from-[#020c1b]/30 to-[#0a192f]" />
@@ -51,7 +51,7 @@ export default function BlogClient({ blogs }: { blogs: any[] }) {
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ duration: 0.6 }}
-            className="text-center mb-16"
+            className="text-center mb-12"
             style={{ opacity }}
           >
             <motion.span
@@ -66,7 +66,7 @@ export default function BlogClient({ blogs }: { blogs: any[] }) {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="text-4xl sm:text-5xl md:text-6xl font-bold text-[#ccd6f6] mb-4"
+              className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#ccd6f6] mb-3"
             >
               Latest Articles
             </motion.h2>
@@ -79,7 +79,7 @@ export default function BlogClient({ blogs }: { blogs: any[] }) {
           </motion.div>
 
           {/* Blog Grid */}
-          <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {blogs.map((blog, index) => (
               <motion.div
                 key={blog.id}
@@ -157,15 +157,15 @@ export default function BlogClient({ blogs }: { blogs: any[] }) {
                         <span>{blog.readingTime} min read</span>
                       </motion.div>
                       <motion.h3
-                        className="text-xl font-bold text-[#ccd6f6] mb-3 group-hover:text-[#64ffda] transition-colors"
+                        className="text-lg font-bold text-[#ccd6f6] mb-2 group-hover:text-[#64ffda] transition-colors"
                         whileHover={{ x: 5 }}
                       >
                         {blog.title}
                       </motion.h3>
-                      <p className="text-[#8892b0] mb-4 text-sm line-clamp-3 flex-1">
+                      <p className="text-[#8892b0] mb-3 text-xs sm:text-sm line-clamp-3 flex-1">
                         {blog.excerpt}
                       </p>
-                      <div className="flex flex-wrap gap-2 mb-4">
+                      <div className="flex flex-wrap gap-1.5 mb-3">
                         {blog.tags.slice(0, 3).map((tag: string, tagIndex: number) => (
                           <motion.span
                             key={tag}

@@ -68,7 +68,7 @@ export default function ServicesPageClient() {
 
   return (
     <div className="min-h-screen bg-[#0a192f] pt-20">
-      <section className="py-20 sm:py-32">
+      <section className="py-16 sm:py-24">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-7xl mx-auto">
             {/* Header */}
@@ -76,7 +76,7 @@ export default function ServicesPageClient() {
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
               transition={{ duration: 0.6 }}
-              className="text-center mb-16"
+              className="text-center mb-12"
             >
               <motion.span
                 initial={{ opacity: 0 }}
@@ -90,7 +90,7 @@ export default function ServicesPageClient() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                 transition={{ duration: 0.6, delay: 0.3 }}
-                className="text-4xl sm:text-5xl md:text-6xl font-bold text-[#ccd6f6] mb-6"
+                className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#ccd6f6] mb-4"
               >
                 Services
               </motion.h1>
@@ -98,7 +98,7 @@ export default function ServicesPageClient() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
-                className="text-xl text-[#8892b0] max-w-3xl mx-auto leading-relaxed mb-4"
+                className="text-base sm:text-lg text-[#8892b0] max-w-3xl mx-auto leading-relaxed mb-3"
               >
                 Comprehensive web development solutions tailored to your needs. I specialize in
                 building modern, scalable, and performant web applications that help businesses
@@ -108,7 +108,7 @@ export default function ServicesPageClient() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                 transition={{ duration: 0.6, delay: 0.5 }}
-                className="text-lg text-[#8892b0] max-w-2xl mx-auto"
+                className="text-sm sm:text-base text-[#8892b0] max-w-2xl mx-auto"
               >
                 Whether you need a complete application, feature enhancements, or technical
                 consulting, I&apos;m here to help.
@@ -122,16 +122,16 @@ export default function ServicesPageClient() {
             </motion.div>
 
             {/* Services Grid */}
-            <div ref={ref} className="mb-20">
+            <div ref={ref} className="mb-16">
               <motion.h2
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="text-3xl font-bold text-[#ccd6f6] mb-12 text-center"
+                className="text-2xl sm:text-3xl font-bold text-[#ccd6f6] mb-8 text-center"
               >
                 What I Offer
               </motion.h2>
-              <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {services.map((service, index) => {
                   const Icon = iconMap[service.icon] || Code;
                   return (
@@ -142,18 +142,18 @@ export default function ServicesPageClient() {
                       transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
                       className="group"
                     >
-                      <div className="relative bg-[#112240] border border-[#233554] rounded-lg p-8 h-full hover:border-[#64ffda] transition-all duration-300">
-                        <div className="relative mb-6">
+                      <div className="relative bg-[#112240] border border-[#233554] rounded-lg p-6 h-full hover:border-[#64ffda] transition-all duration-300">
+                        <div className="relative mb-4">
                           <div className="absolute inset-0 bg-[#64ffda]/10 rounded-lg blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                          <div className="relative w-16 h-16 rounded-xl bg-[#64ffda]/10 border border-[#64ffda]/20 flex items-center justify-center transform group-hover:scale-110 group-hover:border-[#64ffda] transition-all duration-300">
-                            <Icon className="w-8 h-8 text-[#64ffda]" />
+                          <div className="relative w-12 h-12 rounded-xl bg-[#64ffda]/10 border border-[#64ffda]/20 flex items-center justify-center transform group-hover:scale-110 group-hover:border-[#64ffda] transition-all duration-300">
+                            <Icon className="w-6 h-6 text-[#64ffda]" />
                           </div>
                         </div>
-                        <h3 className="text-2xl font-bold mb-4 text-[#ccd6f6] group-hover:text-[#64ffda] transition-colors">
+                        <h3 className="text-xl font-bold mb-3 text-[#ccd6f6] group-hover:text-[#64ffda] transition-colors">
                           {service.title}
                         </h3>
-                        <p className="text-[#8892b0] mb-6 leading-relaxed">{service.description}</p>
-                        <ul className="space-y-3">
+                        <p className="text-sm text-[#8892b0] mb-4 leading-relaxed">{service.description}</p>
+                        <ul className="space-y-2">
                           {service.features.map((feature, i) => (
                             <li
                               key={i}
@@ -172,7 +172,7 @@ export default function ServicesPageClient() {
             </div>
 
             {/* Process Section */}
-            <div ref={processRef} className="mb-20">
+            <div ref={processRef} className="mb-16">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={processInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
@@ -182,8 +182,8 @@ export default function ServicesPageClient() {
                 <span className="inline-block font-mono text-[#64ffda] text-sm mb-4">
                   My Process
                 </span>
-                <h2 className="text-3xl font-bold text-[#ccd6f6] mb-4">How I Work</h2>
-                <p className="text-lg text-[#8892b0] max-w-2xl mx-auto">
+                <h2 className="text-2xl sm:text-3xl font-bold text-[#ccd6f6] mb-3">How I Work</h2>
+                <p className="text-sm sm:text-base text-[#8892b0] max-w-2xl mx-auto">
                   A structured approach to ensure your project succeeds from start to finish
                 </p>
               </motion.div>
@@ -195,32 +195,32 @@ export default function ServicesPageClient() {
                     initial={{ opacity: 0, y: 30 }}
                     animate={processInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                     transition={{ duration: 0.6, delay: 0.2 + index * 0.1 }}
-                    className="bg-[#112240] border border-[#233554] rounded-lg p-6 hover:border-[#64ffda] transition-all duration-300"
+                    className="bg-[#112240] border border-[#233554] rounded-lg p-5 hover:border-[#64ffda] transition-all duration-300"
                   >
-                    <div className="text-[#64ffda] font-mono text-sm mb-3">{step.step}</div>
-                    <h3 className="text-xl font-bold text-[#ccd6f6] mb-3">{step.title}</h3>
-                    <p className="text-[#8892b0] text-sm leading-relaxed">{step.description}</p>
+                    <div className="text-[#64ffda] font-mono text-xs sm:text-sm mb-2">{step.step}</div>
+                    <h3 className="text-lg font-bold text-[#ccd6f6] mb-2">{step.title}</h3>
+                    <p className="text-xs sm:text-sm text-[#8892b0] leading-relaxed">{step.description}</p>
                   </motion.div>
                 ))}
               </div>
             </div>
 
             {/* Benefits Section */}
-            <div className="mb-20">
+            <div className="mb-16">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-                className="text-center mb-12"
-              >
-                <span className="inline-block font-mono text-[#64ffda] text-sm mb-4">
-                  Why Work With Me
-                </span>
-                <h2 className="text-3xl font-bold text-[#ccd6f6] mb-4">
+              transition={{ duration: 0.6 }}
+              className="text-center mb-8"
+            >
+              <span className="inline-block font-mono text-[#64ffda] text-sm mb-4">
+                Why Work With Me
+              </span>
+                <h2 className="text-2xl sm:text-3xl font-bold text-[#ccd6f6] mb-3">
                   What Sets My Services Apart
                 </h2>
-                <p className="text-lg text-[#8892b0] max-w-2xl mx-auto">
+                <p className="text-sm sm:text-base text-[#8892b0] max-w-2xl mx-auto">
                   Combining technical expertise with a focus on delivering real value
                 </p>
               </motion.div>
@@ -233,15 +233,15 @@ export default function ServicesPageClient() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6, delay: index * 0.1 }}
-                    className="bg-[#112240] border border-[#233554] rounded-lg p-6 text-center hover:border-[#64ffda] transition-all duration-300"
+                    className="bg-[#112240] border border-[#233554] rounded-lg p-5 text-center hover:border-[#64ffda] transition-all duration-300"
                   >
-                    <div className="flex justify-center mb-4">
-                      <div className="w-12 h-12 rounded-lg bg-[#64ffda]/10 border border-[#64ffda]/20 flex items-center justify-center">
-                        <benefit.icon className="w-6 h-6 text-[#64ffda]" />
+                    <div className="flex justify-center mb-3">
+                      <div className="w-10 h-10 rounded-lg bg-[#64ffda]/10 border border-[#64ffda]/20 flex items-center justify-center">
+                        <benefit.icon className="w-5 h-5 text-[#64ffda]" />
                       </div>
                     </div>
-                    <h3 className="text-lg font-bold text-[#ccd6f6] mb-2">{benefit.title}</h3>
-                    <p className="text-sm text-[#8892b0] leading-relaxed">{benefit.description}</p>
+                    <h3 className="text-base font-bold text-[#ccd6f6] mb-1.5">{benefit.title}</h3>
+                    <p className="text-xs sm:text-sm text-[#8892b0] leading-relaxed">{benefit.description}</p>
                   </motion.div>
                 ))}
               </div>
@@ -253,18 +253,18 @@ export default function ServicesPageClient() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="text-center bg-[#112240] border border-[#233554] rounded-lg p-12"
+              className="text-center bg-[#112240] border border-[#233554] rounded-lg p-8"
             >
-              <h3 className="text-3xl font-bold mb-4 text-[#ccd6f6]">
+              <h3 className="text-2xl sm:text-3xl font-bold mb-3 text-[#ccd6f6]">
                 Ready to Start Your Project?
               </h3>
-              <p className="text-lg text-[#8892b0] mb-8 max-w-2xl mx-auto">
+              <p className="text-sm sm:text-base text-[#8892b0] mb-6 max-w-2xl mx-auto">
                 Let&apos;s discuss how I can help bring your vision to life. I&apos;m always
                 excited to work on new and challenging projects.
               </p>
               <Link
                 href="/contact"
-                className="inline-flex items-center px-8 py-4 bg-[#64ffda] text-[#0a192f] font-mono text-sm rounded transition-all hover:bg-[#52e0c4] hover:shadow-[0_0_20px_rgba(100,255,218,0.3)]"
+                className="inline-flex items-center px-6 py-3 bg-[#64ffda] text-[#0a192f] font-mono text-xs sm:text-sm rounded transition-all hover:bg-[#52e0c4] hover:shadow-[0_0_20px_rgba(100,255,218,0.3)]"
               >
                 Get In Touch
                 <ArrowRight className="ml-2 w-4 h-4" />

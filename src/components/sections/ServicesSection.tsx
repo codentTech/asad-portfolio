@@ -1,16 +1,14 @@
 "use client";
 
 import { useState, useRef } from "react";
-import { Code, Zap, BarChart, ShoppingCart, TrendingUp } from "lucide-react";
+import { TrendingUp, Zap, BarChart } from "lucide-react";
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import { services } from "@/data/services";
 
 const iconMap: Record<string, any> = {
-  Code,
+  TrendingUp,
   Zap,
   BarChart,
-  ShoppingCart,
-  TrendingUp,
 };
 
 export default function ServicesSection() {
@@ -26,7 +24,7 @@ export default function ServicesSection() {
   const opacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0, 1, 1, 0]);
 
   return (
-    <section ref={ref} className="relative py-20 sm:py-32 overflow-hidden bg-[#0a192f]">
+    <section ref={ref} className="relative py-16 sm:py-24 overflow-hidden bg-[#0a192f]">
       {/* Animated Background Elements */}
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-gradient-to-b from-[#020c1b]/50 to-transparent" />
@@ -58,7 +56,7 @@ export default function ServicesSection() {
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ duration: 0.6 }}
-            className="text-center mb-16"
+            className="text-center mb-12"
             style={{ opacity }}
           >
             <motion.span
@@ -73,9 +71,9 @@ export default function ServicesSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="text-4xl sm:text-5xl md:text-6xl font-bold text-[#ccd6f6] mb-4"
+              className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#ccd6f6] mb-3"
             >
-              What I Can Help You Build
+              My Approach
             </motion.h2>
             <motion.div
               initial={{ width: 0 }}
@@ -86,10 +84,10 @@ export default function ServicesSection() {
           </motion.div>
 
           {/* Services Grid */}
-          <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid sm:grid-cols-1 md:grid-cols-3 gap-5 max-w-5xl mx-auto">
             {services.map((service, index) => {
-              const Icon = iconMap[service.icon] || Code;
-              return (
+              const Icon = iconMap[service.icon] || TrendingUp;
+          return (
                 <motion.div
                   key={service.id}
                   initial={{ opacity: 0, y: 50, scale: 0.9 }}
@@ -121,7 +119,7 @@ export default function ServicesSection() {
                       transition={{ duration: 0.3 }}
                     />
 
-                    <div className="relative mb-6">
+                    <div className="relative mb-4">
                       <motion.div
                         className="absolute inset-0 bg-[#64ffda]/20 rounded-lg blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                         animate={{
@@ -129,7 +127,7 @@ export default function ServicesSection() {
                         }}
                       />
                       <motion.div
-                        className="relative w-16 h-16 rounded-xl bg-[#64ffda]/10 border border-[#64ffda]/20 flex items-center justify-center"
+                        className="relative w-12 h-12 rounded-xl bg-[#64ffda]/10 border border-[#64ffda]/20 flex items-center justify-center"
                         whileHover={{ scale: 1.15, rotate: 5 }}
                         transition={{ type: "spring", stiffness: 300 }}
                       >
@@ -139,24 +137,24 @@ export default function ServicesSection() {
                           }}
                           transition={{ duration: 0.6, ease: "easeInOut" }}
                         >
-                          <Icon className="w-8 h-8 text-[#64ffda]" />
+                          <Icon className="w-6 h-6 text-[#64ffda]" />
                         </motion.div>
                       </motion.div>
-                    </div>
+                </div>
 
                     <motion.h3
-                      className="text-2xl font-bold mb-4 text-[#ccd6f6] group-hover:text-[#64ffda] transition-colors"
+                      className="text-xl font-bold mb-3 text-[#ccd6f6] group-hover:text-[#64ffda] transition-colors"
                       whileHover={{ x: 5 }}
                     >
-                      {service.title}
+                {service.title}
                     </motion.h3>
-                    <p className="text-[#8892b0] mb-6 leading-relaxed">
-                      {service.description}
-                    </p>
-                    <ul className="space-y-3">
-                      {service.features.map((feature, i) => (
+                    <p className="text-sm text-[#8892b0] mb-4 leading-relaxed">
+                {service.description}
+              </p>
+                    <ul className="space-y-2">
+                {service.features.map((feature, i) => (
                         <motion.li
-                          key={i}
+                    key={i}
                           className="text-sm text-[#8892b0] flex items-center font-mono"
                           initial={{ opacity: 0, x: -10 }}
                           animate={
@@ -177,14 +175,14 @@ export default function ServicesSection() {
                             }}
                             transition={{ duration: 0.5, delay: i * 0.1 }}
                           />
-                          {feature}
+                    {feature}
                         </motion.li>
-                      ))}
-                    </ul>
+                ))}
+              </ul>
                   </div>
                 </motion.div>
               );
-            })}
+        })}
           </div>
         </div>
       </div>
