@@ -9,6 +9,7 @@ import Button from '@/components/ui/Button'
 import Card from '@/components/ui/Card'
 import { generateSlug } from '@/lib/utils'
 import toast from 'react-hot-toast'
+import RichTextEditor from '@/components/admin/RichTextEditor'
 
 export default function NewBlogPostPage() {
   const [loading, setLoading] = useState(false)
@@ -157,17 +158,12 @@ export default function NewBlogPostPage() {
 
             <div>
               <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
-                Content * (Markdown supported)
+                Content *
               </label>
-              <textarea
+              <RichTextEditor
                 value={formData.content}
-                onChange={(e) => setFormData(prev => ({ ...prev, content: e.target.value }))}
-                required
-                rows={15}
-                className="w-full px-4 py-2 rounded-lg border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 font-mono text-sm"
-                placeholder="# Your Blog Post Title
-
-Write your content here in Markdown format..."
+                onChange={(html) => setFormData(prev => ({ ...prev, content: html }))}
+                placeholder="Write your blog post content here..."
               />
             </div>
 

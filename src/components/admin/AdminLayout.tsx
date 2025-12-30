@@ -2,7 +2,7 @@
 
 import { usePathname, useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { LogOut, FolderKanban, BookOpen } from 'lucide-react'
+import { LogOut, FolderKanban, BookOpen, Settings } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
 import { motion } from 'framer-motion'
 import toast from 'react-hot-toast'
@@ -42,6 +42,12 @@ export default function AdminLayout({
       href: '/admin/portfolio',
       icon: FolderKanban,
       isActive: pathname?.startsWith('/admin/portfolio'),
+    },
+    {
+      name: 'Services',
+      href: '/admin/services',
+      icon: Settings,
+      isActive: pathname?.startsWith('/admin/services'),
     },
   ]
 

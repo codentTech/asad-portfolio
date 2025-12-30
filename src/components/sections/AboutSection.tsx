@@ -6,6 +6,41 @@ import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import Button from "@/components/ui/Button";
 
+const skills = [
+  "Node.js",
+  "Express.js",
+  "Nest.js",
+  "Python",
+  "React.js",
+  "Next.js",
+  "TypeScript",
+  "Angular",
+  "OpenAI GPT",
+  "Claude AI",
+  "Gemini",
+  "LangChain",
+  "TensorFlow",
+  "PyTorch",
+  "Scikit-learn",
+  "Hugging Face",
+  "MongoDB",
+  "PostgreSQL",
+  "MySQL",
+  "AWS",
+  "Azure",
+  "Docker",
+  "Kubernetes",
+  "Stripe",
+  "PayPal",
+  "FastAPI",
+  "Flask",
+  "Django",
+  "RAG",
+  "Vector DB",
+  "Pinecone",
+  "Weaviate",
+];
+
 export default function AboutSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
@@ -61,9 +96,9 @@ export default function AboutSection() {
             />
           </motion.div>
 
-          {/* Content Grid - Image Left, Text Right */}
-          <div className="grid md:grid-cols-2 gap-8 lg:gap-12 items-start md:items-center">
-            {/* Left Side - Image (Cutout Style) */}
+          {/* Content Layout - Image Left, Text Right */}
+          <div className="grid md:grid-cols-2 gap-8 lg:gap-12 items-start md:items-center mb-12">
+            {/* Left Side - Image */}
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
@@ -87,14 +122,14 @@ export default function AboutSection() {
 
                 {/* Main Person Image - Cutout Style (No Background) */}
                 <motion.div
-                  className="relative z-10 min-h-[500px] flex items-center justify-center"
+                  className="relative z-10 flex items-center justify-center"
                   whileHover={{ scale: 1.02 }}
                   transition={{ type: "spring", stiffness: 300 }}
                 >
                   <img
                     src="/slazzer-preview-7ebme.png"
                     alt="Asad Abbas"
-                    className="w-full h-full max-h-[600px] object-contain"
+                    className="w-full h-auto max-h-[550px] object-contain"
                     style={{
                       filter:
                         "drop-shadow(0 20px 40px rgba(100, 255, 218, 0.3)) drop-shadow(0 0 20px rgba(100, 255, 218, 0.2))",
@@ -140,53 +175,27 @@ export default function AboutSection() {
               transition={{ duration: 0.8, delay: 0.3 }}
               className="space-y-4 order-1 md:order-2 flex flex-col justify-center h-full"
             >
-              <div className="space-y-3 text-[#8892b0] leading-relaxed">
+              <div className="space-y-4 text-[#8892b0] leading-relaxed">
                 <p className="text-sm sm:text-base">
                   Bringing years of expertise and a diverse skill set to craft
-                  intelligent, high-performance solutions.
+                  intelligent, high-performance solutions. I specialize in
+                  building scalable web applications, integrating cutting-edge
+                  AI technologies, and delivering exceptional user experiences.
                 </p>
-              </div>
-
-              <div>
-                <p className="text-[#8892b0] mb-3 text-sm sm:text-base font-semibold">
-                  Technologies:
+                <p className="text-sm sm:text-base">
+                  With a strong foundation in full-stack development and a
+                  passion for artificial intelligence, I leverage modern
+                  frameworks and tools to create innovative solutions that solve
+                  real-world problems. My expertise spans from building robust
+                  backend systems with Node.js and Python to developing
+                  responsive frontend applications with React and Next.js.
                 </p>
-                <ul className="grid grid-cols-2 gap-x-3 gap-y-1 text-[#8892b0] font-mono text-xs sm:text-sm">
-                  {[
-                    "Node.js",
-                    "Express.js",
-                    "Nest.js",
-                    "Python",
-                    "React.js",
-                    "Next.js",
-                    "TypeScript",
-                    "Angular",
-                    "OpenAI",
-                    "LangChain",
-                    "TensorFlow",
-                    "PyTorch",
-                    "MongoDB",
-                    "PostgreSQL",
-                    "MySQL",
-                    "AWS",
-                    "Docker",
-                    "Kubernetes",
-                    "Stripe",
-                    "PayPal",
-                  ].map((tech, index) => (
-                    <motion.li
-                      key={tech}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={
-                        isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }
-                      }
-                      transition={{ duration: 0.4, delay: 0.5 + index * 0.1 }}
-                      className="flex items-center before:content-['▹'] before:text-[#64ffda] before:mr-3 before:text-sm"
-                    >
-                      {tech}
-                    </motion.li>
-                  ))}
-                </ul>
+                <p className="text-sm sm:text-base">
+                  I&apos;m particularly passionate about AI/ML integration,
+                  working with Large Language Models (LLMs), building RAG
+                  systems, and implementing intelligent automation solutions
+                  that enhance productivity and user engagement.
+                </p>
               </div>
 
               <motion.div
@@ -194,7 +203,7 @@ export default function AboutSection() {
                 animate={
                   isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }
                 }
-                transition={{ duration: 0.6, delay: 0.8 }}
+                transition={{ duration: 0.6, delay: 0.5 }}
                 className="pt-2"
               >
                 <Link
@@ -207,8 +216,132 @@ export default function AboutSection() {
               </motion.div>
             </motion.div>
           </div>
+
+          {/* Skills Section - Full Width with Multiple Rows */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            className="space-y-4"
+          >
+            <p className="text-[#8892b0] text-sm sm:text-base font-semibold text-center mb-6">
+              Technologies & Skills:
+            </p>
+
+            {/* First Row - Scrolling Right */}
+            <div className="relative overflow-hidden">
+              <div className="flex gap-4 scroll-row-1">
+                {/* First set */}
+                <div className="flex gap-4 shrink-0">
+                  {skills.map((tech) => (
+                    <span
+                      key={tech}
+                      className="inline-flex items-center px-4 py-2 bg-[#112240] border border-[#233554] rounded-lg text-[#8892b0] font-mono text-xs sm:text-sm whitespace-nowrap hover:border-[#64ffda] hover:text-[#64ffda] transition-colors"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+                {/* Duplicate set for seamless loop */}
+                <div className="flex gap-4 shrink-0" aria-hidden="true">
+                  {skills.map((tech) => (
+                    <span
+                      key={tech}
+                      className="inline-flex items-center px-4 py-2 bg-[#112240] border border-[#233554] rounded-lg text-[#8892b0] font-mono text-xs sm:text-sm whitespace-nowrap hover:border-[#64ffda] hover:text-[#64ffda] transition-colors"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Second Row - Scrolling Left */}
+            <div className="relative overflow-hidden">
+              <div className="flex gap-4 scroll-row-2">
+                {/* First set */}
+                <div className="flex gap-4 shrink-0">
+                  {[...skills].reverse().map((tech) => (
+                    <span
+                      key={tech}
+                      className="inline-flex items-center px-4 py-2 bg-[#112240] border border-[#233554] rounded-lg text-[#8892b0] font-mono text-xs sm:text-sm whitespace-nowrap hover:border-[#64ffda] hover:text-[#64ffda] transition-colors"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+                {/* Duplicate set for seamless loop */}
+                <div className="flex gap-4 shrink-0" aria-hidden="true">
+                  {[...skills].reverse().map((tech) => (
+                    <span
+                      key={tech}
+                      className="inline-flex items-center px-4 py-2 bg-[#112240] border border-[#233554] rounded-lg text-[#8892b0] font-mono text-xs sm:text-sm whitespace-nowrap hover:border-[#64ffda] hover:text-[#64ffda] transition-colors"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Third Row - Scrolling Right */}
+            <div className="relative overflow-hidden">
+              <div className="flex gap-4 scroll-row-3">
+                {/* First set */}
+                <div className="flex gap-4 shrink-0">
+                  {skills.map((tech) => (
+                    <span
+                      key={tech}
+                      className="inline-flex items-center px-4 py-2 bg-[#112240] border border-[#233554] rounded-lg text-[#8892b0] font-mono text-xs sm:text-sm whitespace-nowrap hover:border-[#64ffda] hover:text-[#64ffda] transition-colors"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+                {/* Duplicate set for seamless loop */}
+                <div className="flex gap-4 shrink-0" aria-hidden="true">
+                  {skills.map((tech) => (
+                    <span
+                      key={tech}
+                      className="inline-flex items-center px-4 py-2 bg-[#112240] border border-[#233554] rounded-lg text-[#8892b0] font-mono text-xs sm:text-sm whitespace-nowrap hover:border-[#64ffda] hover:text-[#64ffda] transition-colors"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </div>
+
+      <style jsx>{`
+        .scroll-row-1 {
+          animation: scrollRight 35s linear infinite;
+        }
+        .scroll-row-2 {
+          animation: scrollLeft 40s linear infinite;
+        }
+        .scroll-row-3 {
+          animation: scrollRight 38s linear infinite;
+        }
+        @keyframes scrollRight {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(-50%);
+          }
+        }
+        @keyframes scrollLeft {
+          0% {
+            transform: translateX(-50%);
+          }
+          100% {
+            transform: translateX(0);
+          }
+        }
+      `}</style>
     </section>
   );
 }

@@ -2,9 +2,12 @@
 
 import { useRef } from "react";
 import Link from "next/link";
-import { Code, Zap, BarChart, ShoppingCart, TrendingUp, CheckCircle2, ArrowRight, Clock, Users, Target } from "lucide-react";
+import { 
+  Code, Zap, BarChart, ShoppingCart, TrendingUp, CheckCircle2, 
+  ArrowRight, Clock, Users, Target, Settings, Briefcase, Rocket 
+} from "lucide-react";
 import { motion, useInView } from "framer-motion";
-import { services } from "@/data/services";
+import { Service } from "@/types";
 
 const iconMap: Record<string, any> = {
   Code,
@@ -12,6 +15,13 @@ const iconMap: Record<string, any> = {
   BarChart,
   ShoppingCart,
   TrendingUp,
+  CheckCircle2,
+  Clock,
+  Users,
+  Target,
+  Settings,
+  Briefcase,
+  Rocket,
 };
 
 const processSteps = [
@@ -60,7 +70,7 @@ const benefits = [
   },
 ];
 
-export default function ServicesPageClient() {
+export default function ServicesPageClient({ services }: { services: Service[] }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const processRef = useRef(null);
@@ -153,17 +163,19 @@ export default function ServicesPageClient() {
                           {service.title}
                         </h3>
                         <p className="text-sm text-[#8892b0] mb-4 leading-relaxed">{service.description}</p>
-                        <ul className="space-y-2">
-                          {service.features.map((feature, i) => (
-                            <li
-                              key={i}
-                              className="text-sm text-[#8892b0] flex items-center font-mono"
-                            >
-                              <div className="w-1.5 h-1.5 rounded-full bg-[#64ffda] mr-3" />
-                              {feature}
-                            </li>
-                          ))}
-                        </ul>
+                        {service.features && service.features.length > 0 && (
+                          <ul className="space-y-2">
+                            {service.features.map((feature, i) => (
+                              <li
+                                key={i}
+                                className="text-sm text-[#8892b0] flex items-center font-mono"
+                              >
+                                <div className="w-1.5 h-1.5 rounded-full bg-[#64ffda] mr-3" />
+                                {feature}
+                              </li>
+                            ))}
+                          </ul>
+                        )}
                       </div>
                     </motion.div>
                   );

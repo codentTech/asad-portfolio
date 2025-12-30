@@ -34,9 +34,14 @@ export interface BlogPost {
 export interface Service {
   id: string
   title: string
+  slug?: string
   description: string
   icon: string
   features: string[]
+  content?: string
+  image?: string
+  featured?: boolean
+  createdAt?: string
 }
 
 export interface Skill {

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import ServicesPageClient from "./ServicesPageClient";
+import { getAllServices } from "@/lib/supabase/services";
 
 export const metadata: Metadata = {
   title: "Services",
@@ -11,6 +12,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default function ServicesPage() {
-  return <ServicesPageClient />;
+export default async function ServicesPage() {
+  const services = await getAllServices();
+  return <ServicesPageClient services={services} />;
 }
