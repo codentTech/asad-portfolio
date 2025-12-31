@@ -14,6 +14,10 @@ export const metadata: Metadata = {
   },
 }
 
+// Force dynamic rendering to always fetch fresh data
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
 export default async function PortfolioPage() {
   const projects = await getAllProjects()
   return <PortfolioClient projects={projects} />

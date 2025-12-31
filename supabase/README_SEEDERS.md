@@ -154,6 +154,18 @@ If you prefer running via command line:
 npx tsx scripts/seed-workhive.ts
 ```
 
+## AQUIBOT Seeder
+
+### Option 1: SQL Script (Recommended)
+
+1. Open your Supabase Dashboard
+2. Go to SQL Editor
+3. Copy and paste the contents of `seed_aquibot.sql`
+4. Run the query
+5. The project will be added to your portfolio
+
+This seeder adds the AQUIBOT project, which is a unified AI chat platform that provides a single interface to interact with major LLM providers (OpenAI GPT, Anthropic Claude, Google Gemini, Meta Llama, and Hugging Face models) without switching apps.
+
 ## Customizing the Image
 
 The seeders use placeholder image URLs. Before running, you may want to:

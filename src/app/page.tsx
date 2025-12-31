@@ -1,42 +1,42 @@
 import HeroSection from "@/components/sections/HeroSection";
 import type { Metadata } from "next";
-import dynamic from "next/dynamic";
+import nextDynamic from "next/dynamic";
 import { Suspense } from "react";
 
 // Lazy load below-the-fold sections for better performance
-const AboutSection = dynamic(
+const AboutSection = nextDynamic(
   () => import("@/components/sections/AboutSection"),
   {
     loading: () => <div className="min-h-[400px]" />,
   }
 );
 
-const ServicesSection = dynamic(
+const ServicesSection = nextDynamic(
   () => import("@/components/sections/ServicesSection"),
   {
     loading: () => <div className="min-h-[400px]" />,
   }
 );
 
-const ProjectsSection = dynamic(
+const ProjectsSection = nextDynamic(
   () => import("@/components/sections/ProjectsSection"),
   {
     loading: () => <div className="min-h-[400px]" />,
   }
 );
 
-const TestimonialsSection = dynamic(
+const TestimonialsSection = nextDynamic(
   () => import("@/components/sections/TestimonialsSection"),
   {
     loading: () => <div className="min-h-[400px]" />,
   }
 );
 
-const BlogSection = dynamic(() => import("@/components/sections/BlogSection"), {
+const BlogSection = nextDynamic(() => import("@/components/sections/BlogSection"), {
   loading: () => <div className="min-h-[400px]" />,
 });
 
-const CTASection = dynamic(() => import("@/components/sections/CTASection"), {
+const CTASection = nextDynamic(() => import("@/components/sections/CTASection"), {
   loading: () => <div className="min-h-[200px]" />,
 });
 
@@ -51,6 +51,10 @@ export const metadata: Metadata = {
     type: "website",
   },
 };
+
+// Force dynamic rendering to always fetch fresh data
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
 
 export default function HomePage() {
   return (
