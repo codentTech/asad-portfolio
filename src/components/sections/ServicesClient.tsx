@@ -110,102 +110,177 @@ export default function ServicesClient({ services }: { services: Service[] }) {
             />
           </motion.div>
 
-          {/* Infinite Scrolling Services */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative overflow-hidden mb-8"
-          >
-            {/* Fade edges */}
-            <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-[#0a192f] to-transparent z-10 pointer-events-none" />
-            <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-[#0a192f] to-transparent z-10 pointer-events-none" />
-
-            <div className="flex gap-5 services-scroll">
-              {/* First set */}
-              <div className="flex gap-5 shrink-0">
-                {services.map((service, index) => {
-                  const Icon = iconMap[service.icon] || TrendingUp;
-                  return (
-                    <div
-                      key={`${service.id}-1`}
-                      className="group w-80 sm:w-96 flex-shrink-0"
-                    >
-                      <div className="relative bg-[#112240] border border-[#233554] rounded-lg p-6 h-full hover:border-[#64ffda] transition-all duration-300 overflow-hidden">
-                        <div className="relative mb-4">
-                          <div className="absolute inset-0 bg-[#64ffda]/20 rounded-lg blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                          <div className="relative w-12 h-12 rounded-xl bg-[#64ffda]/10 border border-[#64ffda]/20 flex items-center justify-center group-hover:scale-110 group-hover:rotate-5 transition-all duration-300">
-                            <Icon className="w-6 h-6 text-[#64ffda]" />
-                          </div>
-                        </div>
-
-                        <h3 className="text-xl font-bold mb-3 text-[#ccd6f6] group-hover:text-[#64ffda] transition-colors">
-                          {service.title}
-                        </h3>
-                        <p className="text-sm text-[#8892b0] mb-4 leading-relaxed">
-                          {service.description}
-                        </p>
-                        {service.features && service.features.length > 0 && (
-                          <ul className="space-y-2">
-                            {service.features.map((feature, i) => (
-                              <li
-                                key={i}
-                                className="text-sm text-[#8892b0] flex items-center font-mono hover:text-[#64ffda] transition-colors"
-                              >
-                                <div className="w-1.5 h-1.5 rounded-full bg-[#64ffda] mr-3" />
-                                {feature}
-                              </li>
-                            ))}
-                          </ul>
-                        )}
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-              {/* Duplicate set for seamless loop */}
-              <div className="flex gap-5 shrink-0" aria-hidden="true">
-                {services.map((service, index) => {
-                  const Icon = iconMap[service.icon] || TrendingUp;
-                  return (
-                    <div
-                      key={`${service.id}-2`}
-                      className="group w-80 sm:w-96 flex-shrink-0"
-                    >
-                      <div className="relative bg-[#112240] border border-[#233554] rounded-lg p-6 h-full hover:border-[#64ffda] transition-all duration-300 overflow-hidden">
-                        <div className="relative mb-4">
-                          <div className="absolute inset-0 bg-[#64ffda]/20 rounded-lg blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                          <div className="relative w-12 h-12 rounded-xl bg-[#64ffda]/10 border border-[#64ffda]/20 flex items-center justify-center group-hover:scale-110 group-hover:rotate-5 transition-all duration-300">
-                            <Icon className="w-6 h-6 text-[#64ffda]" />
-                          </div>
-                        </div>
-
-                        <h3 className="text-xl font-bold mb-3 text-[#ccd6f6] group-hover:text-[#64ffda] transition-colors">
-                          {service.title}
-                        </h3>
-                        <p className="text-sm text-[#8892b0] mb-4 leading-relaxed">
-                          {service.description}
-                        </p>
-                        {service.features && service.features.length > 0 && (
-                          <ul className="space-y-2">
-                            {service.features.map((feature, i) => (
-                              <li
-                                key={i}
-                                className="text-sm text-[#8892b0] flex items-center font-mono hover:text-[#64ffda] transition-colors"
-                              >
-                                <div className="w-1.5 h-1.5 rounded-full bg-[#64ffda] mr-3" />
-                                {feature}
-                              </li>
-                            ))}
-                          </ul>
-                        )}
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
+          {/* Services Grid (Mobile/Tablet) */}
+          {services.length === 0 ? (
+            <div className="text-center py-12">
+              <p className="text-[#8892b0]">No services available yet.</p>
             </div>
-          </motion.div>
+          ) : (
+            <>
+              {/* Grid Layout for Mobile/Tablet */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={
+                  isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }
+                }
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="grid sm:grid-cols-1 md:grid-cols-2 lg:hidden gap-5 mb-8"
+              >
+                {services.map((service, index) => {
+                  const Icon = iconMap[service.icon] || TrendingUp;
+                  return (
+                    <motion.div
+                      key={service.id}
+                      initial={{ opacity: 0, y: 50, scale: 0.9 }}
+                      animate={
+                        isInView
+                          ? { opacity: 1, y: 0, scale: 1 }
+                          : { opacity: 0, y: 50, scale: 0.9 }
+                      }
+                      transition={{
+                        duration: 0.6,
+                        delay: 0.2 + index * 0.1,
+                        type: "spring",
+                        stiffness: 100,
+                      }}
+                      className="group"
+                      whileHover={{ y: -10 }}
+                    >
+                      <div className="relative bg-[#112240] border border-[#233554] rounded-lg p-6 h-full hover:border-[#64ffda] transition-all duration-300 overflow-hidden">
+                        <div className="relative mb-4">
+                          <div className="absolute inset-0 bg-[#64ffda]/20 rounded-lg blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                          <div className="relative w-12 h-12 rounded-xl bg-[#64ffda]/10 border border-[#64ffda]/20 flex items-center justify-center group-hover:scale-110 group-hover:rotate-5 transition-all duration-300">
+                            <Icon className="w-6 h-6 text-[#64ffda]" />
+                          </div>
+                        </div>
+
+                        <h3 className="text-xl font-bold mb-3 text-[#ccd6f6] group-hover:text-[#64ffda] transition-colors">
+                          {service.title}
+                        </h3>
+                        <p className="text-sm text-[#8892b0] mb-4 leading-relaxed">
+                          {service.description}
+                        </p>
+                        {service.features && service.features.length > 0 && (
+                          <ul className="space-y-2">
+                            {service.features.map((feature, i) => (
+                              <li
+                                key={i}
+                                className="text-sm text-[#8892b0] flex items-center font-mono hover:text-[#64ffda] transition-colors"
+                              >
+                                <div className="w-1.5 h-1.5 rounded-full bg-[#64ffda] mr-3" />
+                                {feature}
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </motion.div>
+
+              {/* Infinite Scroller for Desktop */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={
+                  isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }
+                }
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="hidden lg:block relative overflow-hidden mb-8"
+              >
+                {/* Fade edges */}
+                <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-[#0a192f] to-transparent z-10 pointer-events-none" />
+                <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-[#0a192f] to-transparent z-10 pointer-events-none" />
+
+                <div className="flex gap-5 services-scroll">
+                  {/* First set */}
+                  <div className="flex gap-5 shrink-0">
+                    {services.map((service, index) => {
+                      const Icon = iconMap[service.icon] || TrendingUp;
+                      return (
+                        <div
+                          key={`${service.id}-1`}
+                          className="group w-80 sm:w-96 flex-shrink-0"
+                        >
+                          <div className="relative bg-[#112240] border border-[#233554] rounded-lg p-6 h-full hover:border-[#64ffda] transition-all duration-300 overflow-hidden">
+                            <div className="relative mb-4">
+                              <div className="absolute inset-0 bg-[#64ffda]/20 rounded-lg blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                              <div className="relative w-12 h-12 rounded-xl bg-[#64ffda]/10 border border-[#64ffda]/20 flex items-center justify-center group-hover:scale-110 group-hover:rotate-5 transition-all duration-300">
+                                <Icon className="w-6 h-6 text-[#64ffda]" />
+                              </div>
+                            </div>
+
+                            <h3 className="text-xl font-bold mb-3 text-[#ccd6f6] group-hover:text-[#64ffda] transition-colors">
+                              {service.title}
+                            </h3>
+                            <p className="text-sm text-[#8892b0] mb-4 leading-relaxed">
+                              {service.description}
+                            </p>
+                            {service.features &&
+                              service.features.length > 0 && (
+                                <ul className="space-y-2">
+                                  {service.features.map((feature, i) => (
+                                    <li
+                                      key={i}
+                                      className="text-sm text-[#8892b0] flex items-center font-mono hover:text-[#64ffda] transition-colors"
+                                    >
+                                      <div className="w-1.5 h-1.5 rounded-full bg-[#64ffda] mr-3" />
+                                      {feature}
+                                    </li>
+                                  ))}
+                                </ul>
+                              )}
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                  {/* Duplicate set for seamless loop */}
+                  <div className="flex gap-5 shrink-0" aria-hidden="true">
+                    {services.map((service, index) => {
+                      const Icon = iconMap[service.icon] || TrendingUp;
+                      return (
+                        <div
+                          key={`${service.id}-2`}
+                          className="group w-80 sm:w-96 flex-shrink-0"
+                        >
+                          <div className="relative bg-[#112240] border border-[#233554] rounded-lg p-6 h-full hover:border-[#64ffda] transition-all duration-300 overflow-hidden">
+                            <div className="relative mb-4">
+                              <div className="absolute inset-0 bg-[#64ffda]/20 rounded-lg blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                              <div className="relative w-12 h-12 rounded-xl bg-[#64ffda]/10 border border-[#64ffda]/20 flex items-center justify-center group-hover:scale-110 group-hover:rotate-5 transition-all duration-300">
+                                <Icon className="w-6 h-6 text-[#64ffda]" />
+                              </div>
+                            </div>
+
+                            <h3 className="text-xl font-bold mb-3 text-[#ccd6f6] group-hover:text-[#64ffda] transition-colors">
+                              {service.title}
+                            </h3>
+                            <p className="text-sm text-[#8892b0] mb-4 leading-relaxed">
+                              {service.description}
+                            </p>
+                            {service.features &&
+                              service.features.length > 0 && (
+                                <ul className="space-y-2">
+                                  {service.features.map((feature, i) => (
+                                    <li
+                                      key={i}
+                                      className="text-sm text-[#8892b0] flex items-center font-mono hover:text-[#64ffda] transition-colors"
+                                    >
+                                      <div className="w-1.5 h-1.5 rounded-full bg-[#64ffda] mr-3" />
+                                      {feature}
+                                    </li>
+                                  ))}
+                                </ul>
+                              )}
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              </motion.div>
+            </>
+          )}
         </div>
       </div>
 

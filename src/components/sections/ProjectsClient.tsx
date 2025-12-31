@@ -79,7 +79,7 @@ export default function ProjectsClient({ projects }: { projects: any[] }) {
             />
           </motion.div>
 
-          {/* Projects Infinite Scroller */}
+          {/* Projects Grid (Mobile/Tablet) */}
           {projects.length === 0 ? (
             <div className="text-center py-12">
               <p className="text-[#8892b0]">
@@ -87,17 +87,124 @@ export default function ProjectsClient({ projects }: { projects: any[] }) {
               </p>
             </div>
           ) : (
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="relative overflow-hidden mb-8"
-            >
-              {/* Fade edges */}
-              <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-[#020c1b] to-transparent z-10 pointer-events-none" />
-              <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-[#020c1b] to-transparent z-10 pointer-events-none" />
+            <>
+              {/* Grid Layout for Mobile/Tablet */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="grid sm:grid-cols-1 md:grid-cols-2 lg:hidden gap-6 mb-8"
+              >
+                {projects.map((project, index) => (
+                  <motion.div
+                    key={project.id}
+                    initial={{ opacity: 0, y: 50, scale: 0.95 }}
+                    animate={
+                      isInView
+                        ? { opacity: 1, y: 0, scale: 1 }
+                        : { opacity: 0, y: 50, scale: 0.95 }
+                    }
+                    transition={{
+                      duration: 0.6,
+                      delay: 0.2 + index * 0.1,
+                      type: "spring",
+                      stiffness: 100,
+                    }}
+                    className="group"
+                    onHoverStart={() => setHoveredIndex(index)}
+                    onHoverEnd={() => setHoveredIndex(null)}
+                    whileHover={{ y: -8, scale: 1.02 }}
+                  >
+                    <div className="relative bg-[#112240] border border-[#233554] rounded-lg overflow-hidden hover:border-[#64ffda] transition-all duration-300 h-full flex flex-col">
+                      {/* Image */}
+                      <div className="relative h-48 overflow-hidden">
+                        <img
+                          src={project.image}
+                          alt={project.title}
+                          className="w-full h-full object-cover group-hover:grayscale-0 transition-all duration-500 group-hover:scale-110"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#112240] via-transparent to-transparent" />
+                        {project.featured && (
+                          <div className="absolute top-4 left-4 px-3 py-1 bg-[#64ffda] text-[#0a192f] text-xs font-mono font-semibold rounded">
+                            Featured
+                          </div>
+                        )}
+                        <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex gap-2">
+                          {project.liveUrl && (
+                            <a
+                              href={project.liveUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="p-2 bg-[#112240]/90 backdrop-blur-sm rounded-lg hover:bg-[#64ffda] hover:text-[#0a192f] text-[#ccd6f6] transition-colors"
+                              aria-label="Live demo"
+                            >
+                              <ExternalLink className="w-4 h-4" />
+                            </a>
+                          )}
+                          {project.githubUrl && (
+                            <a
+                              href={project.githubUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="p-2 bg-[#112240]/90 backdrop-blur-sm rounded-lg hover:bg-[#64ffda] hover:text-[#0a192f] text-[#ccd6f6] transition-colors"
+                              aria-label="GitHub repository"
+                            >
+                              <Github className="w-4 h-4" />
+                            </a>
+                          )}
+                        </div>
+                      </div>
 
-              <div className="flex gap-6 portfolio-scroll">
+                      {/* Content */}
+                      <div className="p-5 flex-1 flex flex-col relative">
+                        <h3 className="text-lg font-bold text-[#ccd6f6] mb-2 group-hover:text-[#64ffda] transition-colors">
+                          {project.title}
+                        </h3>
+                        <p className="text-[#8892b0] mb-3 text-xs sm:text-sm line-clamp-3 flex-1">
+                          {project.description}
+                        </p>
+                        <div className="flex flex-wrap gap-1.5 mb-3">
+                          {project.techStack
+                            .slice(0, 4)
+                            .map((tech: string, techIndex: number) => (
+                              <span
+                                key={tech}
+                                className="px-3 py-1 text-xs font-mono text-[#8892b0] border border-[#233554] rounded hover:border-[#64ffda] hover:text-[#64ffda] transition-colors"
+                              >
+                                {tech}
+                              </span>
+                            ))}
+                          {project.techStack.length > 4 && (
+                            <span className="px-3 py-1 text-xs font-mono text-[#8892b0] border border-[#233554] rounded">
+                              +{project.techStack.length - 4}
+                            </span>
+                          )}
+                        </div>
+                        <Link
+                          href={`/portfolio/${project.slug}`}
+                          className="inline-flex items-center text-sm font-mono text-[#64ffda] hover:text-[#52e0c4] transition-all"
+                        >
+                          View Details
+                          <ArrowRight className="ml-2 w-4 h-4" />
+                        </Link>
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </motion.div>
+
+              {/* Infinite Scroller for Desktop */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="hidden lg:block relative overflow-hidden mb-8"
+              >
+                {/* Fade edges */}
+                <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-[#020c1b] to-transparent z-10 pointer-events-none" />
+                <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-[#020c1b] to-transparent z-10 pointer-events-none" />
+
+                <div className="flex gap-6 portfolio-scroll">
                 {/* First set */}
                 <div className="flex gap-6 shrink-0">
                   {projects.map((project, index) => (
@@ -270,6 +377,7 @@ export default function ProjectsClient({ projects }: { projects: any[] }) {
                 </div>
               </div>
             </motion.div>
+            </>
           )}
 
           {/* View All Button */}
