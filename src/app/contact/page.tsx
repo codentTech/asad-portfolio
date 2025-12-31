@@ -57,8 +57,8 @@ export default function ContactPage() {
     {
       icon: Mail,
       title: "Email",
-      value: "contact@asadabbas.com",
-      link: "mailto:contact@asadabbas.com",
+      value: "asadthedev@gmail.com",
+      link: "mailto:asadthedev@gmail.com",
       description: "Send me an email anytime",
     },
   ];

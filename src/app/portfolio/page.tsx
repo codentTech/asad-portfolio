@@ -12,11 +12,6 @@ export const metadata: Metadata = {
     description: 'Explore my portfolio of AI-powered applications, intelligent automation systems, and full-stack projects.',
     url: 'https://asadabbas.com/portfolio',
   },
-  twitter: {
-    card: 'summary',
-    title: 'Portfolio | Asad Abbas',
-    description: 'Explore my portfolio of AI-powered applications and full-stack projects.',
-  },
 }
 
 export default async function PortfolioPage() {

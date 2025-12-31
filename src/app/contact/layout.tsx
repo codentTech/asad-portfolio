@@ -10,11 +10,6 @@ export const metadata: Metadata = {
       'Get in touch for AI-powered application development, intelligent automation, and full-stack development projects. Free consultations available.',
     url: 'https://asadabbas.com/contact',
   },
-  twitter: {
-    card: 'summary',
-    title: 'Contact | Asad Abbas',
-    description: 'Get in touch for AI-powered application development and full-stack development projects.',
-  },
 }
 
 export default function ContactLayout({

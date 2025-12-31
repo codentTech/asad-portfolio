@@ -11,11 +11,6 @@ export const metadata: Metadata = {
       "Full-Stack Developer with 7+ years of experience specializing in AI/ML integration, backend engineering, and modern web applications. Expert in LLMs, RAG systems, and automation.",
     url: "https://asadabbas.com/about",
   },
-  twitter: {
-    card: "summary",
-    title: "About | Asad Abbas",
-    description: "Full-Stack Developer with 7+ years of experience in AI/ML integration, backend engineering, and modern web applications.",
-  },
 };
 
 export default function AboutPage() {

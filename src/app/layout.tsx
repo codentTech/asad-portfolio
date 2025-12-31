@@ -56,13 +56,6 @@ export const metadata: Metadata = {
       },
     ],
   },
-  twitter: {
-    card: "summary_large_image",
-    title: "Asad Abbas - Full-Stack Developer & AI/ML Engineer",
-    description:
-      "Full-Stack Developer with 7+ years of experience specializing in AI/ML integration, backend engineering, and modern web applications.",
-    images: ["/og-image.jpg"],
-  },
   robots: {
     index: true,
     follow: true,
@@ -119,9 +112,8 @@ export default function RootLayout({
               jobTitle: "Full-Stack Developer & AI/ML Engineer",
               url: "https://asadabbas.com",
               sameAs: [
-                "https://github.com/asadabbas",
-                "https://linkedin.com/in/asadabbas",
-                "https://twitter.com/asadabbas",
+                "https://github.com/abbasasad309",
+                "https://www.linkedin.com/in/asad-abbas-the-consultant/",
               ],
               knowsAbout: [
                 "AI/ML Integration",

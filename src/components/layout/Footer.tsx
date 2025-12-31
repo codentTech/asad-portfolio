@@ -1,13 +1,12 @@
 'use client'
 
-import { Github, Linkedin, Twitter, Mail, ArrowUp } from 'lucide-react'
+import { Github, Linkedin, Mail, ArrowUp } from 'lucide-react'
 import { motion } from 'framer-motion'
 
 const socialLinks = [
-  { icon: Github, href: 'https://github.com/asadabbas', label: 'GitHub' },
-  { icon: Linkedin, href: 'https://linkedin.com/in/asadabbas', label: 'LinkedIn' },
-  { icon: Twitter, href: 'https://twitter.com/asadabbas', label: 'Twitter' },
-  { icon: Mail, href: 'mailto:contact@asadabbas.com', label: 'Email' },
+  { icon: Github, href: 'https://github.com/abbasasad309', label: 'GitHub' },
+  { icon: Linkedin, href: 'https://www.linkedin.com/in/asad-abbas-the-consultant/', label: 'LinkedIn' },
+  { icon: Mail, href: 'mailto:asadthedev@gmail.com', label: 'Email' },
 ]
 
 const scrollToTop = () => {

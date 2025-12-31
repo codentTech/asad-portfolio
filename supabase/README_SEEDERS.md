@@ -196,6 +196,24 @@ This seeder adds blog posts related to portfolio projects:
 - Connecting Travelers and Agents: Building Travel-Expert Platform
 - Building Specialized E-Commerce Platforms: The Bio Tail Experience
 
+## Full Stack Enterprise Application Development Service Seeder
+
+### Option 1: SQL Script (Recommended)
+
+1. Open your Supabase Dashboard
+2. Go to SQL Editor
+3. Copy and paste the contents of `seed_enterprise_fullstack.sql`
+4. Run the query
+5. The service will be added to your services table
+
+This seeder adds the "Full Stack Enterprise Application Development" service, which includes:
+- Enterprise-grade architecture
+- Scalable & secure applications
+- Microservices & cloud-native solutions
+- API integrations & third-party services
+- Performance optimization & monitoring
+- DevOps & CI/CD pipelines
+
 ## Adding More Projects
 
 To add more projects, you can:

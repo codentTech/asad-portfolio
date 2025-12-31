@@ -197,10 +197,21 @@ export default function HeroSection() {
                 whileHover={{ scale: 1.03 }}
                 transition={{ type: "spring", stiffness: 300 }}
               >
-                Proven Track Record – Delivered 100+ projects including
-                AI-driven platforms.
+                Software Consultant | AI/ML Engineer | Building Enterprise SaaS
+                & Automation Workflows for Global Businesses
               </motion.span>
             </motion.h2>
+
+            {/* Sub headline */}
+            <motion.p
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+              className="text-sm lg:text-base xl:text-lg mb-3 sm:mb-4 text-[#8892b0] leading-relaxed px-2"
+            >
+              Proven Track Record – Delivered 100+ projects including AI-driven
+              platforms.
+            </motion.p>
 
             {/* CTA Buttons */}
             <motion.div

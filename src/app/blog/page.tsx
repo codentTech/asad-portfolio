@@ -10,11 +10,6 @@ export const metadata: Metadata = {
     description: 'Articles about AI/ML integration, backend engineering, full-stack development, and modern web technologies.',
     url: 'https://asadabbas.com/blog',
   },
-  twitter: {
-    card: 'summary',
-    title: 'Blog | Asad Abbas',
-    description: 'Articles about AI/ML integration, backend engineering, and full-stack development.',
-  },
 }
 
 export default async function BlogPage() {

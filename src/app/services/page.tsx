@@ -11,11 +11,6 @@ export const metadata: Metadata = {
     description: "AI-powered application development, intelligent automation, backend engineering, and full-stack development services. Expert in LLMs, RAG systems, and workflow optimization.",
     url: "https://asadabbas.com/services",
   },
-  twitter: {
-    card: "summary",
-    title: "Services | Asad Abbas",
-    description: "AI-powered application development, intelligent automation, and full-stack development services.",
-  },
 };
 
 export default async function ServicesPage() {

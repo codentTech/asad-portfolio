@@ -50,11 +50,6 @@ export const metadata: Metadata = {
     url: "https://asadabbas.com",
     type: "website",
   },
-  twitter: {
-    card: "summary_large_image",
-    title: "Asad Abbas - Full-Stack Developer & AI/ML Engineer",
-    description: "Full-Stack Developer with 7+ years of experience in AI/ML integration, backend engineering, and modern web applications.",
-  },
 };
 
 export default function HomePage() {

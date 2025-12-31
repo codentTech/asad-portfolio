@@ -92,7 +92,7 @@ export default function ServicesClient({ services }: { services: Service[] }) {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="inline-block font-mono text-[#64ffda] text-sm mb-4"
             >
-              04. Services
+              02. Services
             </motion.span>
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
