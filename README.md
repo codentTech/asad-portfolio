@@ -59,19 +59,21 @@ supabase/
 
 ### Prerequisites
 
-- Node.js 18+ 
+- Node.js 18+
 - npm, yarn, or pnpm
 - Supabase account ([Sign up for free](https://supabase.com))
 
 ### Installation
 
 1. **Clone the repository:**
+
 ```bash
 git clone <repository-url>
 cd asad-abbas-portfolio
 ```
 
 2. **Install dependencies:**
+
 ```bash
 npm install
 # or
@@ -81,20 +83,22 @@ pnpm install
 ```
 
 3. **Set up environment variables:**
-   
+
    Create a `.env.local` file in the root directory:
+
 ```env
 NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
 ```
 
 4. **Set up Supabase:**
-   
+
    - Follow the detailed instructions in `SUPABASE_SETUP.md`
    - Run the SQL schemas from `supabase/schema.sql` and `supabase/projects_schema.sql` in your Supabase SQL Editor
    - Create an admin user in Supabase Authentication
 
 5. **Run the development server:**
+
 ```bash
 npm run dev
 # or
@@ -150,12 +154,14 @@ Create new routes in `src/app/` following the Next.js App Router structure.
 ### Environment Variables for Production
 
 Make sure to add these in your deployment platform:
+
 - `NEXT_PUBLIC_SUPABASE_URL`
 - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
 
 ### Other Platforms
 
 The site can be deployed to any platform that supports Next.js:
+
 - Netlify
 - AWS Amplify
 - Railway
@@ -185,19 +191,23 @@ The site can be deployed to any platform that supports Next.js:
 ## 🐛 Troubleshooting
 
 **"Invalid API key"**
+
 - Check `.env.local` file exists
 - Verify no extra spaces in values
 - Restart dev server after changes
 
 **"relation 'blog_posts' does not exist"**
+
 - Run the SQL schema in Supabase SQL Editor
 - Check for errors in SQL Editor
 
 **Can't log in**
+
 - Verify user exists in Supabase → Authentication → Users
 - Check Email provider is enabled
 
 **Posts/Projects not showing**
+
 - Check Supabase → Table Editor → blog_posts / projects
 - Verify environment variables are correct
 - Check browser console for errors
@@ -209,9 +219,10 @@ This project is open source and available under the [MIT License](LICENSE).
 ## 👤 Author
 
 **Asad Abbas**
+
 - Portfolio: [asadabbas.com](https://asadabbas.com)
-- GitHub: [@asadabbas](https://github.com/asadabbas)
-- LinkedIn: [asadabbas](https://linkedin.com/in/asadabbas)
+- GitHub: [@asadabbas](https://github.com/asadabbas-dev)
+- LinkedIn: [asadabbas](https://www.linkedin.com/in/asad-abbas-the-consultant/)
 
 ---
 

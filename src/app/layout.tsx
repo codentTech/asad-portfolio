@@ -112,7 +112,7 @@ export default function RootLayout({
               jobTitle: "Full-Stack Developer & AI/ML Engineer",
               url: "https://asadabbas.com",
               sameAs: [
-                "https://github.com/abbasasad309",
+                "https://github.com/asadabbas-dev",
                 "https://www.linkedin.com/in/asad-abbas-the-consultant/",
               ],
               knowsAbout: [

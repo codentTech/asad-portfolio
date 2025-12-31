@@ -1,20 +1,24 @@
-'use client'
+"use client";
 
-import { Github, Linkedin, Mail, ArrowUp } from 'lucide-react'
-import { motion } from 'framer-motion'
+import { Github, Linkedin, Mail, ArrowUp } from "lucide-react";
+import { motion } from "framer-motion";
 
 const socialLinks = [
-  { icon: Github, href: 'https://github.com/abbasasad309', label: 'GitHub' },
-  { icon: Linkedin, href: 'https://www.linkedin.com/in/asad-abbas-the-consultant/', label: 'LinkedIn' },
-  { icon: Mail, href: 'mailto:asadthedev@gmail.com', label: 'Email' },
-]
+  { icon: Github, href: "https://github.com/asadabbas-dev", label: "GitHub" },
+  {
+    icon: Linkedin,
+    href: "https://www.linkedin.com/in/asad-abbas-the-consultant/",
+    label: "LinkedIn",
+  },
+  { icon: Mail, href: "mailto:asadthedev@gmail.com", label: "Email" },
+];
 
 const scrollToTop = () => {
-  window.scrollTo({ top: 0, behavior: 'smooth' })
-}
+  window.scrollTo({ top: 0, behavior: "smooth" });
+};
 
 export default function Footer() {
-  const currentYear = new Date().getFullYear()
+  const currentYear = new Date().getFullYear();
 
   return (
     <footer className="bg-[#020c1b] border-t border-[#233554]">
@@ -84,5 +88,5 @@ export default function Footer() {
         </div>
       </div>
     </footer>
-  )
+  );
 }
