@@ -12,6 +12,7 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://asadabbas.com'
   const project = await getProjectBySlug(params.slug)
   if (!project) {
     return {
@@ -21,7 +22,25 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   return {
     title: project.title,
     description: project.description,
+    alternates: {
+      canonical: `${baseUrl}/portfolio/${project.slug}`,
+    },
     openGraph: {
+      title: project.title,
+      description: project.description,
+      url: `${baseUrl}/portfolio/${project.slug}`,
+      type: 'article',
+      images: [
+        {
+          url: project.image,
+          width: 1200,
+          height: 630,
+          alt: project.title,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
       title: project.title,
       description: project.description,
       images: [project.image],
@@ -30,13 +49,40 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 }
 
 export default async function ProjectDetailPage({ params }: { params: { slug: string } }) {
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://asadabbas.com'
   const project = await getProjectBySlug(params.slug)
 
   if (!project) {
     notFound()
   }
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: project.title,
+    description: project.description,
+    image: project.image,
+    applicationCategory: 'WebApplication',
+    operatingSystem: 'Web',
+    url: project.liveUrl || `${baseUrl}/portfolio/${project.slug}`,
+    author: {
+      '@type': 'Person',
+      name: 'Asad Abbas',
+      url: baseUrl,
+    },
+    keywords: project.techStack?.join(', ') || '',
+    offers: {
+      '@type': 'Offer',
+      availability: 'https://schema.org/OnlineOnly',
+    },
+  }
+
   return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
     <article className="pt-20 pb-16">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
         {/* Back Button */}
@@ -164,5 +210,6 @@ export default async function ProjectDetailPage({ params }: { params: { slug: st
         </div>
       </div>
     </article>
+    </>
   )
 }

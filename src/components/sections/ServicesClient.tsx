@@ -1,9 +1,19 @@
 "use client";
 
-import { useState, useRef } from "react";
-import { 
-  TrendingUp, Zap, BarChart, Code, ShoppingCart, CheckCircle2, 
-  Clock, Users, Target, Settings, Briefcase, Rocket 
+import { useRef } from "react";
+import {
+  TrendingUp,
+  Zap,
+  BarChart,
+  Code,
+  ShoppingCart,
+  CheckCircle2,
+  Clock,
+  Users,
+  Target,
+  Settings,
+  Briefcase,
+  Rocket,
 } from "lucide-react";
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import { Service } from "@/types";
@@ -26,13 +36,11 @@ const iconMap: Record<string, any> = {
 export default function ServicesClient({ services }: { services: Service[] }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"],
   });
 
-  const y = useTransform(scrollYProgress, [0, 1], [50, -50]);
   const opacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0, 1, 1, 0]);
 
   if (!services || services.length === 0) {
@@ -40,7 +48,10 @@ export default function ServicesClient({ services }: { services: Service[] }) {
   }
 
   return (
-    <section ref={ref} className="relative py-16 sm:py-24 overflow-hidden bg-[#0a192f]">
+    <section
+      ref={ref}
+      className="relative py-16 sm:py-24 overflow-hidden bg-[#0a192f]"
+    >
       {/* Animated Background Elements */}
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-gradient-to-b from-[#020c1b]/50 to-transparent" />
@@ -89,7 +100,7 @@ export default function ServicesClient({ services }: { services: Service[] }) {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#ccd6f6] mb-3"
             >
-              My Approach
+              What I Offer
             </motion.h2>
             <motion.div
               initial={{ width: 0 }}
@@ -99,112 +110,118 @@ export default function ServicesClient({ services }: { services: Service[] }) {
             />
           </motion.div>
 
-          {/* Services Grid */}
-          <div className="grid sm:grid-cols-1 md:grid-cols-3 gap-5 max-w-5xl mx-auto">
-            {services.map((service, index) => {
-              const Icon = iconMap[service.icon] || TrendingUp;
-              return (
-                <motion.div
-                  key={service.id}
-                  initial={{ opacity: 0, y: 50, scale: 0.9 }}
-                  animate={
-                    isInView
-                      ? { opacity: 1, y: 0, scale: 1 }
-                      : { opacity: 0, y: 50, scale: 0.9 }
-                  }
-                  transition={{
-                    duration: 0.6,
-                    delay: 0.2 + index * 0.1,
-                    type: "spring",
-                    stiffness: 100,
-                  }}
-                  className="group"
-                  onHoverStart={() => setHoveredIndex(index)}
-                  onHoverEnd={() => setHoveredIndex(null)}
-                  whileHover={{ y: -10 }}
-                  style={{ y }}
-                >
-                  <div className="relative bg-[#112240] border border-[#233554] rounded-lg p-6 h-full hover:border-[#64ffda] transition-all duration-300 overflow-hidden">
-                    {/* Animated background glow */}
-                    <motion.div
-                      className="absolute inset-0 bg-gradient-to-br from-[#64ffda]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                      animate={{
-                        scale: hoveredIndex === index ? 1.2 : 1,
-                        rotate: hoveredIndex === index ? 5 : 0,
-                      }}
-                      transition={{ duration: 0.3 }}
-                    />
+          {/* Infinite Scrolling Services */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="relative overflow-hidden mb-8"
+          >
+            {/* Fade edges */}
+            <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-[#0a192f] to-transparent z-10 pointer-events-none" />
+            <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-[#0a192f] to-transparent z-10 pointer-events-none" />
 
-                    <div className="relative mb-4">
-                      <motion.div
-                        className="absolute inset-0 bg-[#64ffda]/20 rounded-lg blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                        animate={{
-                          scale: hoveredIndex === index ? 1.2 : 1,
-                        }}
-                      />
-                      <motion.div
-                        className="relative w-12 h-12 rounded-xl bg-[#64ffda]/10 border border-[#64ffda]/20 flex items-center justify-center"
-                        whileHover={{ scale: 1.15, rotate: 5 }}
-                        transition={{ type: "spring", stiffness: 300 }}
-                      >
-                        <motion.div
-                          animate={{
-                            rotate: hoveredIndex === index ? 360 : 0,
-                          }}
-                          transition={{ duration: 0.6, ease: "easeInOut" }}
-                        >
-                          <Icon className="w-6 h-6 text-[#64ffda]" />
-                        </motion.div>
-                      </motion.div>
-                    </div>
-
-                    <motion.h3
-                      className="text-xl font-bold mb-3 text-[#ccd6f6] group-hover:text-[#64ffda] transition-colors"
-                      whileHover={{ x: 5 }}
+            <div className="flex gap-5 services-scroll">
+              {/* First set */}
+              <div className="flex gap-5 shrink-0">
+                {services.map((service, index) => {
+                  const Icon = iconMap[service.icon] || TrendingUp;
+                  return (
+                    <div
+                      key={`${service.id}-1`}
+                      className="group w-80 sm:w-96 flex-shrink-0"
                     >
-                      {service.title}
-                    </motion.h3>
-                    <p className="text-sm text-[#8892b0] mb-4 leading-relaxed">
-                      {service.description}
-                    </p>
-                    {service.features && service.features.length > 0 && (
-                      <ul className="space-y-2">
-                        {service.features.map((feature, i) => (
-                          <motion.li
-                            key={i}
-                            className="text-sm text-[#8892b0] flex items-center font-mono"
-                            initial={{ opacity: 0, x: -10 }}
-                            animate={
-                              isInView
-                                ? { opacity: 1, x: 0 }
-                                : { opacity: 0, x: -10 }
-                            }
-                            transition={{
-                              duration: 0.3,
-                              delay: 0.3 + index * 0.1 + i * 0.05,
-                            }}
-                            whileHover={{ x: 5, color: "#64ffda" }}
-                          >
-                            <motion.div
-                              className="w-1.5 h-1.5 rounded-full bg-[#64ffda] mr-3"
-                              animate={{
-                                scale: hoveredIndex === index ? [1, 1.5, 1] : 1,
-                              }}
-                              transition={{ duration: 0.5, delay: i * 0.1 }}
-                            />
-                            {feature}
-                          </motion.li>
-                        ))}
-                      </ul>
-                    )}
-                  </div>
-                </motion.div>
-              );
-            })}
-          </div>
+                      <div className="relative bg-[#112240] border border-[#233554] rounded-lg p-6 h-full hover:border-[#64ffda] transition-all duration-300 overflow-hidden">
+                        <div className="relative mb-4">
+                          <div className="absolute inset-0 bg-[#64ffda]/20 rounded-lg blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                          <div className="relative w-12 h-12 rounded-xl bg-[#64ffda]/10 border border-[#64ffda]/20 flex items-center justify-center group-hover:scale-110 group-hover:rotate-5 transition-all duration-300">
+                            <Icon className="w-6 h-6 text-[#64ffda]" />
+                          </div>
+                        </div>
+
+                        <h3 className="text-xl font-bold mb-3 text-[#ccd6f6] group-hover:text-[#64ffda] transition-colors">
+                          {service.title}
+                        </h3>
+                        <p className="text-sm text-[#8892b0] mb-4 leading-relaxed">
+                          {service.description}
+                        </p>
+                        {service.features && service.features.length > 0 && (
+                          <ul className="space-y-2">
+                            {service.features.map((feature, i) => (
+                              <li
+                                key={i}
+                                className="text-sm text-[#8892b0] flex items-center font-mono hover:text-[#64ffda] transition-colors"
+                              >
+                                <div className="w-1.5 h-1.5 rounded-full bg-[#64ffda] mr-3" />
+                                {feature}
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+              {/* Duplicate set for seamless loop */}
+              <div className="flex gap-5 shrink-0" aria-hidden="true">
+                {services.map((service, index) => {
+                  const Icon = iconMap[service.icon] || TrendingUp;
+                  return (
+                    <div
+                      key={`${service.id}-2`}
+                      className="group w-80 sm:w-96 flex-shrink-0"
+                    >
+                      <div className="relative bg-[#112240] border border-[#233554] rounded-lg p-6 h-full hover:border-[#64ffda] transition-all duration-300 overflow-hidden">
+                        <div className="relative mb-4">
+                          <div className="absolute inset-0 bg-[#64ffda]/20 rounded-lg blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                          <div className="relative w-12 h-12 rounded-xl bg-[#64ffda]/10 border border-[#64ffda]/20 flex items-center justify-center group-hover:scale-110 group-hover:rotate-5 transition-all duration-300">
+                            <Icon className="w-6 h-6 text-[#64ffda]" />
+                          </div>
+                        </div>
+
+                        <h3 className="text-xl font-bold mb-3 text-[#ccd6f6] group-hover:text-[#64ffda] transition-colors">
+                          {service.title}
+                        </h3>
+                        <p className="text-sm text-[#8892b0] mb-4 leading-relaxed">
+                          {service.description}
+                        </p>
+                        {service.features && service.features.length > 0 && (
+                          <ul className="space-y-2">
+                            {service.features.map((feature, i) => (
+                              <li
+                                key={i}
+                                className="text-sm text-[#8892b0] flex items-center font-mono hover:text-[#64ffda] transition-colors"
+                              >
+                                <div className="w-1.5 h-1.5 rounded-full bg-[#64ffda] mr-3" />
+                                {feature}
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </motion.div>
         </div>
       </div>
+
+      <style jsx>{`
+        .services-scroll {
+          animation: scrollServices 55s linear infinite;
+        }
+        @keyframes scrollServices {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(-50%);
+          }
+        }
+      `}</style>
     </section>
   );
 }
-

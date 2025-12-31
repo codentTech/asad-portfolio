@@ -13,7 +13,7 @@ const skillCategories = {
 
 export default function AboutPageClient() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: "0px" });
 
   return (
     <div className="min-h-screen bg-[#0a192f] pt-20">
@@ -22,16 +22,14 @@ export default function AboutPageClient() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-6xl mx-auto">
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+              initial={{ opacity: 1, y: 0 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
               className="grid md:grid-cols-2 gap-12 items-center"
             >
               <motion.div
-                initial={{ opacity: 0, x: -50 }}
-                animate={
-                  isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }
-                }
+                initial={{ opacity: 1, x: 0 }}
+                animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
                 className="relative group"
               >
@@ -57,7 +55,7 @@ export default function AboutPageClient() {
                     transition={{ type: "spring", stiffness: 300 }}
                   >
                     <img
-                      src="/slazzer-preview-7ebme.png"
+                      src="/profile-image.png"
                       alt="Asad Abbas"
                       className="w-full h-full max-h-[600px] object-contain"
                       style={{
@@ -98,10 +96,8 @@ export default function AboutPageClient() {
               </motion.div>
 
               <motion.div
-                initial={{ opacity: 0, x: 50 }}
-                animate={
-                  isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }
-                }
+                initial={{ opacity: 1, x: 0 }}
+                animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, delay: 0.3 }}
                 className="space-y-4"
               >
@@ -115,19 +111,24 @@ export default function AboutPageClient() {
                   </h1>
                 </div>
                 <p className="text-sm sm:text-base text-[#8892b0] leading-relaxed mb-3">
-                  I&apos;m a Full-Stack / Frontend Engineer with a passion for
-                  building exceptional digital experiences. I specialize in
-                  Next.js, TypeScript, and React, creating scalable, performant
-                  web applications that make a real impact.
+                  With over 7 years of experience, I&apos;ve helped numerous
+                  companies build modern web applications, from startups to
+                  enterprise-level solutions. I&apos;m passionate about clean
+                  code, best practices, and continuous learning.
                 </p>
                 <p className="text-sm sm:text-base text-[#8892b0] leading-relaxed mb-3">
-                  With over {stats.yearsExperience} years of experience,
-                  I&apos;ve helped numerous companies build modern web
-                  applications, from startups to enterprise-level solutions.
-                  I&apos;m passionate about clean code, best practices, and
-                  continuous learning.
+                  I am particularly passionate about AI/ML integration and
+                  intelligent automation. My expertise includes working with
+                  Large Language Models (LLMs), automating workflows, and
+                  implementing smart systems that enhance productivity,
+                  decision-making, and user engagement.
                 </p>
-                <p className="text-lg text-[#8892b0] leading-relaxed">
+                <p className="text-sm sm:text-base text-[#8892b0] leading-relaxed mb-3">
+                  By combining AI-driven innovation, solid backend engineering,
+                  and full-stack development, I deliver solutions that are
+                  scalable, maintainable, and future-ready.
+                </p>
+                <p className="text-sm sm:text-base text-[#8892b0] leading-relaxed">
                   When I&apos;m not coding, you&apos;ll find me exploring new
                   technologies, contributing to open-source projects, or sharing
                   my knowledge through blog posts and technical articles. I
@@ -147,8 +148,8 @@ export default function AboutPageClient() {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
               {[
                 {
-                  label: "Years Experience",
-                  value: `${stats.yearsExperience}+`,
+                  label: "Support Team",
+                  value: `${stats.supportTeam}+`,
                 },
                 {
                   label: "Projects Completed",
@@ -185,7 +186,7 @@ export default function AboutPageClient() {
       </section>
 
       {/* Experience */}
-      <section className="py-16 sm:py-24">
+      {/* <section className="py-16 sm:py-24">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-6xl mx-auto">
             <motion.div
@@ -263,7 +264,7 @@ export default function AboutPageClient() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Skills */}
       {/* <section className="py-20 sm:py-32 bg-[#020c1b]">

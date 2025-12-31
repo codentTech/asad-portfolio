@@ -1,0 +1,60 @@
+-- Seeder for WORK HIVE SaaS Platform Project
+-- Run this SQL script in your Supabase SQL Editor to add the WORK HIVE project
+
+INSERT INTO projects (
+  title,
+  slug,
+  description,
+  long_description,
+  image,
+  images,
+  tech_stack,
+  live_url,
+  github_url,
+  problem,
+  solution,
+  result,
+  featured
+) VALUES (
+  'WORK HIVE',
+  'work-hive',
+  'SaaS-based multi-stack domain application powered by AI covering project management and comprehensive business operations.',
+  'Built a comprehensive 360-degree workflow platform designed to automate decision-making and enhance team collaboration. Leveraging AI/ML technologies for smart management, the platform accelerates task completion and optimizes resource allocation. It includes scalable modules for Project Management, HR, Finance, Recruitment, and Resource Tracking, alongside a secure cloud-based file storage system. Additionally, the platform integrates ERP and CRM functionalities, providing a seamless experience across departments. A Chrome extension further enhances project management, ensuring efficiency and real-time collaboration for teams.',
+  'https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=1200',
+  ARRAY[]::TEXT[],
+  ARRAY[
+    'NestJS',
+    '.NET 6',
+    'FastAPI',
+    'Angular',
+    'React.js',
+    'SQL',
+    'PostgreSQL',
+    'Redis',
+    'WebSockets',
+    'Socket.io',
+    'AWS EC2',
+    'AWS Lambda',
+    'AWS S3',
+    'Azure',
+    'Digital Ocean',
+    'Docker',
+    'Stripe',
+    'Twilio',
+    'SendGrid',
+    'Zoom',
+    'FCM',
+    'SSO',
+    'Chrome Extension',
+    'WPF',
+    'AI/ML',
+    'CI/CD'
+  ],
+  NULL,
+  NULL,
+  'Organizations struggle with fragmented business operations across multiple departments, leading to inefficiencies and lack of visibility. Traditional systems fail to integrate project management, HR, finance, recruitment, and resource tracking into a unified platform. The absence of AI-driven automation limits decision-making speed and workflow optimization. Teams face challenges with collaboration, file sharing, and real-time updates. Existing solutions lack multi-tenant support for SaaS deployment, making it difficult to serve multiple organizations. The absence of cross-platform tools (browser extensions, desktop apps) restricts accessibility, while fragmented ERP and CRM systems create operational silos. Organizations need a comprehensive, AI-powered platform that automates workflows, enhances collaboration, and provides real-time insights across all business functions.',
+  'WORK HIVE provides a comprehensive 360-degree workflow platform that integrates all business operations into a unified, AI-powered solution. The platform features AI/ML-driven task management that accelerates decision-making and optimizes workflows through intelligent automation and analytics. Scalable modules for Project Management, HR, Finance, and Recruitment provide comprehensive functionality for each department. Resource tracking capabilities offer real-time visibility and effective allocation of resources. Secure cloud-based file storage enables easy file sharing and collaboration across teams. Integrated ERP and CRM functionalities provide seamless business operations across departments. A Chrome extension streamlines project management directly from the browser, enhancing productivity. The platform includes multitenancy support for SaaS deployment, enabling service to multiple organizations. Multi-cloud deployment on AWS, Azure, and Digital Ocean ensures high availability and scalability. Docker-based CI/CD pipelines automate deployment and ensure continuous updates. Third-party API integrations (SendGrid, Twilio, Stripe, Zoom) extend platform functionality. Single Sign-On (SSO) enables seamless authentication across all modules. FCM push notifications keep users informed with real-time updates. A desktop employee tracking app and attendance module provide comprehensive workforce management. Built with NestJS, .NET 6, and FastAPI for backend, Angular and React.js for frontend, with PostgreSQL, Redis, and SQL for data management, the platform ensures scalability, performance, and reliability.',
+  'WORK HIVE successfully delivered a comprehensive, AI-powered SaaS platform that transformed business operations for organizations. The platform significantly improved workflow efficiency through AI/ML-driven automation, accelerating task completion and optimizing resource allocation. The unified approach integrating Project Management, HR, Finance, Recruitment, and Resource Tracking eliminated operational silos and improved cross-department collaboration. Real-time visibility through resource tracking and notifications enhanced decision-making capabilities. Secure cloud storage and collaboration tools improved team productivity and file management. ERP and CRM integration provided seamless business operations, while the Chrome extension and desktop app increased accessibility and convenience. Multitenancy support enabled successful SaaS deployment, serving multiple organizations efficiently. Multi-cloud architecture (AWS, Azure, Digital Ocean) ensured high availability, scalability, and disaster recovery. Docker-based CI/CD pipelines streamlined deployment processes, enabling continuous improvements. Third-party integrations extended platform functionality, while SSO simplified user authentication. The comprehensive solution now serves as a complete business management platform, automating workflows, enhancing collaboration, and providing real-time insights that drive organizational efficiency and productivity.',
+  true
+);
+

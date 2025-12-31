@@ -43,7 +43,18 @@ const CTASection = dynamic(() => import("@/components/sections/CTASection"), {
 export const metadata: Metadata = {
   title: "Home",
   description:
-    "Full-Stack / Frontend Engineer specializing in Next.js, TypeScript, React, and modern web applications.",
+    "Full-Stack Developer with 7+ years of experience building AI-powered applications, intelligent automation systems, and scalable web solutions. Expert in LLMs, RAG systems, backend engineering, Next.js, Node.js, and Python.",
+  openGraph: {
+    title: "Asad Abbas - Full-Stack Developer & AI/ML Engineer",
+    description: "Full-Stack Developer specializing in AI/ML integration, backend engineering, and modern web applications. Expert in LLMs, RAG systems, and automation.",
+    url: "https://asadabbas.com",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Asad Abbas - Full-Stack Developer & AI/ML Engineer",
+    description: "Full-Stack Developer with 7+ years of experience in AI/ML integration, backend engineering, and modern web applications.",
+  },
 };
 
 export default function HomePage() {

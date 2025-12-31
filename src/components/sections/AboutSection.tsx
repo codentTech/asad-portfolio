@@ -26,6 +26,8 @@ const skills = [
   "MongoDB",
   "PostgreSQL",
   "MySQL",
+  "MSSQL",
+  "Supabase",
   "AWS",
   "Azure",
   "Docker",
@@ -35,10 +37,17 @@ const skills = [
   "FastAPI",
   "Flask",
   "Django",
+  ".NET",
   "RAG",
   "Vector DB",
   "Pinecone",
   "Weaviate",
+  "Replit",
+  "Loveable",
+  "N8N",
+  "Bolt",
+  "V0",
+  "oAuth",
 ];
 
 export default function AboutSection() {
@@ -127,7 +136,7 @@ export default function AboutSection() {
                   transition={{ type: "spring", stiffness: 300 }}
                 >
                   <img
-                    src="/slazzer-preview-7ebme.png"
+                    src="/profile-image.png"
                     alt="Asad Abbas"
                     className="w-full h-auto max-h-[550px] object-contain"
                     style={{
@@ -177,24 +186,40 @@ export default function AboutSection() {
             >
               <div className="space-y-4 text-[#8892b0] leading-relaxed">
                 <p className="text-sm sm:text-base">
-                  Bringing years of expertise and a diverse skill set to craft
-                  intelligent, high-performance solutions. I specialize in
-                  building scalable web applications, integrating cutting-edge
-                  AI technologies, and delivering exceptional user experiences.
+                  I bring years of experience building intelligent, scalable,
+                  and automation-driven solutions, with a strong focus on AI/ML,
+                  backend engineering, and full-stack development. My work
+                  revolves around creating high-performance applications that
+                  leverage modern artificial intelligence to solve real-world
+                  business problems efficiently and at scale.
                 </p>
                 <p className="text-sm sm:text-base">
-                  With a strong foundation in full-stack development and a
-                  passion for artificial intelligence, I leverage modern
-                  frameworks and tools to create innovative solutions that solve
-                  real-world problems. My expertise spans from building robust
-                  backend systems with Node.js and Python to developing
-                  responsive frontend applications with React and Next.js.
+                  With a deep foundation in backend development, I specialize in
+                  building robust, secure, and scalable systems using Python,
+                  Node.js, NestJS, and .NET. I design clean architectures,
+                  optimize APIs, and develop reliable microservices that power
+                  data-intensive and AI-enabled platforms.
                 </p>
                 <p className="text-sm sm:text-base">
-                  I&apos;m particularly passionate about AI/ML integration,
-                  working with Large Language Models (LLMs), building RAG
-                  systems, and implementing intelligent automation solutions
-                  that enhance productivity and user engagement.
+                  Alongside backend expertise, I have strong full-stack
+                  experience, developing responsive and intuitive user
+                  interfaces using modern frontend frameworks like React,
+                  Next.js and Angular. I focus on seamless integration between
+                  frontend and backend systems to ensure smooth user experiences
+                  and efficient data flow.
+                </p>
+                <p className="text-sm sm:text-base">
+                  I am particularly passionate about AI/ML integration and
+                  intelligent automation. My expertise includes working with
+                  Large Language Models (LLMs), building RAG
+                  (Retrieval-Augmented Generation) systems, automating
+                  workflows, and implementing smart systems that enhance
+                  productivity, decision-making, and user engagement.
+                </p>
+                <p className="text-sm sm:text-base">
+                  By combining AI-driven innovation, solid backend engineering,
+                  and full-stack development, I deliver solutions that are
+                  scalable, maintainable, and future-ready.
                 </p>
               </div>
 

@@ -6,10 +6,16 @@ import PortfolioClient from './PortfolioClient'
 
 export const metadata: Metadata = {
   title: 'Portfolio',
-  description: 'Explore my portfolio of web applications, SaaS dashboards, e-commerce solutions, and more. Built with Next.js, TypeScript, and modern web technologies.',
+  description: 'Explore my portfolio of AI-powered applications, intelligent automation systems, SaaS platforms, e-commerce solutions, and full-stack projects. Built with Next.js, Node.js, Python, and modern technologies.',
   openGraph: {
     title: 'Portfolio | Asad Abbas',
-    description: 'Explore my portfolio of web applications and projects.',
+    description: 'Explore my portfolio of AI-powered applications, intelligent automation systems, and full-stack projects.',
+    url: 'https://asadabbas.com/portfolio',
+  },
+  twitter: {
+    card: 'summary',
+    title: 'Portfolio | Asad Abbas',
+    description: 'Explore my portfolio of AI-powered applications and full-stack projects.',
   },
 }
 

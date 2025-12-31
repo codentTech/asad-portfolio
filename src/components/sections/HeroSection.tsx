@@ -1,10 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, ChevronDown } from "lucide-react";
-import Button from "@/components/ui/Button";
+import { useEffect, useState } from "react";
 
 export default function HeroSection() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -192,27 +190,17 @@ export default function HeroSection() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold mb-3 sm:mb-4 text-[#8892b0] leading-tight px-2"
+              className="text-base lg:text-xl xl:text-2xl font-bold mb-3 sm:mb-4 text-[#8892b0] leading-tight px-2"
             >
               <motion.span
                 className="block"
                 whileHover={{ scale: 1.03 }}
                 transition={{ type: "spring", stiffness: 300 }}
               >
-                Full Stack Development Meets AI Innovation
+                Proven Track Record – Delivered 100+ projects including
+                AI-driven platforms.
               </motion.span>
             </motion.h2>
-
-            {/* Description */}
-            <motion.p
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.3 }}
-              className="text-sm sm:text-base md:text-lg text-[#8892b0] max-w-2xl mx-auto mb-4 sm:mb-6 leading-relaxed px-4"
-            >
-              Proven Track Record – Delivered 50+ projects including AI-driven
-              platforms.
-            </motion.p>
 
             {/* CTA Buttons */}
             <motion.div
@@ -284,7 +272,7 @@ export default function HeroSection() {
               {[
                 { number: "50+", label: "Happy Client" },
                 { number: "20+", label: "Support Team" },
-                { number: "100", label: "Sales Count" },
+                { number: "100+", label: "Delivered Projects" },
               ].map((stat, index) => (
                 <motion.div
                   key={index}

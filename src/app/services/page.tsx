@@ -5,10 +5,16 @@ import { getAllServices } from "@/lib/supabase/services";
 export const metadata: Metadata = {
   title: "Services",
   description:
-    "Web Development, Next.js Applications, SaaS Dashboards, E-Commerce Solutions, and Performance & SEO Optimization services.",
+    "AI-powered application development, intelligent automation, backend & API engineering, full-stack development, AI integration for existing products, and technical consulting. Expert in LLMs, RAG systems, and workflow optimization.",
   openGraph: {
     title: "Services | Asad Abbas",
-    description: "Professional web development services for modern businesses.",
+    description: "AI-powered application development, intelligent automation, backend engineering, and full-stack development services. Expert in LLMs, RAG systems, and workflow optimization.",
+    url: "https://asadabbas.com/services",
+  },
+  twitter: {
+    card: "summary",
+    title: "Services | Asad Abbas",
+    description: "AI-powered application development, intelligent automation, and full-stack development services.",
   },
 };
 

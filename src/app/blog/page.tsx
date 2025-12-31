@@ -4,10 +4,16 @@ import BlogPageClient from './BlogPageClient'
 
 export const metadata: Metadata = {
   title: 'Blog',
-  description: 'Articles about web development, Next.js, TypeScript, React, and modern web technologies.',
+  description: 'Articles about AI/ML integration, LLM applications, RAG systems, backend engineering, full-stack development, Next.js, TypeScript, React, and modern web technologies. Insights from building scalable, intelligent applications.',
   openGraph: {
     title: 'Blog | Asad Abbas',
-    description: 'Thoughts on web development and technology.',
+    description: 'Articles about AI/ML integration, backend engineering, full-stack development, and modern web technologies.',
+    url: 'https://asadabbas.com/blog',
+  },
+  twitter: {
+    card: 'summary',
+    title: 'Blog | Asad Abbas',
+    description: 'Articles about AI/ML integration, backend engineering, and full-stack development.',
   },
 }
 

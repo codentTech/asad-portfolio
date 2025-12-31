@@ -3,13 +3,20 @@
 import { useRef } from "react";
 import Link from "next/link";
 import { motion, useInView } from "framer-motion";
-import { ExternalLink, Github, ArrowRight, Code2, Zap, Globe } from "lucide-react";
+import {
+  ExternalLink,
+  Github,
+  ArrowRight,
+  Code2,
+  Zap,
+  Globe,
+} from "lucide-react";
 
 export default function PortfolioClient({ projects }: { projects: any[] }) {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: "0px" });
   const introRef = useRef(null);
-  const introInView = useInView(introRef, { once: true, margin: "-100px" });
+  const introInView = useInView(introRef, { once: true, margin: "0px" });
 
   // Calculate stats
   const featuredCount = projects.filter((p) => p.featured).length;
@@ -23,48 +30,49 @@ export default function PortfolioClient({ projects }: { projects: any[] }) {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-7xl mx-auto">
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+              initial={{ opacity: 1, y: 0 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
               className="text-center mb-12"
             >
               <motion.span
-                initial={{ opacity: 0 }}
-                animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+                initial={{ opacity: 1 }}
+                animate={{ opacity: 1 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
                 className="inline-block font-mono text-[#64ffda] text-sm mb-4"
               >
                 Portfolio
               </motion.span>
               <motion.h1
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                initial={{ opacity: 1, y: 0 }}
+                animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.3 }}
                 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#ccd6f6] mb-4"
               >
                 My Portfolio
               </motion.h1>
               <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                initial={{ opacity: 1, y: 0 }}
+                animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
                 className="text-base sm:text-lg text-[#8892b0] max-w-3xl mx-auto leading-relaxed mb-3"
               >
-                A curated collection of projects I&apos;ve built and contributed to. Each project
-                represents a unique challenge solved with modern technologies and best practices.
+                A curated collection of projects I&apos;ve built and contributed
+                to. Each project represents a unique challenge solved with
+                modern technologies and best practices.
               </motion.p>
               <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                initial={{ opacity: 1, y: 0 }}
+                animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.5 }}
                 className="text-sm sm:text-base text-[#8892b0] max-w-2xl mx-auto"
               >
-                From scalable SaaS platforms to innovative web applications, explore my work and see
-                how I bring ideas to life through code.
+                From scalable SaaS platforms to innovative web applications,
+                explore my work and see how I bring ideas to life through code.
               </motion.p>
               <motion.div
-                initial={{ width: 0 }}
-                animate={isInView ? { width: "100px" } : { width: 0 }}
+                initial={{ width: "100px" }}
+                animate={{ width: "100px" }}
                 transition={{ duration: 0.6, delay: 0.6 }}
                 className="h-1 bg-[#64ffda] mx-auto mt-8"
               />
@@ -74,7 +82,9 @@ export default function PortfolioClient({ projects }: { projects: any[] }) {
             <motion.div
               ref={introRef}
               initial={{ opacity: 0, y: 30 }}
-              animate={introInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+              animate={
+                introInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }
+              }
               transition={{ duration: 0.6, delay: 0.3 }}
               className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-16"
             >
@@ -101,7 +111,11 @@ export default function PortfolioClient({ projects }: { projects: any[] }) {
                 <motion.div
                   key={stat.label}
                   initial={{ opacity: 0, scale: 0.9 }}
-                  animate={introInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
+                  animate={
+                    introInView
+                      ? { opacity: 1, scale: 1 }
+                      : { opacity: 0, scale: 0.9 }
+                  }
                   transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
                   className="bg-[#112240] border border-[#233554] rounded-lg p-5 text-center hover:border-[#64ffda] transition-all duration-300"
                 >
@@ -110,9 +124,15 @@ export default function PortfolioClient({ projects }: { projects: any[] }) {
                       <stat.icon className="w-6 h-6 text-[#64ffda]" />
                     </div>
                   </div>
-                  <div className="text-2xl sm:text-3xl font-bold text-[#64ffda] mb-1.5">{stat.value}</div>
-                  <div className="text-[#ccd6f6] font-semibold mb-1">{stat.label}</div>
-                  <div className="text-sm text-[#8892b0] font-mono">{stat.description}</div>
+                  <div className="text-2xl sm:text-3xl font-bold text-[#64ffda] mb-1.5">
+                    {stat.value}
+                  </div>
+                  <div className="text-[#ccd6f6] font-semibold mb-1">
+                    {stat.label}
+                  </div>
+                  <div className="text-sm text-[#8892b0] font-mono">
+                    {stat.description}
+                  </div>
                 </motion.div>
               ))}
             </motion.div>
@@ -120,13 +140,17 @@ export default function PortfolioClient({ projects }: { projects: any[] }) {
             {/* Projects Grid */}
             {projects.length === 0 ? (
               <div className="text-center py-12">
-                <p className="text-[#8892b0] text-lg">No projects yet. Check back soon!</p>
+                <p className="text-[#8892b0] text-lg">
+                  No projects yet. Check back soon!
+                </p>
               </div>
             ) : (
               <div ref={ref} className="mb-16">
                 <motion.h2
                   initial={{ opacity: 0, y: 20 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                  animate={
+                    isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }
+                  }
                   transition={{ duration: 0.6, delay: 0.2 }}
                   className="text-2xl sm:text-3xl font-bold text-[#ccd6f6] mb-6 text-center"
                 >
@@ -137,7 +161,9 @@ export default function PortfolioClient({ projects }: { projects: any[] }) {
                     <motion.div
                       key={project.id}
                       initial={{ opacity: 0, y: 50 }}
-                      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+                      animate={
+                        isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }
+                      }
                       transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
                       className="group"
                     >
@@ -147,7 +173,7 @@ export default function PortfolioClient({ projects }: { projects: any[] }) {
                           <img
                             src={project.image}
                             alt={project.title}
-                            className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-110"
+                            className="w-full h-full object-cover group-hover:grayscale-0 transition-all duration-500 group-hover:scale-110"
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-[#112240] via-transparent to-transparent" />
                           {project.featured && (
@@ -190,14 +216,16 @@ export default function PortfolioClient({ projects }: { projects: any[] }) {
                             {project.description}
                           </p>
                           <div className="flex flex-wrap gap-1.5 mb-3">
-                            {project.techStack.slice(0, 4).map((tech: string) => (
-                              <span
-                                key={tech}
-                                className="px-3 py-1 text-xs font-mono text-[#8892b0] border border-[#233554] rounded"
-                              >
-                                {tech}
-                              </span>
-                            ))}
+                            {project.techStack
+                              .slice(0, 4)
+                              .map((tech: string) => (
+                                <span
+                                  key={tech}
+                                  className="px-3 py-1 text-xs font-mono text-[#8892b0] border border-[#233554] rounded"
+                                >
+                                  {tech}
+                                </span>
+                              ))}
                             {project.techStack.length > 4 && (
                               <span className="px-3 py-1 text-xs font-mono text-[#8892b0] border border-[#233554] rounded">
                                 +{project.techStack.length - 4}
@@ -231,8 +259,9 @@ export default function PortfolioClient({ projects }: { projects: any[] }) {
                 Have a Project in Mind?
               </h2>
               <p className="text-sm sm:text-base text-[#8892b0] mb-6 max-w-2xl mx-auto">
-                I&apos;m always interested in new challenges and exciting projects. Let&apos;s
-                discuss how we can work together to bring your vision to life.
+                I&apos;m always interested in new challenges and exciting
+                projects. Let&apos;s discuss how we can work together to bring
+                your vision to life.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link

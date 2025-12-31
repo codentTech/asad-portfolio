@@ -2,9 +2,20 @@
 
 import { useRef } from "react";
 import Link from "next/link";
-import { 
-  Code, Zap, BarChart, ShoppingCart, TrendingUp, CheckCircle2, 
-  ArrowRight, Clock, Users, Target, Settings, Briefcase, Rocket 
+import {
+  Code,
+  Zap,
+  BarChart,
+  ShoppingCart,
+  TrendingUp,
+  CheckCircle2,
+  ArrowRight,
+  Clock,
+  Users,
+  Target,
+  Settings,
+  Briefcase,
+  Rocket,
 } from "lucide-react";
 import { motion, useInView } from "framer-motion";
 import { Service } from "@/types";
@@ -28,22 +39,26 @@ const processSteps = [
   {
     step: "01",
     title: "Discovery & Planning",
-    description: "Understanding your goals, target audience, and project requirements to create a detailed roadmap.",
+    description:
+      "Understanding your goals, target audience, and project requirements to create a detailed roadmap.",
   },
   {
     step: "02",
     title: "Design & Development",
-    description: "Building your solution with modern technologies, following best practices and your design specifications.",
+    description:
+      "Building your solution with modern technologies, following best practices and your design specifications.",
   },
   {
     step: "03",
     title: "Testing & Optimization",
-    description: "Rigorous testing, performance optimization, and ensuring cross-browser compatibility.",
+    description:
+      "Rigorous testing, performance optimization, and ensuring cross-browser compatibility.",
   },
   {
     step: "04",
     title: "Launch & Support",
-    description: "Deploying your project and providing ongoing maintenance and support as needed.",
+    description:
+      "Deploying your project and providing ongoing maintenance and support as needed.",
   },
 ];
 
@@ -51,30 +66,38 @@ const benefits = [
   {
     icon: Clock,
     title: "Fast Delivery",
-    description: "Efficient development process ensuring timely project delivery without compromising quality.",
+    description:
+      "Efficient development process ensuring timely project delivery without compromising quality.",
   },
   {
     icon: CheckCircle2,
     title: "Quality Code",
-    description: "Clean, maintainable, and scalable code following industry best practices and standards.",
+    description:
+      "Clean, maintainable, and scalable code following industry best practices and standards.",
   },
   {
     icon: Users,
     title: "Collaborative Approach",
-    description: "Working closely with you throughout the project to ensure your vision is realized.",
+    description:
+      "Working closely with you throughout the project to ensure your vision is realized.",
   },
   {
     icon: Target,
     title: "Result-Driven",
-    description: "Focus on delivering solutions that drive real business value and user satisfaction.",
+    description:
+      "Focus on delivering solutions that drive real business value and user satisfaction.",
   },
 ];
 
-export default function ServicesPageClient({ services }: { services: Service[] }) {
+export default function ServicesPageClient({
+  services,
+}: {
+  services: Service[];
+}) {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: "0px" });
   const processRef = useRef(null);
-  const processInView = useInView(processRef, { once: true, margin: "-100px" });
+  const processInView = useInView(processRef, { once: true, margin: "0px" });
 
   return (
     <div className="min-h-screen bg-[#0a192f] pt-20">
@@ -83,50 +106,65 @@ export default function ServicesPageClient({ services }: { services: Service[] }
           <div className="max-w-7xl mx-auto">
             {/* Header */}
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+              initial={{ opacity: 1, y: 0 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
               className="text-center mb-12"
             >
               <motion.span
-                initial={{ opacity: 0 }}
-                animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+                initial={{ opacity: 1 }}
+                animate={{ opacity: 1 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
                 className="inline-block font-mono text-[#64ffda] text-sm mb-4"
               >
                 Services
               </motion.span>
               <motion.h1
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                initial={{ opacity: 1, y: 0 }}
+                animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.3 }}
                 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#ccd6f6] mb-4"
               >
                 Services
               </motion.h1>
               <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                initial={{ opacity: 1, y: 0 }}
+                animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
-                className="text-base sm:text-lg text-[#8892b0] max-w-3xl mx-auto leading-relaxed mb-3"
+                className="text-base sm:text-lg text-[#8892b0] max-w-6xl mx-auto leading-relaxed mb-3"
               >
-                Comprehensive web development solutions tailored to your needs. I specialize in
-                building modern, scalable, and performant web applications that help businesses
-                achieve their goals.
+                I provide AI-driven and automation-first software solutions
+                designed to be scalable, secure, and business-focused. My
+                services center on building intelligent systems that streamline
+                workflows, enhance user experiences, and deliver real,
+                measurable impact.
               </motion.p>
               <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                initial={{ opacity: 1, y: 0 }}
+                animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.5 }}
-                className="text-sm sm:text-base text-[#8892b0] max-w-2xl mx-auto"
+                className="text-sm sm:text-base text-[#8892b0] max-w-5xl mx-auto leading-relaxed mb-3"
               >
-                Whether you need a complete application, feature enhancements, or technical
-                consulting, I&apos;m here to help.
+                I specialize in AI/ML integration and intelligent automation,
+                including LLM-powered applications, RAG systems, smart APIs, and
+                workflow automation that reduce manual effort and improve
+                decision-making.
+              </motion.p>
+              <motion.p
+                initial={{ opacity: 1, y: 0 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.6 }}
+                className="text-sm sm:text-base text-[#8892b0] max-w-4xl mx-auto"
+              >
+                Whether you need a complete AI-enabled application, automation
+                of existing processes, or technical consulting and architecture
+                guidance, I work closely with you to deliver solutions that are
+                reliable, efficient, and built for scale.
               </motion.p>
               <motion.div
-                initial={{ width: 0 }}
-                animate={isInView ? { width: "100px" } : { width: 0 }}
-                transition={{ duration: 0.6, delay: 0.6 }}
+                initial={{ width: "100px" }}
+                animate={{ width: "100px" }}
+                transition={{ duration: 0.6, delay: 0.7 }}
                 className="h-1 bg-[#64ffda] mx-auto mt-8"
               />
             </motion.div>
@@ -135,7 +173,9 @@ export default function ServicesPageClient({ services }: { services: Service[] }
             <div ref={ref} className="mb-16">
               <motion.h2
                 initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                animate={
+                  isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }
+                }
                 transition={{ duration: 0.6, delay: 0.2 }}
                 className="text-2xl sm:text-3xl font-bold text-[#ccd6f6] mb-8 text-center"
               >
@@ -148,7 +188,9 @@ export default function ServicesPageClient({ services }: { services: Service[] }
                     <motion.div
                       key={service.id}
                       initial={{ opacity: 0, y: 50 }}
-                      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+                      animate={
+                        isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }
+                      }
                       transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
                       className="group"
                     >
@@ -162,7 +204,9 @@ export default function ServicesPageClient({ services }: { services: Service[] }
                         <h3 className="text-xl font-bold mb-3 text-[#ccd6f6] group-hover:text-[#64ffda] transition-colors">
                           {service.title}
                         </h3>
-                        <p className="text-sm text-[#8892b0] mb-4 leading-relaxed">{service.description}</p>
+                        <p className="text-sm text-[#8892b0] mb-4 leading-relaxed">
+                          {service.description}
+                        </p>
                         {service.features && service.features.length > 0 && (
                           <ul className="space-y-2">
                             {service.features.map((feature, i) => (
@@ -187,16 +231,21 @@ export default function ServicesPageClient({ services }: { services: Service[] }
             <div ref={processRef} className="mb-16">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
-                animate={processInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+                animate={
+                  processInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }
+                }
                 transition={{ duration: 0.6 }}
                 className="text-center mb-12"
               >
                 <span className="inline-block font-mono text-[#64ffda] text-sm mb-4">
                   My Process
                 </span>
-                <h2 className="text-2xl sm:text-3xl font-bold text-[#ccd6f6] mb-3">How I Work</h2>
+                <h2 className="text-2xl sm:text-3xl font-bold text-[#ccd6f6] mb-3">
+                  How I Work
+                </h2>
                 <p className="text-sm sm:text-base text-[#8892b0] max-w-2xl mx-auto">
-                  A structured approach to ensure your project succeeds from start to finish
+                  A structured approach to ensure your project succeeds from
+                  start to finish
                 </p>
               </motion.div>
 
@@ -205,13 +254,23 @@ export default function ServicesPageClient({ services }: { services: Service[] }
                   <motion.div
                     key={step.step}
                     initial={{ opacity: 0, y: 30 }}
-                    animate={processInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+                    animate={
+                      processInView
+                        ? { opacity: 1, y: 0 }
+                        : { opacity: 0, y: 30 }
+                    }
                     transition={{ duration: 0.6, delay: 0.2 + index * 0.1 }}
                     className="bg-[#112240] border border-[#233554] rounded-lg p-5 hover:border-[#64ffda] transition-all duration-300"
                   >
-                    <div className="text-[#64ffda] font-mono text-xs sm:text-sm mb-2">{step.step}</div>
-                    <h3 className="text-lg font-bold text-[#ccd6f6] mb-2">{step.title}</h3>
-                    <p className="text-xs sm:text-sm text-[#8892b0] leading-relaxed">{step.description}</p>
+                    <div className="text-[#64ffda] font-mono text-xs sm:text-sm mb-2">
+                      {step.step}
+                    </div>
+                    <h3 className="text-lg font-bold text-[#ccd6f6] mb-2">
+                      {step.title}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-[#8892b0] leading-relaxed">
+                      {step.description}
+                    </p>
                   </motion.div>
                 ))}
               </div>
@@ -223,17 +282,18 @@ export default function ServicesPageClient({ services }: { services: Service[] }
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="text-center mb-8"
-            >
-              <span className="inline-block font-mono text-[#64ffda] text-sm mb-4">
-                Why Work With Me
-              </span>
+                transition={{ duration: 0.6 }}
+                className="text-center mb-8"
+              >
+                <span className="inline-block font-mono text-[#64ffda] text-sm mb-4">
+                  Why Work With Me
+                </span>
                 <h2 className="text-2xl sm:text-3xl font-bold text-[#ccd6f6] mb-3">
                   What Sets My Services Apart
                 </h2>
                 <p className="text-sm sm:text-base text-[#8892b0] max-w-2xl mx-auto">
-                  Combining technical expertise with a focus on delivering real value
+                  Combining technical expertise with a focus on delivering real
+                  value
                 </p>
               </motion.div>
 
@@ -252,8 +312,12 @@ export default function ServicesPageClient({ services }: { services: Service[] }
                         <benefit.icon className="w-5 h-5 text-[#64ffda]" />
                       </div>
                     </div>
-                    <h3 className="text-base font-bold text-[#ccd6f6] mb-1.5">{benefit.title}</h3>
-                    <p className="text-xs sm:text-sm text-[#8892b0] leading-relaxed">{benefit.description}</p>
+                    <h3 className="text-base font-bold text-[#ccd6f6] mb-1.5">
+                      {benefit.title}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-[#8892b0] leading-relaxed">
+                      {benefit.description}
+                    </p>
                   </motion.div>
                 ))}
               </div>
@@ -271,8 +335,8 @@ export default function ServicesPageClient({ services }: { services: Service[] }
                 Ready to Start Your Project?
               </h3>
               <p className="text-sm sm:text-base text-[#8892b0] mb-6 max-w-2xl mx-auto">
-                Let&apos;s discuss how I can help bring your vision to life. I&apos;m always
-                excited to work on new and challenging projects.
+                Let&apos;s discuss how I can help bring your vision to life.
+                I&apos;m always excited to work on new and challenging projects.
               </p>
               <Link
                 href="/contact"
