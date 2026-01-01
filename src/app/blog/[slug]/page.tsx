@@ -10,12 +10,9 @@ import { getBlogPostBySlug, getAllBlogPosts } from '@/lib/supabase/blog'
 import { formatDate } from '@/lib/utils'
 import 'highlight.js/styles/github-dark.css'
 
-export async function generateStaticParams() {
-  const posts = await getAllBlogPosts()
-  return posts.map((post) => ({
-    slug: post.slug,
-  }))
-}
+// Force dynamic rendering to always fetch fresh data (prevents static generation)
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
 
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://asadabbas.com'
