@@ -53,6 +53,15 @@ body {
   }
 }
 
+/* Hide scrollbar for thumbnail strip */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
 /* Custom scrollbar - Dark Theme */
 ::-webkit-scrollbar {
   width: 10px;

@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS projects (
   description TEXT NOT NULL,
   long_description TEXT NOT NULL,
   image TEXT NOT NULL,
-  images TEXT[] DEFAULT '{}',
+  gallery TEXT[] DEFAULT '{}',
   video TEXT,
   tech_stack TEXT[] DEFAULT '{}',
   live_url TEXT,

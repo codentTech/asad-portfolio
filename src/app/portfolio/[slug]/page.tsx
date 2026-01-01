@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { ArrowLeft, ExternalLink, Github } from 'lucide-react'
 import { getProjectBySlug, getAllProjects } from '@/lib/supabase/projects'
+import ProjectGallery from '@/components/portfolio/ProjectGallery'
 
 export async function generateStaticParams() {
   const projects = await getAllProjects()
@@ -122,31 +123,13 @@ export default async function ProjectDetailPage({ params }: { params: { slug: st
           </div>
         </header>
 
-        {/* Featured Image */}
+        {/* Gallery (includes featured image + gallery images) */}
         {project.image && (
-          <div className="relative h-64 sm:h-80 lg:h-96 rounded-2xl overflow-hidden mb-8 shadow-2xl">
-            <img
-              src={project.image}
-              alt={project.title}
-              className="w-full h-full object-cover"
-              loading="eager"
-            />
-          </div>
-        )}
-
-        {/* Additional Images */}
-        {project.images && project.images.length > 0 && (
-          <div className="grid sm:grid-cols-2 gap-4 mb-8">
-            {project.images.map((image, index) => (
-              <div key={index} className="relative h-48 rounded-xl overflow-hidden">
-                <img
-                  src={image}
-                  alt={`${project.title} - Image ${index + 1}`}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            ))}
-          </div>
+          <ProjectGallery 
+            featuredImage={project.image} 
+            images={project.gallery || []} 
+            title={project.title} 
+          />
         )}
 
         {/* Video */}

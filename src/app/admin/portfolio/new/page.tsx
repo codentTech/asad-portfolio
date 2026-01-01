@@ -1,128 +1,130 @@
-'use client'
+"use client";
 
-import { useState, useEffect } from 'react'
-import { useRouter } from 'next/navigation'
-import { ArrowLeft, Save, Plus, X } from 'lucide-react'
-import Link from 'next/link'
-import { createClient } from '@/lib/supabase/client'
-import Button from '@/components/ui/Button'
-import Card from '@/components/ui/Card'
-import { generateSlug } from '@/lib/utils'
-import toast from 'react-hot-toast'
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { ArrowLeft, Save, Plus, X } from "lucide-react";
+import Link from "next/link";
+import { createClient } from "@/lib/supabase/client";
+import Button from "@/components/ui/Button";
+import Card from "@/components/ui/Card";
+import { generateSlug } from "@/lib/utils";
+import toast from "react-hot-toast";
 
 export default function NewProjectPage() {
-  const [saving, setSaving] = useState(false)
-  const [user, setUser] = useState<any>(null)
-  const router = useRouter()
-  const supabase = createClient()
+  const [saving, setSaving] = useState(false);
+  const [user, setUser] = useState<any>(null);
+  const router = useRouter();
+  const supabase = createClient();
 
   const [formData, setFormData] = useState({
-    title: '',
-    slug: '',
-    description: '',
-    longDescription: '',
-    image: '',
-    images: [] as string[],
-    video: '',
+    title: "",
+    slug: "",
+    description: "",
+    longDescription: "",
+    image: "",
+    gallery: [] as string[],
+    video: "",
     techStack: [] as string[],
-    liveUrl: '',
-    githubUrl: '',
-    problem: '',
-    solution: '',
-    result: '',
+    liveUrl: "",
+    githubUrl: "",
+    problem: "",
+    solution: "",
+    result: "",
     featured: false,
-  })
+  });
 
-  const [newImage, setNewImage] = useState('')
-  const [newTech, setNewTech] = useState('')
+  const [newGalleryImage, setNewGalleryImage] = useState("");
+  const [newTech, setNewTech] = useState("");
 
   useEffect(() => {
-    checkAuth()
-  }, [])
+    checkAuth();
+  }, []);
 
   useEffect(() => {
     if (formData.title && !formData.slug) {
-      setFormData(prev => ({
+      setFormData((prev) => ({
         ...prev,
-        slug: generateSlug(prev.title)
-      }))
+        slug: generateSlug(prev.title),
+      }));
     }
-  }, [formData.title])
+  }, [formData.title]);
 
   const checkAuth = async () => {
-    const { data: { user } } = await supabase.auth.getUser()
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
     if (!user) {
-      router.push('/admin/login')
-      return
+      router.push("/admin/login");
+      return;
     }
-    setUser(user)
-  }
+    setUser(user);
+  };
 
-  const addImage = () => {
-    if (newImage.trim()) {
-      setFormData(prev => ({
+  const addGalleryImage = () => {
+    if (newGalleryImage.trim()) {
+      setFormData((prev) => ({
         ...prev,
-        images: [...prev.images, newImage.trim()]
-      }))
-      setNewImage('')
+        gallery: [...prev.gallery, newGalleryImage.trim()],
+      }));
+      setNewGalleryImage("");
     }
-  }
+  };
 
-  const removeImage = (index: number) => {
-    setFormData(prev => ({
+  const removeGalleryImage = (index: number) => {
+    setFormData((prev) => ({
       ...prev,
-      images: prev.images.filter((_, i) => i !== index)
-    }))
-  }
+      gallery: prev.gallery.filter((_, i) => i !== index),
+    }));
+  };
 
   const addTech = () => {
     if (newTech.trim()) {
-      setFormData(prev => ({
+      setFormData((prev) => ({
         ...prev,
-        techStack: [...prev.techStack, newTech.trim()]
-      }))
-      setNewTech('')
+        techStack: [...prev.techStack, newTech.trim()],
+      }));
+      setNewTech("");
     }
-  }
+  };
 
   const removeTech = (index: number) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      techStack: prev.techStack.filter((_, i) => i !== index)
-    }))
-  }
+      techStack: prev.techStack.filter((_, i) => i !== index),
+    }));
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setSaving(true)
+    e.preventDefault();
+    setSaving(true);
 
     try {
-      const response = await fetch('/api/projects', {
-        method: 'POST',
+      const response = await fetch("/api/projects", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
-      })
+      });
 
-      const data = await response.json()
+      const data = await response.json();
 
       if (response.ok) {
-        toast.success('Project created successfully!')
-        router.push('/admin/portfolio')
+        toast.success("Project created successfully!");
+        router.push("/admin/portfolio");
       } else {
-        toast.error(data.error || 'Failed to create project')
+        toast.error(data.error || "Failed to create project");
       }
     } catch (error) {
-      console.error('Error creating project:', error)
-      toast.error('Failed to create project. Please try again.')
+      console.error("Error creating project:", error);
+      toast.error("Failed to create project. Please try again.");
     } finally {
-      setSaving(false)
+      setSaving(false);
     }
-  }
+  };
 
   if (!user) {
-    return null
+    return null;
   }
 
   return (
@@ -144,8 +146,10 @@ export default function NewProjectPage() {
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Basic Info */}
             <div className="space-y-4">
-              <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Basic Information</h2>
-              
+              <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+                Basic Information
+              </h2>
+
               <div>
                 <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                   Title *
@@ -153,7 +157,9 @@ export default function NewProjectPage() {
                 <input
                   type="text"
                   value={formData.title}
-                  onChange={(e) => setFormData(prev => ({ ...prev, title: e.target.value }))}
+                  onChange={(e) =>
+                    setFormData((prev) => ({ ...prev, title: e.target.value }))
+                  }
                   required
                   className="w-full px-4 py-2 rounded-lg border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 />
@@ -166,12 +172,17 @@ export default function NewProjectPage() {
                 <input
                   type="text"
                   value={formData.slug}
-                  onChange={(e) => setFormData(prev => ({ ...prev, slug: generateSlug(e.target.value) }))}
+                  onChange={(e) =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      slug: generateSlug(e.target.value),
+                    }))
+                  }
                   required
                   className="w-full px-4 py-2 rounded-lg border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 />
                 <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                  URL: /portfolio/{formData.slug || 'your-slug'}
+                  URL: /portfolio/{formData.slug || "your-slug"}
                 </p>
               </div>
 
@@ -181,7 +192,12 @@ export default function NewProjectPage() {
                 </label>
                 <textarea
                   value={formData.description}
-                  onChange={(e) => setFormData(prev => ({ ...prev, description: e.target.value }))}
+                  onChange={(e) =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      description: e.target.value,
+                    }))
+                  }
                   required
                   rows={2}
                   className="w-full px-4 py-2 rounded-lg border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
@@ -194,7 +210,12 @@ export default function NewProjectPage() {
                 </label>
                 <textarea
                   value={formData.longDescription}
-                  onChange={(e) => setFormData(prev => ({ ...prev, longDescription: e.target.value }))}
+                  onChange={(e) =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      longDescription: e.target.value,
+                    }))
+                  }
                   required
                   rows={4}
                   className="w-full px-4 py-2 rounded-lg border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
@@ -204,8 +225,10 @@ export default function NewProjectPage() {
 
             {/* Images & Media */}
             <div className="space-y-4">
-              <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Images & Media</h2>
-              
+              <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+                Images & Media
+              </h2>
+
               <div>
                 <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                   Featured Image URL *
@@ -213,36 +236,56 @@ export default function NewProjectPage() {
                 <input
                   type="url"
                   value={formData.image}
-                  onChange={(e) => setFormData(prev => ({ ...prev, image: e.target.value }))}
+                  onChange={(e) =>
+                    setFormData((prev) => ({ ...prev, image: e.target.value }))
+                  }
                   required
+                  placeholder="https://example.com/image.jpg"
                   className="w-full px-4 py-2 rounded-lg border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 />
+                <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                  Main hero image displayed at the top of the project page
+                </p>
               </div>
 
               <div>
                 <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
-                  Additional Images
+                  Gallery
                 </label>
+                <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">
+                  Add multiple images to display in the interactive gallery
+                  section
+                </p>
                 <div className="flex gap-2 mb-2">
                   <input
                     type="url"
-                    value={newImage}
-                    onChange={(e) => setNewImage(e.target.value)}
-                    onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), addImage())}
-                    placeholder="Image URL"
+                    value={newGalleryImage}
+                    onChange={(e) => setNewGalleryImage(e.target.value)}
+                    onKeyPress={(e) =>
+                      e.key === "Enter" &&
+                      (e.preventDefault(), addGalleryImage())
+                    }
+                    placeholder="Gallery Image URL"
                     className="flex-1 px-4 py-2 rounded-lg border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
                   />
-                  <Button type="button" onClick={addImage} variant="outline">
+                  <Button
+                    type="button"
+                    onClick={addGalleryImage}
+                    variant="outline"
+                  >
                     <Plus className="w-4 h-4" />
                   </Button>
                 </div>
                 <div className="flex flex-wrap gap-2">
-                  {formData.images.map((img, index) => (
-                    <span key={index} className="inline-flex items-center gap-2 px-3 py-1 bg-gray-100 dark:bg-gray-800 rounded-lg text-sm">
+                  {formData.gallery.map((img, index) => (
+                    <span
+                      key={index}
+                      className="inline-flex items-center gap-2 px-3 py-1 bg-purple-100 dark:bg-purple-900/20 rounded-lg text-sm"
+                    >
                       <span className="truncate max-w-xs">{img}</span>
                       <button
                         type="button"
-                        onClick={() => removeImage(index)}
+                        onClick={() => removeGalleryImage(index)}
                         className="text-red-600 hover:text-red-700"
                       >
                         <X className="w-4 h-4" />
@@ -259,7 +302,9 @@ export default function NewProjectPage() {
                 <input
                   type="url"
                   value={formData.video}
-                  onChange={(e) => setFormData(prev => ({ ...prev, video: e.target.value }))}
+                  onChange={(e) =>
+                    setFormData((prev) => ({ ...prev, video: e.target.value }))
+                  }
                   className="w-full px-4 py-2 rounded-lg border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 />
               </div>
@@ -267,13 +312,17 @@ export default function NewProjectPage() {
 
             {/* Tech Stack */}
             <div className="space-y-4">
-              <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Tech Stack</h2>
+              <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+                Tech Stack
+              </h2>
               <div className="flex gap-2 mb-2">
                 <input
                   type="text"
                   value={newTech}
                   onChange={(e) => setNewTech(e.target.value)}
-                  onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), addTech())}
+                  onKeyPress={(e) =>
+                    e.key === "Enter" && (e.preventDefault(), addTech())
+                  }
                   placeholder="Technology name"
                   className="flex-1 px-4 py-2 rounded-lg border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 />
@@ -283,7 +332,10 @@ export default function NewProjectPage() {
               </div>
               <div className="flex flex-wrap gap-2">
                 {formData.techStack.map((tech, index) => (
-                  <span key={index} className="inline-flex items-center gap-2 px-3 py-1 bg-indigo-100 dark:bg-indigo-900/20 text-indigo-700 dark:text-indigo-300 rounded-lg text-sm">
+                  <span
+                    key={index}
+                    className="inline-flex items-center gap-2 px-3 py-1 bg-indigo-100 dark:bg-indigo-900/20 text-indigo-700 dark:text-indigo-300 rounded-lg text-sm"
+                  >
                     {tech}
                     <button
                       type="button"
@@ -299,7 +351,9 @@ export default function NewProjectPage() {
 
             {/* Links */}
             <div className="space-y-4">
-              <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Links</h2>
+              <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+                Links
+              </h2>
               <div className="grid sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
@@ -308,7 +362,12 @@ export default function NewProjectPage() {
                   <input
                     type="url"
                     value={formData.liveUrl}
-                    onChange={(e) => setFormData(prev => ({ ...prev, liveUrl: e.target.value }))}
+                    onChange={(e) =>
+                      setFormData((prev) => ({
+                        ...prev,
+                        liveUrl: e.target.value,
+                      }))
+                    }
                     className="w-full px-4 py-2 rounded-lg border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
                   />
                 </div>
@@ -319,7 +378,12 @@ export default function NewProjectPage() {
                   <input
                     type="url"
                     value={formData.githubUrl}
-                    onChange={(e) => setFormData(prev => ({ ...prev, githubUrl: e.target.value }))}
+                    onChange={(e) =>
+                      setFormData((prev) => ({
+                        ...prev,
+                        githubUrl: e.target.value,
+                      }))
+                    }
                     className="w-full px-4 py-2 rounded-lg border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
                   />
                 </div>
@@ -328,15 +392,22 @@ export default function NewProjectPage() {
 
             {/* Project Details */}
             <div className="space-y-4">
-              <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Project Details</h2>
-              
+              <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+                Project Details
+              </h2>
+
               <div>
                 <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                   Problem *
                 </label>
                 <textarea
                   value={formData.problem}
-                  onChange={(e) => setFormData(prev => ({ ...prev, problem: e.target.value }))}
+                  onChange={(e) =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      problem: e.target.value,
+                    }))
+                  }
                   required
                   rows={3}
                   className="w-full px-4 py-2 rounded-lg border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
@@ -349,7 +420,12 @@ export default function NewProjectPage() {
                 </label>
                 <textarea
                   value={formData.solution}
-                  onChange={(e) => setFormData(prev => ({ ...prev, solution: e.target.value }))}
+                  onChange={(e) =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      solution: e.target.value,
+                    }))
+                  }
                   required
                   rows={3}
                   className="w-full px-4 py-2 rounded-lg border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
@@ -362,7 +438,9 @@ export default function NewProjectPage() {
                 </label>
                 <textarea
                   value={formData.result}
-                  onChange={(e) => setFormData(prev => ({ ...prev, result: e.target.value }))}
+                  onChange={(e) =>
+                    setFormData((prev) => ({ ...prev, result: e.target.value }))
+                  }
                   required
                   rows={3}
                   className="w-full px-4 py-2 rounded-lg border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
@@ -376,10 +454,18 @@ export default function NewProjectPage() {
                 type="checkbox"
                 id="featured"
                 checked={formData.featured}
-                onChange={(e) => setFormData(prev => ({ ...prev, featured: e.target.checked }))}
+                onChange={(e) =>
+                  setFormData((prev) => ({
+                    ...prev,
+                    featured: e.target.checked,
+                  }))
+                }
                 className="w-4 h-4 rounded border-gray-300 dark:border-gray-600 text-indigo-600 focus:ring-indigo-500"
               />
-              <label htmlFor="featured" className="text-sm font-semibold text-gray-700 dark:text-gray-300">
+              <label
+                htmlFor="featured"
+                className="text-sm font-semibold text-gray-700 dark:text-gray-300"
+              >
                 Featured (show on homepage)
               </label>
             </div>
@@ -388,7 +474,7 @@ export default function NewProjectPage() {
             <div className="flex gap-3">
               <Button type="submit" disabled={saving}>
                 <Save className="w-4 h-4 mr-2" />
-                {saving ? 'Creating...' : 'Create Project'}
+                {saving ? "Creating..." : "Create Project"}
               </Button>
               <Button type="button" variant="outline" asChild>
                 <Link href="/admin/portfolio">Cancel</Link>
@@ -398,6 +484,5 @@ export default function NewProjectPage() {
         </Card>
       </div>
     </div>
-  )
+  );
 }
-

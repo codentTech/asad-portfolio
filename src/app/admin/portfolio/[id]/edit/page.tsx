@@ -1,161 +1,164 @@
-'use client'
+"use client";
 
-import { useState, useEffect } from 'react'
-import { useRouter, useParams } from 'next/navigation'
-import { ArrowLeft, Save, Plus, X } from 'lucide-react'
-import Link from 'next/link'
-import { createClient } from '@/lib/supabase/client'
-import Button from '@/components/ui/Button'
-import Card from '@/components/ui/Card'
-import { generateSlug } from '@/lib/utils'
-import toast from 'react-hot-toast'
+import { useState, useEffect } from "react";
+import { useRouter, useParams } from "next/navigation";
+import { ArrowLeft, Save, Plus, X } from "lucide-react";
+import Link from "next/link";
+import { createClient } from "@/lib/supabase/client";
+import Button from "@/components/ui/Button";
+import Card from "@/components/ui/Card";
+import { generateSlug } from "@/lib/utils";
+import toast from "react-hot-toast";
 
 export default function EditProjectPage() {
-  const params = useParams()
-  const id = params.id as string
-  const [loading, setLoading] = useState(true)
-  const [saving, setSaving] = useState(false)
-  const [user, setUser] = useState<any>(null)
-  const router = useRouter()
-  const supabase = createClient()
+  const params = useParams();
+  const id = params.id as string;
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
+  const [user, setUser] = useState<any>(null);
+  const router = useRouter();
+  const supabase = createClient();
 
   const [formData, setFormData] = useState({
-    title: '',
-    slug: '',
-    description: '',
-    longDescription: '',
-    image: '',
-    images: [] as string[],
-    video: '',
+    title: "",
+    slug: "",
+    description: "",
+    longDescription: "",
+    image: "",
+    gallery: [] as string[],
+    video: "",
     techStack: [] as string[],
-    liveUrl: '',
-    githubUrl: '',
-    problem: '',
-    solution: '',
-    result: '',
+    liveUrl: "",
+    githubUrl: "",
+    problem: "",
+    solution: "",
+    result: "",
     featured: false,
-  })
+  });
 
-  const [newImage, setNewImage] = useState('')
-  const [newTech, setNewTech] = useState('')
+  const [newGalleryImage, setNewGalleryImage] = useState("");
+  const [newTech, setNewTech] = useState("");
 
   useEffect(() => {
-    checkAuth()
-    fetchProject()
-  }, [id])
+    checkAuth();
+    fetchProject();
+  }, [id]);
 
   const checkAuth = async () => {
-    const { data: { user } } = await supabase.auth.getUser()
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
     if (!user) {
-      router.push('/admin/login')
-      return
+      router.push("/admin/login");
+      return;
     }
-    setUser(user)
-  }
+    setUser(user);
+  };
 
   const fetchProject = async () => {
     try {
-      const response = await fetch(`/api/projects/${id}`)
-      const data = await response.json()
+      const response = await fetch(`/api/projects/${id}`);
+      const data = await response.json();
 
       if (response.ok && data.project) {
-        const project = data.project
+        const project = data.project;
         setFormData({
-          title: project.title || '',
-          slug: project.slug || '',
-          description: project.description || '',
-          longDescription: project.long_description || project.longDescription || '',
-          image: project.image || '',
-          images: project.images || [],
-          video: project.video || '',
+          title: project.title || "",
+          slug: project.slug || "",
+          description: project.description || "",
+          longDescription:
+            project.long_description || project.longDescription || "",
+          image: project.image || "",
+          gallery: project.gallery || [],
+          video: project.video || "",
           techStack: project.tech_stack || project.techStack || [],
-          liveUrl: project.live_url || project.liveUrl || '',
-          githubUrl: project.github_url || project.githubUrl || '',
-          problem: project.problem || '',
-          solution: project.solution || '',
-          result: project.result || '',
+          liveUrl: project.live_url || project.liveUrl || "",
+          githubUrl: project.github_url || project.githubUrl || "",
+          problem: project.problem || "",
+          solution: project.solution || "",
+          result: project.result || "",
           featured: project.featured || false,
-        })
+        });
       } else {
-        toast.error('Failed to load project')
+        toast.error("Failed to load project");
       }
     } catch (error) {
-      console.error('Error fetching project:', error)
-      toast.error('Failed to load project')
+      console.error("Error fetching project:", error);
+      toast.error("Failed to load project");
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
-  const addImage = () => {
-    if (newImage.trim()) {
-      setFormData(prev => ({
+  const addGalleryImage = () => {
+    if (newGalleryImage.trim()) {
+      setFormData((prev) => ({
         ...prev,
-        images: [...prev.images, newImage.trim()]
-      }))
-      setNewImage('')
+        gallery: [...prev.gallery, newGalleryImage.trim()],
+      }));
+      setNewGalleryImage("");
     }
-  }
+  };
 
-  const removeImage = (index: number) => {
-    setFormData(prev => ({
+  const removeGalleryImage = (index: number) => {
+    setFormData((prev) => ({
       ...prev,
-      images: prev.images.filter((_, i) => i !== index)
-    }))
-  }
+      gallery: prev.gallery.filter((_, i) => i !== index),
+    }));
+  };
 
   const addTech = () => {
     if (newTech.trim()) {
-      setFormData(prev => ({
+      setFormData((prev) => ({
         ...prev,
-        techStack: [...prev.techStack, newTech.trim()]
-      }))
-      setNewTech('')
+        techStack: [...prev.techStack, newTech.trim()],
+      }));
+      setNewTech("");
     }
-  }
+  };
 
   const removeTech = (index: number) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      techStack: prev.techStack.filter((_, i) => i !== index)
-    }))
-  }
+      techStack: prev.techStack.filter((_, i) => i !== index),
+    }));
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setSaving(true)
+    e.preventDefault();
+    setSaving(true);
 
     try {
       const response = await fetch(`/api/projects/${id}`, {
-        method: 'PUT',
+        method: "PUT",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
-      })
+      });
 
-      const data = await response.json()
+      const data = await response.json();
 
       if (response.ok) {
-        toast.success('Project updated successfully!')
-        router.push('/admin/portfolio')
+        toast.success("Project updated successfully!");
+        router.push("/admin/portfolio");
       } else {
-        toast.error(data.error || 'Failed to update project')
+        toast.error(data.error || "Failed to update project");
       }
     } catch (error) {
-      console.error('Error updating project:', error)
-      toast.error('Failed to update project. Please try again.')
+      console.error("Error updating project:", error);
+      toast.error("Failed to update project. Please try again.");
     } finally {
-      setSaving(false)
+      setSaving(false);
     }
-  }
+  };
 
   if (loading || !user) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-gray-600 dark:text-gray-400">Loading...</div>
       </div>
-    )
+    );
   }
 
   return (
@@ -177,8 +180,10 @@ export default function EditProjectPage() {
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Basic Info */}
             <div className="space-y-4">
-              <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Basic Information</h2>
-              
+              <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+                Basic Information
+              </h2>
+
               <div>
                 <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                   Title *
@@ -186,7 +191,9 @@ export default function EditProjectPage() {
                 <input
                   type="text"
                   value={formData.title}
-                  onChange={(e) => setFormData(prev => ({ ...prev, title: e.target.value }))}
+                  onChange={(e) =>
+                    setFormData((prev) => ({ ...prev, title: e.target.value }))
+                  }
                   required
                   className="w-full px-4 py-2 rounded-lg border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 />
@@ -199,7 +206,12 @@ export default function EditProjectPage() {
                 <input
                   type="text"
                   value={formData.slug}
-                  onChange={(e) => setFormData(prev => ({ ...prev, slug: generateSlug(e.target.value) }))}
+                  onChange={(e) =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      slug: generateSlug(e.target.value),
+                    }))
+                  }
                   required
                   className="w-full px-4 py-2 rounded-lg border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 />
@@ -211,7 +223,12 @@ export default function EditProjectPage() {
                 </label>
                 <textarea
                   value={formData.description}
-                  onChange={(e) => setFormData(prev => ({ ...prev, description: e.target.value }))}
+                  onChange={(e) =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      description: e.target.value,
+                    }))
+                  }
                   required
                   rows={2}
                   className="w-full px-4 py-2 rounded-lg border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
@@ -224,7 +241,12 @@ export default function EditProjectPage() {
                 </label>
                 <textarea
                   value={formData.longDescription}
-                  onChange={(e) => setFormData(prev => ({ ...prev, longDescription: e.target.value }))}
+                  onChange={(e) =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      longDescription: e.target.value,
+                    }))
+                  }
                   required
                   rows={4}
                   className="w-full px-4 py-2 rounded-lg border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
@@ -234,8 +256,10 @@ export default function EditProjectPage() {
 
             {/* Images & Media */}
             <div className="space-y-4">
-              <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Images & Media</h2>
-              
+              <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+                Images & Media
+              </h2>
+
               <div>
                 <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                   Featured Image URL *
@@ -243,7 +267,9 @@ export default function EditProjectPage() {
                 <input
                   type="url"
                   value={formData.image}
-                  onChange={(e) => setFormData(prev => ({ ...prev, image: e.target.value }))}
+                  onChange={(e) =>
+                    setFormData((prev) => ({ ...prev, image: e.target.value }))
+                  }
                   required
                   className="w-full px-4 py-2 rounded-lg border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 />
@@ -251,28 +277,42 @@ export default function EditProjectPage() {
 
               <div>
                 <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
-                  Additional Images
+                  Gallery
                 </label>
+                <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">
+                  Add multiple images to display in the interactive gallery
+                  section
+                </p>
                 <div className="flex gap-2 mb-2">
                   <input
                     type="url"
-                    value={newImage}
-                    onChange={(e) => setNewImage(e.target.value)}
-                    onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), addImage())}
-                    placeholder="Image URL"
+                    value={newGalleryImage}
+                    onChange={(e) => setNewGalleryImage(e.target.value)}
+                    onKeyPress={(e) =>
+                      e.key === "Enter" &&
+                      (e.preventDefault(), addGalleryImage())
+                    }
+                    placeholder="Gallery Image URL"
                     className="flex-1 px-4 py-2 rounded-lg border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
                   />
-                  <Button type="button" onClick={addImage} variant="outline">
+                  <Button
+                    type="button"
+                    onClick={addGalleryImage}
+                    variant="outline"
+                  >
                     <Plus className="w-4 h-4" />
                   </Button>
                 </div>
                 <div className="flex flex-wrap gap-2">
-                  {formData.images.map((img, index) => (
-                    <span key={index} className="inline-flex items-center gap-2 px-3 py-1 bg-gray-100 dark:bg-gray-800 rounded-lg text-sm">
+                  {formData.gallery.map((img, index) => (
+                    <span
+                      key={index}
+                      className="inline-flex items-center gap-2 px-3 py-1 bg-purple-100 dark:bg-purple-900/20 rounded-lg text-sm"
+                    >
                       <span className="truncate max-w-xs">{img}</span>
                       <button
                         type="button"
-                        onClick={() => removeImage(index)}
+                        onClick={() => removeGalleryImage(index)}
                         className="text-red-600 hover:text-red-700"
                       >
                         <X className="w-4 h-4" />
@@ -289,7 +329,9 @@ export default function EditProjectPage() {
                 <input
                   type="url"
                   value={formData.video}
-                  onChange={(e) => setFormData(prev => ({ ...prev, video: e.target.value }))}
+                  onChange={(e) =>
+                    setFormData((prev) => ({ ...prev, video: e.target.value }))
+                  }
                   className="w-full px-4 py-2 rounded-lg border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 />
               </div>
@@ -297,13 +339,17 @@ export default function EditProjectPage() {
 
             {/* Tech Stack */}
             <div className="space-y-4">
-              <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Tech Stack</h2>
+              <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+                Tech Stack
+              </h2>
               <div className="flex gap-2 mb-2">
                 <input
                   type="text"
                   value={newTech}
                   onChange={(e) => setNewTech(e.target.value)}
-                  onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), addTech())}
+                  onKeyPress={(e) =>
+                    e.key === "Enter" && (e.preventDefault(), addTech())
+                  }
                   placeholder="Technology name"
                   className="flex-1 px-4 py-2 rounded-lg border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 />
@@ -313,7 +359,10 @@ export default function EditProjectPage() {
               </div>
               <div className="flex flex-wrap gap-2">
                 {formData.techStack.map((tech, index) => (
-                  <span key={index} className="inline-flex items-center gap-2 px-3 py-1 bg-indigo-100 dark:bg-indigo-900/20 text-indigo-700 dark:text-indigo-300 rounded-lg text-sm">
+                  <span
+                    key={index}
+                    className="inline-flex items-center gap-2 px-3 py-1 bg-indigo-100 dark:bg-indigo-900/20 text-indigo-700 dark:text-indigo-300 rounded-lg text-sm"
+                  >
                     {tech}
                     <button
                       type="button"
@@ -329,7 +378,9 @@ export default function EditProjectPage() {
 
             {/* Links */}
             <div className="space-y-4">
-              <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Links</h2>
+              <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+                Links
+              </h2>
               <div className="grid sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
@@ -338,7 +389,12 @@ export default function EditProjectPage() {
                   <input
                     type="url"
                     value={formData.liveUrl}
-                    onChange={(e) => setFormData(prev => ({ ...prev, liveUrl: e.target.value }))}
+                    onChange={(e) =>
+                      setFormData((prev) => ({
+                        ...prev,
+                        liveUrl: e.target.value,
+                      }))
+                    }
                     className="w-full px-4 py-2 rounded-lg border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
                   />
                 </div>
@@ -349,7 +405,12 @@ export default function EditProjectPage() {
                   <input
                     type="url"
                     value={formData.githubUrl}
-                    onChange={(e) => setFormData(prev => ({ ...prev, githubUrl: e.target.value }))}
+                    onChange={(e) =>
+                      setFormData((prev) => ({
+                        ...prev,
+                        githubUrl: e.target.value,
+                      }))
+                    }
                     className="w-full px-4 py-2 rounded-lg border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
                   />
                 </div>
@@ -358,15 +419,22 @@ export default function EditProjectPage() {
 
             {/* Project Details */}
             <div className="space-y-4">
-              <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Project Details</h2>
-              
+              <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+                Project Details
+              </h2>
+
               <div>
                 <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                   Problem *
                 </label>
                 <textarea
                   value={formData.problem}
-                  onChange={(e) => setFormData(prev => ({ ...prev, problem: e.target.value }))}
+                  onChange={(e) =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      problem: e.target.value,
+                    }))
+                  }
                   required
                   rows={3}
                   className="w-full px-4 py-2 rounded-lg border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
@@ -379,7 +447,12 @@ export default function EditProjectPage() {
                 </label>
                 <textarea
                   value={formData.solution}
-                  onChange={(e) => setFormData(prev => ({ ...prev, solution: e.target.value }))}
+                  onChange={(e) =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      solution: e.target.value,
+                    }))
+                  }
                   required
                   rows={3}
                   className="w-full px-4 py-2 rounded-lg border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
@@ -392,7 +465,9 @@ export default function EditProjectPage() {
                 </label>
                 <textarea
                   value={formData.result}
-                  onChange={(e) => setFormData(prev => ({ ...prev, result: e.target.value }))}
+                  onChange={(e) =>
+                    setFormData((prev) => ({ ...prev, result: e.target.value }))
+                  }
                   required
                   rows={3}
                   className="w-full px-4 py-2 rounded-lg border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
@@ -406,10 +481,18 @@ export default function EditProjectPage() {
                 type="checkbox"
                 id="featured"
                 checked={formData.featured}
-                onChange={(e) => setFormData(prev => ({ ...prev, featured: e.target.checked }))}
+                onChange={(e) =>
+                  setFormData((prev) => ({
+                    ...prev,
+                    featured: e.target.checked,
+                  }))
+                }
                 className="w-4 h-4 rounded border-gray-300 dark:border-gray-600 text-indigo-600 focus:ring-indigo-500"
               />
-              <label htmlFor="featured" className="text-sm font-semibold text-gray-700 dark:text-gray-300">
+              <label
+                htmlFor="featured"
+                className="text-sm font-semibold text-gray-700 dark:text-gray-300"
+              >
                 Featured (show on homepage)
               </label>
             </div>
@@ -418,7 +501,7 @@ export default function EditProjectPage() {
             <div className="flex gap-3">
               <Button type="submit" disabled={saving}>
                 <Save className="w-4 h-4 mr-2" />
-                {saving ? 'Saving...' : 'Save Changes'}
+                {saving ? "Saving..." : "Save Changes"}
               </Button>
               <Button type="button" variant="outline" asChild>
                 <Link href="/admin/portfolio">Cancel</Link>
@@ -428,6 +511,5 @@ export default function EditProjectPage() {
         </Card>
       </div>
     </div>
-  )
+  );
 }
-

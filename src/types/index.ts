@@ -5,7 +5,7 @@ export interface Project {
   description: string
   longDescription: string
   image: string
-  images?: string[]
+  gallery?: string[]
   video?: string
   techStack: string[]
   liveUrl?: string

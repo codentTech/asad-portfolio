@@ -166,9 +166,22 @@ npx tsx scripts/seed-workhive.ts
 
 This seeder adds the AQUIBOT project, which is a unified AI chat platform that provides a single interface to interact with major LLM providers (OpenAI GPT, Anthropic Claude, Google Gemini, Meta Llama, and Hugging Face models) without switching apps.
 
+## ITWestStore Seeder
+
+### Option 1: SQL Script (Recommended)
+
+1. Open your Supabase Dashboard
+2. Go to SQL Editor
+3. Copy and paste the contents of `seed_itweststore.sql`
+4. Run the query
+5. The project will be added to your portfolio
+
+This seeder adds the ITWestStore project, which is an AI-powered e-commerce platform for technology products with intelligent product discovery, personalized recommendations, and instant customer assistance via natural language AI assistant.
+
 ## Customizing the Image
 
 The seeders use placeholder image URLs. Before running, you may want to:
+
 1. Upload your project images to a hosting service (e.g., Supabase Storage, Cloudinary, etc.)
 2. Update the `image` field in the seeder with your actual image URL
 
@@ -183,6 +196,7 @@ The seeders use placeholder image URLs. Before running, you may want to:
 5. All 6 services will be added to your services table
 
 This seeder adds the following services:
+
 - AI-Powered Application Development
 - Intelligent Automation & Workflow Optimization
 - Backend & API Engineering
@@ -201,6 +215,7 @@ This seeder adds the following services:
 5. All 6 blog posts will be added to your blog_posts table
 
 This seeder adds blog posts related to portfolio projects:
+
 - Building AI-Driven Real Estate Platforms: Lessons from PropertyAxis
 - Revolutionizing Healthcare Access: Building OGOW Health for Underserved Communities
 - Building Comprehensive SaaS Platforms: The WORK HIVE Story
@@ -219,6 +234,7 @@ This seeder adds blog posts related to portfolio projects:
 5. The service will be added to your services table
 
 This seeder adds the "Full Stack Enterprise Application Development" service, which includes:
+
 - Enterprise-grade architecture
 - Scalable & secure applications
 - Microservices & cloud-native solutions
@@ -226,9 +242,34 @@ This seeder adds the "Full Stack Enterprise Application Development" service, wh
 - Performance optimization & monitoring
 - DevOps & CI/CD pipelines
 
+## Adding Gallery Column to Projects Table
+
+If you need to add the `gallery` field to your projects table (for storing additional project images):
+
+1. Open your Supabase Dashboard
+2. Go to SQL Editor
+3. Copy and paste the contents of `migrations/add_gallery_to_projects.sql`
+4. Run the query
+5. The `gallery` column will be added to your projects table
+
+Note: This adds a `TEXT[]` column that stores an array of image URLs. You can then add gallery images through the admin panel at `/admin/portfolio/new` or `/admin/portfolio/[id]/edit`.
+
+## Removing Images Column from Projects Table
+
+If you want to remove the redundant `images` column (since we now use `gallery` instead):
+
+1. Open your Supabase Dashboard
+2. Go to SQL Editor
+3. Copy and paste the contents of `migrations/remove_images_from_projects.sql`
+4. Run the query
+5. The `images` column will be removed from your projects table
+
+**Warning:** This will permanently delete the `images` column and any data stored in it. Make sure you've migrated any important images to the `gallery` column before running this migration.
+
 ## Adding More Projects
 
 To add more projects, you can:
+
 1. Create similar SQL files following the same structure
 2. Use the admin panel at `/admin/portfolio/new` for easier management
 3. Copy the structure from existing seeders and modify the values

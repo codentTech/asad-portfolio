@@ -1,17 +1,17 @@
-import { createApiClient } from './api'
-import { Project } from '@/types'
+import { createApiClient } from "./api";
+import { Project } from "@/types";
 
 export async function getAllProjects(): Promise<Project[]> {
-  const supabase = createApiClient()
-  
+  const supabase = createApiClient();
+
   const { data, error } = await supabase
-    .from('projects')
-    .select('*')
-    .order('created_at', { ascending: false })
+    .from("projects")
+    .select("*")
+    .order("created_at", { ascending: false });
 
   if (error) {
-    console.error('Error fetching projects:', error)
-    return []
+    console.error("Error fetching projects:", error);
+    return [];
   }
 
   return (data || []).map((project) => ({
@@ -21,7 +21,7 @@ export async function getAllProjects(): Promise<Project[]> {
     description: project.description,
     longDescription: project.long_description,
     image: project.image,
-    images: project.images || [],
+    gallery: project.gallery || [],
     video: project.video || undefined,
     techStack: project.tech_stack || [],
     liveUrl: project.live_url || undefined,
@@ -31,20 +31,20 @@ export async function getAllProjects(): Promise<Project[]> {
     result: project.result,
     featured: project.featured || false,
     createdAt: project.created_at || project.created_at,
-  }))
+  }));
 }
 
 export async function getProjectBySlug(slug: string): Promise<Project | null> {
-  const supabase = createApiClient()
-  
+  const supabase = createApiClient();
+
   const { data, error } = await supabase
-    .from('projects')
-    .select('*')
-    .eq('slug', slug)
-    .single()
+    .from("projects")
+    .select("*")
+    .eq("slug", slug)
+    .single();
 
   if (error || !data) {
-    return null
+    return null;
   }
 
   return {
@@ -54,7 +54,7 @@ export async function getProjectBySlug(slug: string): Promise<Project | null> {
     description: data.description,
     longDescription: data.long_description,
     image: data.image,
-    images: data.images || [],
+    gallery: data.gallery || [],
     video: data.video || undefined,
     techStack: data.tech_stack || [],
     liveUrl: data.live_url || undefined,
@@ -64,22 +64,22 @@ export async function getProjectBySlug(slug: string): Promise<Project | null> {
     result: data.result,
     featured: data.featured || false,
     createdAt: data.created_at || data.created_at,
-  }
+  };
 }
 
 export async function getFeaturedProjects(): Promise<Project[]> {
-  const supabase = createApiClient()
-  
+  const supabase = createApiClient();
+
   const { data, error } = await supabase
-    .from('projects')
-    .select('*')
-    .eq('featured', true)
-    .order('created_at', { ascending: false })
-    .limit(6)
+    .from("projects")
+    .select("*")
+    .eq("featured", true)
+    .order("created_at", { ascending: false })
+    .limit(6);
 
   if (error) {
-    console.error('Error fetching featured projects:', error)
-    return []
+    console.error("Error fetching featured projects:", error);
+    return [];
   }
 
   return (data || []).map((project) => ({
@@ -89,7 +89,7 @@ export async function getFeaturedProjects(): Promise<Project[]> {
     description: project.description,
     longDescription: project.long_description,
     image: project.image,
-    images: project.images || [],
+    gallery: project.gallery || [],
     video: project.video || undefined,
     techStack: project.tech_stack || [],
     liveUrl: project.live_url || undefined,
@@ -99,5 +99,5 @@ export async function getFeaturedProjects(): Promise<Project[]> {
     result: project.result,
     featured: project.featured || false,
     createdAt: project.created_at || project.created_at,
-  }))
+  }));
 }

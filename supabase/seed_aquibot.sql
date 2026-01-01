@@ -61,3 +61,4 @@ INSERT INTO projects (
 )
 ON CONFLICT (slug) DO NOTHING;
 
+

@@ -56,7 +56,6 @@ export default function AdminPortfolioPage() {
             description: project.description,
             longDescription: project.long_description,
             image: project.image,
-            images: project.images || [],
             video: project.video,
             techStack: project.tech_stack || [],
             liveUrl: project.live_url,
