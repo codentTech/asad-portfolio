@@ -10,19 +10,29 @@ interface ProjectGalleryProps {
   title: string;
 }
 
-export default function ProjectGallery({ featuredImage, images, title }: ProjectGalleryProps) {
+export default function ProjectGallery({
+  featuredImage,
+  images,
+  title,
+}: ProjectGalleryProps) {
   // Combine featured image with gallery images (featured first)
   // Filter out any empty or invalid image URLs
-  const validImages = images ? images.filter(img => img && img.trim() !== '') : [];
-  const allImages = featuredImage ? [featuredImage, ...validImages] : validImages;
-  
+  const validImages = images
+    ? images.filter((img) => img && img.trim() !== "")
+    : [];
+  const allImages = featuredImage
+    ? [featuredImage, ...validImages]
+    : validImages;
+
   const [activeIndex, setActiveIndex] = useState(0);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   // Auto-scroll to active thumbnail
   useEffect(() => {
     if (scrollContainerRef.current) {
-      const activeThumbnail = scrollContainerRef.current.children[activeIndex] as HTMLElement;
+      const activeThumbnail = scrollContainerRef.current.children[
+        activeIndex
+      ] as HTMLElement;
       if (activeThumbnail) {
         activeThumbnail.scrollIntoView({
           behavior: "smooth",
@@ -92,7 +102,7 @@ export default function ProjectGallery({ featuredImage, images, title }: Project
               <img
                 src={allImages[activeIndex]}
                 alt={`${title} - Image ${activeIndex + 1}`}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-fit"
               />
             </motion.div>
           </AnimatePresence>

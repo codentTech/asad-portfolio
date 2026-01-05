@@ -1,9 +1,9 @@
-import type { Metadata } from "next";
-import { notFound } from "next/navigation";
-import Link from "next/link";
-import { ArrowLeft, ExternalLink, Github } from "lucide-react";
-import { getProjectBySlug, getAllProjects } from "@/lib/supabase/projects";
 import ProjectGallery from "@/components/portfolio/ProjectGallery";
+import { getProjectBySlug } from "@/lib/supabase/projects";
+import { ArrowLeft, ExternalLink, Github } from "lucide-react";
+import type { Metadata } from "next";
+import Link from "next/link";
+import { notFound } from "next/navigation";
 
 // Force dynamic rendering to always fetch fresh data (prevents static generation)
 export const dynamic = "force-dynamic";
