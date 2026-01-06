@@ -61,7 +61,7 @@ export default function ProjectsClient({ projects }: { projects: any[] }) {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="inline-block font-mono text-[#64ffda] text-sm mb-4"
             >
-              03. Featured Work
+              04. Featured Work
             </motion.span>
             <motion.h2
               initial={{ opacity: 0, y: 20 }}

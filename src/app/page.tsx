@@ -36,6 +36,13 @@ const BlogSection = nextDynamic(() => import("@/components/sections/BlogSection"
   loading: () => <div className="min-h-[400px]" />,
 });
 
+const ProjectFocusSection = nextDynamic(
+  () => import("@/components/sections/ProjectFocusSection"),
+  {
+    loading: () => <div className="min-h-[400px]" />,
+  }
+);
+
 const CTASection = nextDynamic(() => import("@/components/sections/CTASection"), {
   loading: () => <div className="min-h-[200px]" />,
 });
@@ -65,6 +72,9 @@ export default function HomePage() {
       </Suspense>
       <Suspense fallback={<div className="min-h-[400px]" />}>
         <ServicesSection />
+      </Suspense>
+      <Suspense fallback={<div className="min-h-[400px]" />}>
+        <ProjectFocusSection />
       </Suspense>
       <Suspense fallback={<div className="min-h-[400px]" />}>
         <ProjectsSection />
