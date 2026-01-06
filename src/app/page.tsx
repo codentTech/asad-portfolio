@@ -71,10 +71,10 @@ export default function HomePage() {
         <AboutSection />
       </Suspense>
       <Suspense fallback={<div className="min-h-[400px]" />}>
-        <ServicesSection />
+        <ProjectFocusSection />
       </Suspense>
       <Suspense fallback={<div className="min-h-[400px]" />}>
-        <ProjectFocusSection />
+        <ServicesSection />
       </Suspense>
       <Suspense fallback={<div className="min-h-[400px]" />}>
         <ProjectsSection />

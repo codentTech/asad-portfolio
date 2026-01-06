@@ -41,7 +41,7 @@ export default function ProjectFocusSection() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="inline-block font-mono text-[#64ffda] text-sm mb-4"
             >
-              03. What I&apos;m Looking For
+              02. What I&apos;m Looking For
             </motion.span>
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
